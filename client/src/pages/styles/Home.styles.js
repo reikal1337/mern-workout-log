@@ -14,7 +14,6 @@ const animationGradiant = keyframes`
 
 export const SectionStyled = styled.section`
     display: flex;
-
     ul{
         height: 100vh;
         width: 40vw;
@@ -30,6 +29,7 @@ export const SectionStyled = styled.section`
             padding: 1.5rem;
             font-size: 20px;
             font-weight: 600;
+            text-transform: capitalize;
 
             background-image: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(193,1,20,1) 100%);
             -webkit-background-clip: text;

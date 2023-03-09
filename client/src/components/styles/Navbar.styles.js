@@ -42,6 +42,9 @@ export const NavStyled = styled.nav`
             }
         }
     }
+    .active{
+        border-bottom: 2px solid red;
+    }
     button{
         margin-right: 1rem;
         background-color: red;
