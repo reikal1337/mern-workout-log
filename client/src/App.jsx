@@ -1,5 +1,5 @@
 import { Home , Register, Login, Exercises, YourExercises, YourWorkouts} from "./pages"
-import { Navbar } from "./components";
+import { Navbar, Footer } from "./components";
 import { GlobalStyle } from "./GlobalStyles.styles";
 import { Route, Routes } from "react-router-dom"
 
@@ -7,7 +7,10 @@ import { Route, Routes } from "react-router-dom"
 function App() {
   return (
     <>
-      <GlobalStyle />
+      <header>
+        <GlobalStyle />
+        
+      </header>
       <Navbar />
       <Routes >
         <Route path="/" element={<Home />} />
@@ -15,6 +18,7 @@ function App() {
         <Route path="/yourexercises" element={<YourExercises />} />
         <Route path="/workouts" element={<YourWorkouts />} />
       </Routes>
+      <Footer />
     </>
   );
 }
