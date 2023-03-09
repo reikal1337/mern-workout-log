@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { MainStyled } from "./styles/Register.styles"
+import { MainStyled } from "./styles/RegisterLogin.styles"
 
 function Login() {
     const [username, setUsername] = useState("")

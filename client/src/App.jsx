@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Login/>
+      <Home />
     </>
   );
 }
