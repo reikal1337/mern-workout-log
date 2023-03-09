@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const NavStyled = styled.nav`
     background-color: black;
     width: 100%;
+    position: fixed;
 
     ul{
         display: flex;
