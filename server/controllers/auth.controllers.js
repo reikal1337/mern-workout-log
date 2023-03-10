@@ -18,7 +18,7 @@ const register = async(req, res) => {
         if(user) return res.status(406).json({msg: "User already exists!"})
         
 
-        const salt = await bcrypt.genSalt()
+        const salt = await bcrypt.genSalt(10)
         const passwordHash = await bcrypt.hash(password, salt)
 
         const newUser = new User({
@@ -44,9 +44,9 @@ const login = async (req,res) => {
 
         const correctPassword = await bcrypt.compare(password, user.password)
         if(!correctPassword) return res.status(403).json({msg: "Wrong password!"})
-
+        const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
         delete user.password
-        res.status(200).json({user})
+        res.status(200).json({token, user})
     } catch(err) {
         res.status(500).json({ error: err.message})
     }

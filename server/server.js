@@ -9,6 +9,7 @@ const morgan = require("morgan")
 const cors = require("cors")
 
 const { router } = require("./routes/auth.routes")
+const authenticateToken = require("./middleware/auth")
 
 //Config
 dotenv.config()
@@ -18,6 +19,12 @@ app.use(morgan("common"))
 app.use(cors())
 
 app.use("/", router)
+
+app.use(authenticateToken)
+
+app.get("/auth/home", (req, res) => {
+    res.status(200).send("works")
+})
 
 
 
