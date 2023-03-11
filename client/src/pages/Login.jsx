@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { MainStyled } from "./styles"
+import { AuthButton } from "../components/styles/Buttons.syles"
 
 function Login() {
     const [username, setUsername] = useState("")
@@ -17,11 +18,12 @@ function Login() {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Enter username: </label>
                 <input type="text" id="username" value={username} onChange={ (e) => setUsername( e.target.value)}/> 
+                {/* Redo with full seter */}
 
                 <label htmlFor="password">Enter password: </label>
                 <input type="password" id="password" value={password} onChange={ (e) => setPassword( e.target.value)}/>
 
-                <button>Log In</button>
+                <AuthButton>Log In</AuthButton>
             </form>
         </MainStyled>
   )

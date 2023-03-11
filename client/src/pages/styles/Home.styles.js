@@ -14,8 +14,8 @@ const animationGradiant = keyframes`
 
 export const SectionStyled = styled.section`
     display: flex;
+    height: 90vh;
     ul{
-        height: 100vh;
         width: 40vw;
         background: rgb(0,0,0);
         background: linear-gradient(0deg, rgb(0,0,0) 0%, rgb(4,15,17) 100%);
@@ -43,7 +43,7 @@ export const SectionStyled = styled.section`
 
 
     img{
-        height: 100vh;
+        
         width: 60vw;
         object-fit: cover;
     }

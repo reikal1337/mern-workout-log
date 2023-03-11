@@ -10,6 +10,7 @@ export const FooterStyled = styled.footer`
         color: white;
         height: 50px;
         padding-bottom: 5px;
+        /* margin-top: auto; */
         
 
 

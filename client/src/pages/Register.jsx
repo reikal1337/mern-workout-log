@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { MainStyled } from "./styles"
+import { AuthButton } from "../components/styles/Buttons.syles"
 
 function Register() {
     const [username, setUsername] = useState("")
@@ -26,7 +27,7 @@ function Register() {
                 <label htmlFor="repPassword">Repeat password: </label>
                 <input type="password" id="repPassword" value={repPassword} onChange={ (e) => setRepPassword( e.target.value)}/> 
 
-                <button>Register</button>
+                <AuthButton>Register</AuthButton>
             </form>
         </MainStyled>
   )

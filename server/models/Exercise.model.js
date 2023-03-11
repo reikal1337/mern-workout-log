@@ -4,7 +4,7 @@ const ExerciseSchema = new mongoose.Schema(
     {
         createdBy: {
             type: ObjectId,
-            required: false,
+            required: true,
         },
         name: {
             type: String,

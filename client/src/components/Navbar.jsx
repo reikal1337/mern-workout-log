@@ -14,8 +14,9 @@ function Navbar() {
             <div>
                 <li><NavLink to="/">Home</NavLink></li>
                 <li><NavLink to="/exercises">Exercises</NavLink></li>
-                <li><NavLink to="/yourexercises">Your Exercises</NavLink></li>
+                <li><NavLink to="/savedexercises">Saved Exercises</NavLink></li>
                 <li><NavLink to="/workouts">Your Workouts</NavLink></li>
+                <li><NavLink to="/workoutlogs">Workout Logs</NavLink></li>
             </div>
             <li><button>Log out</button></li>
         </ul>
