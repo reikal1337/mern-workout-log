@@ -11,7 +11,7 @@ const authenticateToken = async(req , res, next) => {
             token= token.slice(7,token.length).trimLeft()
         }
 
-        const authenticated = jwt.verify(token, process.env.JWT_SECRET)
+        const authenticated = jwt.verify(token, process.env.JWT_SECRET, { expiresIn: "10m"})
         req.user = authenticated
         next()
 
