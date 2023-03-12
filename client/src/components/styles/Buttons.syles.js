@@ -28,6 +28,7 @@ export const SimpleButtonRed = styled.button`
     border-radius: 10px;
     border: none;
     color: white;
+    cursor: pointer;
     transition: ease 0.3s;
     &:hover,&:focus{
         color: black;

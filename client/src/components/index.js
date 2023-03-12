@@ -2,5 +2,6 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Exercise from "./Exercise";
 import ExercisesSearch from "./ExercisesSearch";
+import CreateExerciseForm from "./CreateExerciseForm";
 
-export { Navbar, Footer, Exercise, ExercisesSearch}
+export { Navbar, Footer, Exercise, ExercisesSearch, CreateExerciseForm}
