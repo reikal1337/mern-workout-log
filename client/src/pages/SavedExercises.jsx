@@ -11,12 +11,16 @@ function SavedExercises() {
     console.log(data)
   }
 
+  const getCreateData = (data) => {
+    console.log(data)
+  }
+
   return (
     <SavedExercisesStyled>
       <h2>Saved Exercises</h2> 
       <ExercisesSearch onSubmit={getSearchData} />
-      <SimpleButtonBlue onClick={() => setPopUp(true)}  id="buttton-create">Create Exerciece</SimpleButtonBlue>
-      <CreateExerciseForm popUp={popUp} setPopUp={setPopUp}/>
+      <SimpleButtonBlue onClick={() => setPopUp(true)} id="buttton-create">Create Exerciece</SimpleButtonBlue>
+      <CreateExerciseForm popUp={popUp} setPopUp={setPopUp} onSubmit={getCreateData} />
       {mockData.map(object => {
         return !object.public ? <Exercise key={object.id} {...object}/> : "" 
         
