@@ -3,8 +3,8 @@ import Register from "./Register";
 import Login from "./Login";
 import Exercises from "./Exercises"
 import SavedExercises from "./SavedExercises"
-import YourWorkouts from "./YourWorkouts"
+import Workouts from "./Workouts"
 import WorkoutLogs from "./WorkoutLogs";
 
 
-export { Home , Register, Login, Exercises, SavedExercises, YourWorkouts, WorkoutLogs}
+export { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs}

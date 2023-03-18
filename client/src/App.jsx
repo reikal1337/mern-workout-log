@@ -1,4 +1,4 @@
-import { Home , Register, Login, Exercises, SavedExercises, YourWorkouts, WorkoutLogs} from "./pages"
+import { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs} from "./pages"
 import { Navbar, Footer } from "./components";
 import { GlobalStyle } from "./GlobalStyles.styles";
 import { Route, Routes } from "react-router-dom"
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/exercises" element={<Exercises />} />
         <Route path="/savedexercises" element={<SavedExercises />} />
-        <Route path="/workouts" element={<YourWorkouts />} />
+        <Route path="/workouts" element={<Workouts />} />
         <Route path="/workoutlogs" element={<WorkoutLogs />} />
       </Routes>
       <Footer />
