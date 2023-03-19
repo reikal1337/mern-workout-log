@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid"
-import { Exercises } from "../pages"
 
 const mockData =[
     {
