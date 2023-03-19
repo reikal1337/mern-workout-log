@@ -3,6 +3,7 @@ import { useState } from "react"
 import { SimpleButtonBlue, SimpleButtonRed } from "./styles/Buttons.syles"
 import { CreateForm } from "./styles/CreateExerciseForm.styles"
 import { AiOutlineClose } from "react-icons/ai"
+import ReactDom from "react-dom"
 
 function CreateExerciseForm(props) {
 
@@ -37,9 +38,10 @@ function CreateExerciseForm(props) {
         })
     }
 
-  return props.popUp  ? (
+  return  props.popUp  ? ReactDom.createPortal(
     <CreateForm >
-        
+        <div id="create-popup-background" onClick={() => props.setPopUp(false)} />
+        <div id="form-container">
         <form onSubmit={handleSubmit}>
             <SimpleButtonRed id="button-exit" onClick={() => props.setPopUp(false)}>{<AiOutlineClose />}</SimpleButtonRed>
             <h3>Create Exercise</h3>
@@ -74,8 +76,10 @@ function CreateExerciseForm(props) {
             
             <SimpleButtonBlue type="Submit">Create</SimpleButtonBlue>
         </form>
+        </div>
         
-    </CreateForm>
+    </CreateForm>,
+    document.getElementById("popup-portal")
   ) : ""
 }
 
