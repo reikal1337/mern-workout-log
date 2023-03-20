@@ -13,7 +13,7 @@ function App() {
       <Navbar />
       <Routes >
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" index element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="/exercises" element={<Exercises />} />
         <Route path="/savedexercises" element={<SavedExercises />} />

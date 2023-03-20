@@ -34,6 +34,10 @@ export const MainStyled = styled.main`
         font-weight: 400;
         margin-bottom: 5px;
     }
+    span{
+        font-size: 0.7rem;
+        color: red;
+    }
 
     input{
         margin-bottom: 10px;

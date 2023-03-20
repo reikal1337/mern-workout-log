@@ -15,11 +15,6 @@ const UserSchema = new mongoose.Schema(
             minLength: 6,
             maxLength: 75,
         },
-        name: {
-            type: String,
-            required: true,
-            maxLength: 50,
-        },
         exercises: {
             type: Array,
             default: [],

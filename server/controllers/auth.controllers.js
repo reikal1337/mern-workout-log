@@ -7,31 +7,37 @@ const register = async(req, res) => {
         const{
             username,
             password,
-            name,
             exercises,
             workouts,
             workoutLogs
 
         } = req.body
+        console.log(req.body)
+        if(!username || !password){
+            
+            return res.status(406).json({message: "Please fill all fields"})
+        }
 
         const user = await User.findOne({username: username})
-        if(user) return res.status(406).json({msg: "User already exists!"})
+        if(user) return res.status(406).json({message: "User already exists!"})
         
-
+        
+        console.log("Lol " + password)
         const salt = await bcrypt.genSalt(10)
         const passwordHash = await bcrypt.hash(password, salt)
 
         const newUser = new User({
             username,
             password: passwordHash,
-            name,
             exercises,
             workouts,
             workoutLogs
         })
         const savedUser = await newUser.save()
+        // delete savedUser.password
         res.status(201).json(savedUser)// Should not send password
     } catch (err) {
+        console.log(err)
         res.status(406).json({ error: err.message})
     }
 }
@@ -40,10 +46,10 @@ const login = async (req,res) => {
     try{
         const{username, password} = req.body
         const user = await User.findOne({username: username})
-        if(!user) return res.status(403).json({msg: "User does not exist!"})
+        if(!user) return res.status(403).json({message: "User does not exist!"})
 
         const correctPassword = await bcrypt.compare(password, user.password)
-        if(!correctPassword) return res.status(403).json({msg: "Wrong password!"})
+        if(!correctPassword) return res.status(403).json({message: "Wrong password!"})
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
         delete user.password
         res.status(200).json({token, user})
