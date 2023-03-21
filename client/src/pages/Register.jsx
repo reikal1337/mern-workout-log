@@ -5,6 +5,7 @@ import { register, reset } from "../features/auth/authSlice"
 import { MainStyled } from "./styles"
 import { AuthButton } from "../components/styles/Buttons.syles"
 import { Loading } from "../components"
+import { validateUsernameInput, validateUsername } from "../helpers/auth.helper"
 
 function Register() {
 
@@ -13,7 +14,7 @@ function Register() {
         password: ""
     })
 
-    const [formData,setFromData] = useState({
+    const [formData,setFormData] = useState({
         username: "",
         password: "",
         repPassword: ""
@@ -30,30 +31,53 @@ function Register() {
 
     useEffect(() => {
         if(isError) {
-            setError({
-                ...error,
-                urername: message
-            })
+            // console.log(message)
+            setError( () => ({
+                username: message,
+                password: ""
+            }))
         }
 
         if(isSuccess || user) {
+            console.log("Should work")
             navigate("/login")
         }
         dispatch(reset())
 
     },[user, isError, isSuccess, message, navigate, dispatch])
 
+    const badPassword = (errorMessage) => {
+        setError({
+            ...error,
+            password: errorMessage
+        })
+        setFormData({
+            ...formData,
+             password: "",
+             repPassword: ""
+            })
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
-        // alert(`
-        // Usr: ${username}\n
-        // Psw: ${password}\n
-        // Rpsw: ${repPassword}`)
-        if(password !== repPassword){// should do all valadation
+        if(validateUsername(username) !== ""){
             setError({
                 ...error,
-                password: "Passwords don't match!"
+                username: validateUsername(username)
             })
+        }else if(password !== repPassword){// should do all valadation
+            badPassword("Passwords don't match!")
+
+        }else if(password.length > 100){
+            badPassword("Password can't be longer then 100 char!")
+
+        }else if(password.length < 6){
+            badPassword("Password can't be shorter then 6 char!")
+
+        }else if(/\s/.test(password)){
+            badPassword("Password can't have any spaces!")
+        }else if (username.toLowerCase() === password.toLowerCase()){
+            badPassword("Username and password can't match!")
         }else{
             const userData = {
                 username, password
@@ -63,14 +87,25 @@ function Register() {
     }
 
     const handleChange =  (event) => {
-        setFromData({
+        if(event.target.name === "username"){
+            setError({
+                ...error,
+                username: validateUsernameInput(username)
+            })
+        }
+        setFormData({
             ...formData,
              [event.target.name]: event.target.value
             })
     }
 
+
     if(isLoading){
-       return <Loading />
+        return  <>
+            <h1>LOADINGGGGGGGGG</h1>
+            <Loading />
+        </>
+       
     }
 
   return (
@@ -78,15 +113,21 @@ function Register() {
             <div>Registration</div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username" >Username: </label>
-                <input type="text" id="username" name="username" value={username} onChange={handleChange} placeholder="Enter username..."/> 
+                <input type="text" id="username" name="username"
+                 value={username} onChange={handleChange} placeholder="Enter username..."
+                 maxLength="15" minLength="6" /> 
                 <span className="error-input">{error.username}</span>
 
                 <label htmlFor="password">Password: </label>
-                <input type="password" id="password" name="password" value={password} onChange={ handleChange}placeholder="Enter password..."/>
+                <input type="password" id="password" name="password"
+                 value={password} onChange={ handleChange}placeholder="Enter password..."
+                 maxLength="100" minLength="6" />
                 <span className="error-input">{error.password}</span>
 
                 <label htmlFor="repPassword">Confirm password: </label>
-                <input type="password" id="repPassword" name="repPassword" value={repPassword} onChange={handleChange} placeholder="Repeat passsword..."/> 
+                <input type="password" id="repPassword" name="repPassword"
+                 value={repPassword} onChange={handleChange} placeholder="Repeat passsword..."
+                 maxLength="100" minLength="6" /> 
 
                 <AuthButton>Register</AuthButton>
             </form>
@@ -94,4 +135,7 @@ function Register() {
   )
 }
 
+
 export default Register
+
+

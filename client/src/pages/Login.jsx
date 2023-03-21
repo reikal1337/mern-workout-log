@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { login, reset } from "../features/auth/authSlice"
 import { Loading } from "../components"
+import { validateUsernameInput, validateUsername } from "../helpers/auth.helper"
 
 
 function Login() {
@@ -15,10 +16,7 @@ function Login() {
 
     const {username, password } = formData
 
-    const [error, setError] = useState({
-        username: "",
-        password: ""
-    })
+    const [error, setError] = useState("")
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -29,10 +27,7 @@ function Login() {
 
     useEffect(() => {
         if(isError){
-            setError({
-                ...error,
-                urername: message
-            })
+            setError(prevState => prevState = message)
         }
         if(isSuccess || user) {
             navigate("/")
@@ -44,19 +39,27 @@ function Login() {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-
-        const userData = {
-            username, password
+        if(validateUsername(username) !== ""){
+            setError(prevState => prevState = validateUsername(username))
         }
-        dispatch(login(userData))
+        else{
+            const userData = {
+                username, password
+            }
+            dispatch(login(userData))
+        }
+        
         
     }
 
     const handleChange = (event) => {
+        if(event.target.name === "username"){
+            setError(prevState => prevState = validateUsernameInput(username))
+        }
         setFormData({
             ...formData,
-            [event.target.name]: event.target.value
-        })
+             [event.target.name]: event.target.value
+            })
     }
 
     if(isLoading){
@@ -68,10 +71,13 @@ function Login() {
             <div>Login</div>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Enter username: </label>
-                <input type="text" id="username" name="username" value={username} onChange={handleChange}/> 
+                <input type="text" id="username" name="username" value={username}
+                 onChange={handleChange} maxLength="15" minLength="6"/>
+                <span className="error-input">{error}</span>
 
                 <label htmlFor="password">Enter password: </label>
-                <input type="password" id="password" name="password" value={password} onChange={handleChange}/>
+                <input type="password" id="password" name="password" value={password}
+                 onChange={handleChange} maxLength="100" minLength="6"/>
 
                 <AuthButton>Log In</AuthButton>
             </form>
