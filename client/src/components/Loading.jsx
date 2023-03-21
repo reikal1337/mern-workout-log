@@ -1,10 +1,10 @@
 import { BiLoaderCircle } from "react-icons/bi"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
-function Loading() {
+function Loading(props) {
   return (
-    <Spiner>
-        <BiLoaderCircle id="loading-icon"/>
+    <Spiner size={props.size} speed={props.speed}>
+        <BiLoaderCircle className="loading-icon"/>
     </Spiner>
     
   )
@@ -12,7 +12,22 @@ function Loading() {
 
 export default Loading
 
-const Spiner = styled.div`
+const spinerAnimation = keyframes`
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
 
+
+`
+
+
+const Spiner = styled.div`
+  .loading-icon{
+    font-size: ${props => props.size}px;
+    animation: ${spinerAnimation} ${props => props.speed}s linear 0s infinite forwards ;
+  }
 
 `

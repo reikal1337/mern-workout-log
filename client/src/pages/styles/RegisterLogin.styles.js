@@ -48,4 +48,10 @@ export const MainStyled = styled.main`
         border: 2px inset #ccc;
         box-shadow: inset 1px 1px 10px 1px grey;
     }
+
+    a{
+        color: white;
+        text-decoration: underline;
+        font-size: .7rem;
+    }
 `

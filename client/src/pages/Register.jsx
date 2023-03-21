@@ -101,10 +101,7 @@ function Register() {
 
 
     if(isLoading){
-        return  <>
-            <h1>LOADINGGGGGGGGG</h1>
-            <Loading />
-        </>
+        return  <Loading size={"100"} speed={"4"} />
        
     }
 

@@ -1,7 +1,7 @@
 import { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs} from "./pages"
 import { Navbar, Footer } from "./components";
 import { GlobalStyle } from "./GlobalStyles.styles";
-import { Route, Routes } from "react-router-dom"
+import {BrowserRouter, Route, Routes } from "react-router-dom"
 
 
 function App() {
@@ -10,17 +10,19 @@ function App() {
       <header>
         <GlobalStyle />
       </header>
+      <BrowserRouter>
       <Navbar />
       <Routes >
         <Route path="/register" element={<Register />} />
-        <Route path="/login" index element={<Login />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/login"  element={<Login />} />
+        <Route path="/" index element={<Home />} />
         <Route path="/exercises" element={<Exercises />} />
         <Route path="/savedexercises" element={<SavedExercises />} />
         <Route path="/workouts" element={<Workouts />} />
         <Route path="/workoutlogs" element={<WorkoutLogs />} />
       </Routes>
       <Footer />
+      </BrowserRouter>
     </>
   );
 }

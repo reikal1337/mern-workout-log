@@ -53,27 +53,6 @@ export const NavStyled = styled.nav`
     .active{
         border-bottom: 2px solid red;
     }
-
-    button{
-        margin-right: 1rem;
-        background-color: red;
-        color: white;
-        font-size: 1.3rem;
-        border-radius: 5px;
-        padding-inline: 1rem;
-        padding-block: 0.7rem;
-        transition: ease-in-out 0.3s;
-        &:hover{
-            border-radius: 12px;
-        }
-        &:focus{
-            border-radius: 12px;
-            color: black;
-
-        }
-
-
-    }
     
     img{
         width: 80px;

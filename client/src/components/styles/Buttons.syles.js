@@ -42,3 +42,27 @@ export const SimpleButtonBlue = styled(SimpleButtonRed)`
 
 `
 
+export const LogOutButton = styled.button`
+    margin-right: 1rem;
+    background-color: red;
+    color: white;
+    font-size: 1.3rem;
+    border-radius: 5px;
+    padding-inline: 1rem;
+    padding-block: 0.7rem;
+    transition: ease-in-out 0.3s;
+    &:hover{
+        border-radius: 12px;
+    }
+    &:focus{
+        border-radius: 12px;
+        color: black;
+
+    }
+`
+
+export const LogInButton = styled(LogOutButton)`
+    background-color: #00a0dc;
+
+`
+
