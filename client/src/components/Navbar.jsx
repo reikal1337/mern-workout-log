@@ -1,12 +1,20 @@
 import { NavStyled } from "./styles/Navbar.styles"
 import logoImg from "../assets/images/logo.png"
-import { Link, NavLink } from "react-router-dom"
+import { Link, NavLink, useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { logout, reset } from "../features/auth/authSlice"
 
 function Navbar() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const {user} = useSelector((state) => state.auth)
 
-  // <li><a href="/exercises">Exercises</a></li>
-  //               <li><a href="/yourexercises">Your Exercises</a></li>
-  //               <li><a href="/workouts">Your Workouts</a></li>
+  const handleLogout = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate("/login")
+  }
+
   return (
     <NavStyled>
         <ul>
@@ -18,12 +26,8 @@ function Navbar() {
                 <li><NavLink to="/workouts">Workouts</NavLink></li>
                 <li><NavLink to="/workoutlogs">Workout Logs</NavLink></li>
             </div>
-            <li><button>Log out</button></li>
+            <li><button onClick={handleLogout}>Log out</button></li>
         </ul>
-        
-        
-        
-
     </NavStyled>
     
   )

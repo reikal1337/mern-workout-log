@@ -2,13 +2,11 @@ const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
 const dotenv = require("dotenv")
-const path = require("path")
-const hemlmet = require("helmet")
 const { default: helmet } = require("helmet")
 const morgan = require("morgan")
 const cors = require("cors")
 
-const { router } = require("./routes/auth.routes")
+const { authRouter } = require("./routes/auth.routes")
 const authenticateToken = require("./middleware/auth")
 
 //Config
@@ -18,7 +16,7 @@ app.use(helmet())
 app.use(morgan("common"))
 app.use(cors())
 
-app.use("/", router)
+app.use("/", authRouter)
 
 app.use(authenticateToken)
 

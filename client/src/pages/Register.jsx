@@ -37,7 +37,7 @@ function Register() {
         }
 
         if(isSuccess || user) {
-            navigate("/")
+            navigate("/login")
         }
         dispatch(reset())
 
@@ -50,7 +50,6 @@ function Register() {
         // Psw: ${password}\n
         // Rpsw: ${repPassword}`)
         if(password !== repPassword){// should do all valadation
-            console.log("works lol!")
             setError({
                 ...error,
                 password: "Passwords don't match!"
@@ -71,7 +70,7 @@ function Register() {
     }
 
     if(isLoading){
-        <Loading />
+       return <Loading />
     }
 
   return (

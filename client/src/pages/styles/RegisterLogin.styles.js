@@ -2,9 +2,10 @@ import styled from "styled-components"
 import backgroundImage from "../../assets/images/workout1.jpg"
 
 export const MainStyled = styled.main`
-    height: 100vh; //  change vh and make background with "cover"
-    width: 100vw;
+    height: 90vh; //  change vh and make background with "cover"
+    /* width: 100vw; */
     background-image: url(${backgroundImage});
+    background-size: cover;
     color: white;
     display: flex;
     flex-direction: column;
