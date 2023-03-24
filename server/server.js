@@ -5,9 +5,11 @@ const dotenv = require("dotenv")
 const { default: helmet } = require("helmet")
 const morgan = require("morgan")
 const cors = require("cors")
+const authenticateToken = require("./middleware/auth")
 
 const { authRouter } = require("./routes/auth.routes")
-const authenticateToken = require("./middleware/auth")
+const { globalRouter } = require("./routes/globalExercises.routes")
+
 
 //Config
 dotenv.config()
@@ -20,10 +22,7 @@ app.use("/", authRouter)
 
 app.use(authenticateToken)
 
-app.get("/auth/home", (req, res) => {
-    res.status(200).send("works")
-})
-
+app.use("/global", globalRouter)
 
 
 //Db

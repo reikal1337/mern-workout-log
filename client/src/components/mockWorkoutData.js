@@ -3,7 +3,7 @@ import { nanoid } from "nanoid"
 const mockData =[
     {
         id: nanoid(),
-        name: "Push day lol",
+        name: "Push day",
         exercises: [
             {
                 id: "1",
@@ -96,7 +96,7 @@ const mockData =[
     },
     {
         id: nanoid(),
-        name: "Leg day lol",
+        name: "Leg day",
         exercises: [
             {
                 id: "1",
@@ -189,7 +189,7 @@ const mockData =[
     },
     {
         id: nanoid(),
-        name: "Pull day lol",
+        name: "Pull day",
         exercises: [
             {
                 id: "1",

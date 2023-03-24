@@ -25,6 +25,12 @@ const spinerAnimation = keyframes`
 
 
 const Spiner = styled.div`
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: whitesmoke;
   .loading-icon{
     font-size: ${props => props.size}px;
     animation: ${spinerAnimation} ${props => props.speed}s linear 0s infinite forwards ;

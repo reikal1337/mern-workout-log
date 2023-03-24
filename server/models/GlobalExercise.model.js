@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const ExerciseSchema = new mongoose.Schema(
+const GlobalExerciseSchema = new mongoose.Schema(
     {
         createdBy: {
             type: String,
@@ -22,25 +22,12 @@ const ExerciseSchema = new mongoose.Schema(
         bodyParts: {
             type: Array,
             default: [],
-        },
-        workouts: {
-            type: Array,
-            default: [],
-        },
-        sets: {
-            type: Array,
-            default: [],
-        },
-        public: {
-            type: Boolean,
-            required: true,
-            default: false
         }
         
     },
-    { timestamps: true, collection : 'exercises' }
+    { timestamps: true, collection : 'globalexercises' }
 )
 
-const Exercise = mongoose.model("Exercise", ExerciseSchema)
+const GlobalExercise = mongoose.model("GlobalExercise", GlobalExerciseSchema)
 
-module.exports = { Exercise }
+module.exports = { GlobalExercise }

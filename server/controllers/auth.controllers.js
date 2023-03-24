@@ -37,7 +37,6 @@ const register = async(req, res) => {
         // delete savedUser.password
         res.status(201).json({message: "User succesfully registered"})// Should not send password
     } catch (err) {
-        console.log(err)
         res.status(406).json({ error: err.message})
     }
 }
