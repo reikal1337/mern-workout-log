@@ -9,7 +9,8 @@ const getExercieses = async(token) => {
         }
     }
     const response = await axios.get(API_URL + "/all",config)
-    return response
+    return response.data
+    //action.payload.data.exercises
 }
 
 

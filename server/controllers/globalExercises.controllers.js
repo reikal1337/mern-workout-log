@@ -2,9 +2,15 @@ const { GlobalExercise } = require("../models/GlobalExercise.model")
 
 const getGlobalExercises = async(req, res) => {
     try {
-        const exercises = await GlobalExercise.find()
+        const exercises = await GlobalExercise.find().lean()
         if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
 
+        exercises.forEach( exercise => {
+            
+            delete exercise.createdAt
+            delete exercise.updatedAt
+            delete exercise.__v
+        })
         res.status(200).json({exercises})
         
     } catch (err) {
@@ -44,4 +50,22 @@ const postGlobalExercise = async(req, res) => {
     }
 }
 
-module.exports = {getGlobalExercises, postGlobalExercise}
+const serachGlobalExercieses = async(req,res) =>{
+    const queryName = new RegExp(req.query.name, "i")
+    const queryBodyPart = new new RegExp(req.query.bodypart, "i")
+    if(queryName !== ""){
+        try {
+            console.log(queryName)
+            const results = await GlobalExercise.find({name: queryName})
+            
+            res.status(200).json(results)
+            
+
+        } catch (err) {
+            console.log(err)
+            res.status(404).json({ error: "Not found!"})
+        }
+    }
+} 
+
+module.exports = {getGlobalExercises, postGlobalExercise, serachGlobalExercieses}

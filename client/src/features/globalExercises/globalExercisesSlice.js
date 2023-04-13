@@ -38,12 +38,12 @@ export const exercisesSlice = createSlice({
             .addCase(getExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.exercises = action.payload.data.exercises
+                state.exercises = action.payload.exercises
             })
             .addCase(getExercieses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.Exercises = action.payload.data.exercises
+                state.Exercises = action.payload.exercises
             })
     }
 })
