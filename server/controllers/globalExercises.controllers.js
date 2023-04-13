@@ -52,15 +52,11 @@ const postGlobalExercise = async(req, res) => {
 
 const serachGlobalExercieses = async(req,res) =>{
     const queryName = new RegExp(req.query.name, "i")
-    const queryBodyPart = new new RegExp(req.query.bodypart, "i")
-    if(queryName !== ""){
+    const queryBodyPart = new RegExp(req.query.bodypart, "i")
+    if(queryName !== "" || queryBodyPart !== ""){
         try {
-            console.log(queryName)
-            const results = await GlobalExercise.find({name: queryName})
-            
+            const results = await GlobalExercise.find({name: queryName, bodyParts: queryBodyPart})
             res.status(200).json(results)
-            
-
         } catch (err) {
             console.log(err)
             res.status(404).json({ error: "Not found!"})
