@@ -13,9 +13,22 @@ const getExercieses = async(token) => {
     //action.payload.data.exercises
 }
 
+const serachExercieses = async(serachQuery,token) => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+    const response = await axios.get(API_URL + `?name=${serachQuery.name}&bodypart=${serachQuery.bodypart}`,config)
+    return response.data
+}
+
+
+
 
 const globalExercisesService = {
-    getExercieses
+    getExercieses,
+    serachExercieses
 }
 
 export default globalExercisesService

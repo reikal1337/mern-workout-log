@@ -1,13 +1,14 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getExercieses, reset } from "../features/globalExercises/globalExercisesSlice";
+import { getExercieses, serachExercieses, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
 import { Exercise, ExercisesSearch } from "../components";
-
+import { useSearchParams } from "react-router-dom";
 
 
 
 import mockData  from "../components/mockExerciseData";
+
 
 
 
@@ -18,6 +19,8 @@ function Exercises() {
   const { exercises, isLoading, isError, message } = useSelector(
     (state) => state.globalExerciese
   )
+  const [searchParams, setSearchParams] = useSearchParams();
+
   useEffect(() =>{
     if(isError){
       console.log(message)
@@ -34,7 +37,17 @@ function Exercises() {
 
   
   const getSearchData = (data) => {
-    console.log(data)
+    setSearchParams({name: data.field, bodypart: data.bodyPart})
+    const name = searchParams.get("name")
+    const bodypart = searchParams.get("bodypart")
+    console.log(name)
+    console.log(bodypart)
+    const serachQuery ={
+      name,
+      bodypart
+    }
+    dispatch(serachExercieses(serachQuery))
+
   }
 
   return (

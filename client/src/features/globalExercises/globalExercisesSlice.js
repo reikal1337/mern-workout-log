@@ -2,6 +2,7 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 
 import globalExercisesService from "./globalExercisesService"
 
+
 const initialState = {
     exercises: [],
     isError: false,
@@ -24,11 +25,31 @@ export const getExercieses = createAsyncThunk(
     }
 )
 
+export const serachExercieses = createAsyncThunk(
+    "exercises/serach",
+    async(serachQuery,thunkAPI) =>{
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await globalExercisesService.serachExercieses(serachQuery,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+
 export const exercisesSlice = createSlice({
     name: "globalExercises",
     initialState,
     reducers: {
-        reset: (state) => initialState
+        reset: (state) => {
+            state.isError = false
+            state.isSuccess= false
+            state.isLoading = false
+            state.message = ""
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -41,6 +62,19 @@ export const exercisesSlice = createSlice({
                 state.exercises = action.payload.exercises
             })
             .addCase(getExercieses.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.Exercises = action.payload.exercises
+            })
+            .addCase(serachExercieses.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(serachExercieses.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.exercises = action.payload
+            })
+            .addCase(serachExercieses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.Exercises = action.payload.exercises

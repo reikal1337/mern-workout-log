@@ -6,7 +6,7 @@ function ExercisesSearch(props) {
 
   const [search,setSearch] = useState({
     field: "",
-    bodyPart: ""
+    bodyPart: "all"
   });
 
   const handleSubmit = (event) => {
@@ -22,9 +22,9 @@ function ExercisesSearch(props) {
     
   return (
     <SerachStyled onSubmit={handleSubmit}>
-        <input name="field" maxLength="50" value={search.field} onChange={handleChange} placeholder="search..." />
+        <input name="field" maxLength="50"  value={search.field} onChange={handleChange} placeholder="Search..." />
         <select name="bodyPart" value={search.bodyPart} onChange={handleChange}>
-          <option value="">All</option>
+          <option value="all">All</option>
           <option value="chest">Chest</option>
           <option value="back">Back</option>
           <option value="arms">Arms</option>
