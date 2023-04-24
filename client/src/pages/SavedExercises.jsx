@@ -1,7 +1,6 @@
 import { SavedExercisesStyled } from "./styles"
 import { Exercise, ExercisesSearch, CreateExerciseForm } from "../components";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
-import mockData  from "../components/mockExerciseData";
 import { useState } from "react";
 
 function SavedExercises() {
@@ -26,10 +25,10 @@ function SavedExercises() {
       <ExercisesSearch onSubmit={getSearchData} />
       <SimpleButtonBlue onClick={handleButton} id="buttton-create">Create Exerciece</SimpleButtonBlue>
       <CreateExerciseForm popUp={popUp} setPopUp={setPopUp} onSubmit={getCreateData} />
-      {mockData.map(object => {
+      {/* {mockData.map(object => {
         return !object.public ? <Exercise key={object.id} {...object}/> : "" 
         
-      })}
+      })} */}
 
     </SavedExercisesStyled>
     

@@ -12,5 +12,10 @@ export const ExercisesStyled = styled.section`
         margin-block: 10px 5px;
         font-weight: 800;
     }
+    h4{
+        margin-top: 20px;
+        font-size: 1.3rem;
+        color: grey;
+    }
 
 `

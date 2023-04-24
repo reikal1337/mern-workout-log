@@ -11,12 +11,10 @@ function ExercisesSearch(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    //Should validate first
     props.onSubmit(search)
   }
 
   const handleChange = (event) => {
-    
     setSearch({...search, [event.target.name]: event.target.value})
   }
     

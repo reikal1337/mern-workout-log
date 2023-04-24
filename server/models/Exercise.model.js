@@ -23,19 +23,19 @@ const ExerciseSchema = new mongoose.Schema(
             type: Array,
             default: [],
         },
-        workouts: {
-            type: Array,
-            default: [],
-        },
-        sets: {
-            type: Array,
-            default: [],
-        },
-        public: {
-            type: Boolean,
-            required: true,
-            default: false
-        }
+        // workouts: {
+        //     type: Array,
+        //     default: [],
+        // },
+        // sets: {
+        //     type: Array,
+        //     default: [],
+        // },
+        // public: {
+        //     type: Boolean,
+        //     required: true,
+        //     default: false
+        // }
         
     },
     { timestamps: true, collection : 'exercises' }

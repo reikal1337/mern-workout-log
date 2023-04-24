@@ -13,6 +13,7 @@ export const ExerciseStyled = styled.div`
     h3{
         font-size: .8rem;
         margin-block: 10px;
+        text-transform: capitalize;
     }
     p{
         font-size: 0.6rem;
@@ -28,5 +29,9 @@ export const ExerciseStyled = styled.div`
         display: flex;
         font-size: .5rem;
         justify-content: space-between;
+    }
+    span{
+        /* flex-grow: 1; */
+        flex-basis: 0;
     }
 `

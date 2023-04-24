@@ -1,15 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExercieses, serachExercieses, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
 import { Exercise, ExercisesSearch } from "../components";
 import { useSearchParams } from "react-router-dom";
-
-
-
-import mockData  from "../components/mockExerciseData";
-
-
 
 
 function Exercises() {
@@ -21,15 +15,22 @@ function Exercises() {
   )
   const [searchParams, setSearchParams] = useSearchParams();
 
+
+  useEffect(() => {
+    dispatch(getExercieses())
+
+    return () => {
+      dispatch(reset())
+    }
+  },[dispatch])
+
   useEffect(() =>{
     if(isError){
       console.log(message)
     }
-    dispatch(getExercieses())
-    return () => {
-      dispatch(reset())
-    }
-  },[isError, message, dispatch ])
+    
+    
+  },[isError, message])
 
 
 
@@ -38,16 +39,13 @@ function Exercises() {
   
   const getSearchData = (data) => {
     setSearchParams({name: data.field, bodypart: data.bodyPart})
-    const name = searchParams.get("name")
-    const bodypart = searchParams.get("bodypart")
-    console.log(name)
-    console.log(bodypart)
+    const name =  data.field
+    const bodypart = data.bodyPart
     const serachQuery ={
       name,
       bodypart
     }
     dispatch(serachExercieses(serachQuery))
-
   }
 
   return (
@@ -59,7 +57,12 @@ function Exercises() {
         return object.public ? <Exercise key={object.id} {...object}/> : "" 
         
       })} */}
-      {exercises.map(object => {
+
+      {
+        exercises.length === 0 && <h4>No exercises</h4>
+      }
+      {
+      exercises.map(object => {
         return( 
           <Exercise key={object._id} {...object} public={true}/>
           )
