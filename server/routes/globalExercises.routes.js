@@ -1,4 +1,3 @@
-const { Router } = require("express")
 const express = require("express")
 const {getGlobalExercises, postGlobalExercise, serachGlobalExercieses} = require("../controllers/globalExercises.controllers")
 

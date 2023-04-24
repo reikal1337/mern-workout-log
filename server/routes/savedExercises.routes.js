@@ -1,4 +1,3 @@
-const { Router } = require("express")
 const express = require("express")
 const {getExercises, postExercise, serachExercieses} = require("../controllers/savedExercises.controllers")
 
