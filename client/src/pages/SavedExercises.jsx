@@ -2,16 +2,29 @@ import { SavedExercisesStyled } from "./styles"
 import { Exercise, ExercisesSearch, CreateExerciseForm } from "../components";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
+import { postExerciese } from "../features/savedExercises/savedExercisesSlice";
 
 function SavedExercises() {
   const[popUp,setPopUp] = useState(false)
+   const dispatch = useDispatch()
+
+
+  // useEffect(() => {
+  //   dispatch(postExerciese(user.toke))
+
+  //   return () => {
+  //     dispatch(reset())
+  //   }
+  // },[dispatch])
 
   const getSearchData = (data) => {
     console.log(data)
   }
 
   const getCreateData = (data) => {
-    console.log(data)
+
+    dispatch(postExerciese(data))
   }
 
   const handleButton = () => {

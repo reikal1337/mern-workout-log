@@ -9,6 +9,7 @@ const authenticateToken = require("./middleware/auth")
 
 const { authRouter } = require("./routes/auth.routes")
 const { globalRouter } = require("./routes/globalExercises.routes")
+const { savedExRouter } = require("./routes/savedExercises.routes")
 
 
 //Config
@@ -23,6 +24,7 @@ app.use("/", authRouter)
 app.use(authenticateToken)
 
 app.use("/global", globalRouter)
+app.use("/savedexercises", savedExRouter)
 
 
 //Db

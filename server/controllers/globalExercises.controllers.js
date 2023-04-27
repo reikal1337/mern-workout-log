@@ -11,7 +11,7 @@ const getGlobalExercises = async(req, res) => {
             delete exercise.updatedAt
             delete exercise.__v
         })
-        res.status(200).json({exercises})
+        res.status(200).status(200).json({exercises})
         
     } catch (err) {
         res.status(500).json({ error: err.message})
@@ -62,9 +62,16 @@ const serachGlobalExercieses = async(req,res) =>{
             if(queryBodyPart != "/all/i"){
                 Object.assign(query,{bodyParts: {$all: [queryBodyPart]}});
             }
-            console.log(query)
-            const exercises = await GlobalExercise.find(query)
-            console.log(exercises)
+            // console.log(query)
+            const exercises = await GlobalExercise.find(query).lean()
+            if(!exercises) return res.status(404).json({message: "No searched exercises exist!"})
+            exercises.forEach( exercise => {
+            
+                delete exercise.createdAt
+                delete exercise.updatedAt
+                delete exercise.__v
+            })
+            // console.log(exercises)
             res.status(200).json(exercises)
         } catch (err) {
             console.log(err)

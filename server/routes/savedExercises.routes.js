@@ -4,8 +4,8 @@ const {getExercises, postExercise, serachExercieses} = require("../controllers/s
 
 const savedExRouter = express.Router()
 
-savedExRouter.get("/savedexercises/all", getExercises)
-.get("/savedexercises",postExercise)
-.post("/savedexercises/add", serachExercieses)
+savedExRouter.get("/all", getExercises)
+.get("/save", serachExercieses)
+.post("/add", postExercise)
 
 module.exports = { savedExRouter }

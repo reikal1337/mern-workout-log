@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 
-import globalExercisesService from "./savedExercisesService"
+import savedExercisesService from "./savedExercisesService"
 
 
 const initialState = {
@@ -11,12 +11,13 @@ const initialState = {
     message: ""
 }
 
+
 export const getExercieses = createAsyncThunk(
-    "exercises/all",
+    "savedexercises/all",
     async(_,thunkAPI) =>{
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await globalExercisesService.getExercieses(token)
+            return await savedExercisesService.getExercieses(token)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) 
         || error.message || error.toString()
@@ -26,11 +27,25 @@ export const getExercieses = createAsyncThunk(
 )
 
 export const serachExercieses = createAsyncThunk(
-    "exercises/serach",
+    "savedexercises/serach",
     async(serachQuery,thunkAPI) =>{
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await globalExercisesService.serachExercieses(serachQuery,token)
+            return await savedExercisesService.serachExercieses(serachQuery,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+export const postExerciese = createAsyncThunk(
+    "savedexercises/add",
+    async(formData,thunkAPI) =>{
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await savedExercisesService.postExerciese(formData,token)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) 
         || error.message || error.toString()

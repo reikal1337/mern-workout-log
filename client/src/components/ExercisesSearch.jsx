@@ -15,12 +15,14 @@ function ExercisesSearch(props) {
   }
 
   const handleChange = (event) => {
-    setSearch({...search, [event.target.name]: event.target.value})
+    const result = event.target.value.replace(/[^a-z\s]/gi, '')
+
+    setSearch({...search, [event.target.name]: result})
   }
     
   return (
     <SerachStyled onSubmit={handleSubmit}>
-        <input name="field" maxLength="50"  value={search.field} onChange={handleChange} placeholder="Search..." />
+        <input name="field" type="text" maxLength="50"  value={search.field} onChange={handleChange} placeholder="Search..." />
         <select name="bodyPart" value={search.bodyPart} onChange={handleChange}>
           <option value="all">All</option>
           <option value="chest">Chest</option>

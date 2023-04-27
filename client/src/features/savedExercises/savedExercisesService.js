@@ -1,6 +1,6 @@
 import axios from "../http"
 
-const API_URL = "/global/exercises"
+const API_URL = "/savedexercises"
 
 const getExercieses = async(token) => {
     const config ={
@@ -23,12 +23,27 @@ const serachExercieses = async(serachQuery,token) => {
     return response.data
 }
 
-
-
-
-const globalExercisesService = {
-    getExercieses,
-    serachExercieses
+const postExerciese = async(formData,token) => {
+    console.log(formData);
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+        data: formData
+    }
+    console.log(config)
+    const response = await axios.post(API_URL + `/add`,config)
+    console.log(response.data)
+    return response.data
 }
 
-export default globalExercisesService
+
+
+
+const savedExercisesService = {
+    getExercieses,
+    serachExercieses,
+    postExerciese
+}
+
+export default savedExercisesService

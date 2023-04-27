@@ -1,9 +1,15 @@
+// const { token } = require("morgan")
 const { Exercise } = require("../models/Exercise.model")
+const { User } = require("../models/User.model")
+const jwt = require("jsonwebtoken")
 
 const getExercises = async(req, res) => {
+    
+    const id = req.user.id
     try {
-        const exercises = await Exercise.find().lean()
-        if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
+        const exercises = await Exercise.find({_id: id}).lean()
+        console.log(exercises)
+        if(!exercises) return res.status(404).json({message: "No saved exercises exist!"})
 
         exercises.forEach( exercise => {
             
@@ -19,18 +25,20 @@ const getExercises = async(req, res) => {
 }
 
 const postExercise = async(req, res) => {
+    const id = req.user.id
+    console.log(id)
     try {
+        
+        const createdBy = (await User.findOne({_id: id}).distinct("username")).toString()
         const{
-            createdBy,
             name,
             description,
             bodyParts,
         } = req.body
-
+        console.log(createdBy + name + description + bodyParts)
         if(!createdBy || !name || !description || !bodyParts){
             return res.status(406).json({message: "Missing data!"})
         }
-
         const newExercise = new Exercise({
             createdBy,
             name,
@@ -42,6 +50,7 @@ const postExercise = async(req, res) => {
         // const exercises = await GlobalExercise.find({_id: 0})
         // if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
         // res.status(201).json({exercises})
+        console.log("added")
         res.status(201).json({message: "Exercise added!"})
 
 
@@ -63,7 +72,7 @@ const serachExercieses = async(req,res) =>{
                 Object.assign(query,{bodyParts: {$all: [queryBodyPart]}});
             }
             console.log(query)
-            const exercises = await GlobalExercise.find(query)
+            const exercises = await Exercise.find(query)
             console.log(exercises)
             res.status(200).json(exercises)
         } catch (err) {

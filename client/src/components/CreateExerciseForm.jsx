@@ -23,10 +23,21 @@ function CreateExerciseForm(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        props.onSubmit(formData)
+        const bodyParts = []
+        Object.entries(formData.bodyParts).forEach(([k,v]) => v === true && bodyParts.push(k))
+        const sendingData = {
+            name: formData.name,
+            description: formData.description,
+            bodyParts: bodyParts
+        }
+        props.onSubmit(sendingData)
     }
 
-    const handleChange = (event) => {
+    const handleNameChange = (event) => {
+        const result = event.target.value.replace(/[^a-z\s]/gi, '')
+        setFormData({...formData, [event.target.name]: result})
+    }
+    const handleDescriptionChange = (event) => {
         setFormData({...formData, [event.target.name]: event.target.value})
     }
     const handleCheckChange = (event) => {
@@ -45,8 +56,8 @@ function CreateExerciseForm(props) {
         <form onSubmit={handleSubmit}>
             <SimpleButtonRed id="button-exit" onClick={() => props.setPopUp(false)}>{<AiOutlineClose />}</SimpleButtonRed>
             <h3>Create Exercise</h3>
-            <input name="name" id="input-field" value={formData.name} onChange={handleChange} maxLength="50" placeholder="Exerciece name..." />
-            <textarea name="description" value={formData.description} onChange={handleChange} maxLength="252" placeholder="Description..."  />
+            <input name="name" id="input-field" value={formData.name} onChange={handleNameChange} type="text" maxLength="50" placeholder="Exerciece name..." />
+            <textarea name="description" value={formData.description} onChange={handleDescriptionChange} type="text" maxLength="500" placeholder="Description..."  />
             <div>
                 <label>
                     <input type="checkbox" name="chest" checked={formData.bodyParts.chest} onChange={handleCheckChange} />
