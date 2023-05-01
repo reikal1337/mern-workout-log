@@ -7,7 +7,9 @@ const getExercises = async(req, res) => {
     
     const id = req.user.id
     try {
-        const exercises = await Exercise.find({_id: id}).lean()
+        const exercises = await Exercise.find(
+            {createdBy: createdBy},
+            {createdBy:1, name: 1, description: 1, _id: 0})
         console.log(exercises)
         if(!exercises) return res.status(404).json({message: "No saved exercises exist!"})
 
@@ -25,17 +27,14 @@ const getExercises = async(req, res) => {
 }
 
 const postExercise = async(req, res) => {
-    const id = req.user.id
-    console.log(id)
+    const userId = req.user.id
     try {
-        
-        const createdBy = (await User.findOne({_id: id}).distinct("username")).toString()
+        const createdBy = (await User.findOne({_id: userId}).distinct("username")).toString()
         const{
             name,
             description,
             bodyParts,
         } = req.body
-        console.log(createdBy + name + description + bodyParts)
         if(!createdBy || !name || !description || !bodyParts){
             return res.status(406).json({message: "Missing data!"})
         }
@@ -45,13 +44,34 @@ const postExercise = async(req, res) => {
             description,
             bodyParts,
         })
-        await newExercise.save()
+        // await newExercise.save( (err,exerciece) => {
+        //    const exercieceId = exerciece._id 
+        //    console.log(exercieceId)
+        // })
+
+         const ex =  await newExercise.save()
+        //  console.log(ex._id.toString())
+         await User.updateOne({_id: userId}, {$push: {exercises: ex._id}})
+
+        // console.log(exercieceId)
+        
+        // await User.updateOne({_id: id},{$push: {exercises}})
+
 
         // const exercises = await GlobalExercise.find({_id: 0})
         // if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
         // res.status(201).json({exercises})
-        console.log("added")
-        res.status(201).json({message: "Exercise added!"})
+        // console.log(id)
+        const exercisesID = await User.findOne(
+            {_id: userId},
+            {exercises: 1 ,_id: 0})
+
+        console.log(exercisesID)
+        // const exercises = Exercise.find({_id: {$in: {exercisesID}} })
+        // const exercises = Exercise.findOne({_id: exercisesID[0].toString() })
+        // console.log(exercises)
+
+        res.status(201).json({message: "Exercise added!" })
 
 
     } catch (err) {
