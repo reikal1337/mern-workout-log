@@ -1,7 +1,7 @@
 // const { token } = require("morgan")
 const { Exercise } = require("../models/Exercise.model")
 const { User } = require("../models/User.model")
-const jwt = require("jsonwebtoken")
+
 
 const getExercises = async(req, res) => {
     
@@ -44,34 +44,13 @@ const postExercise = async(req, res) => {
             description,
             bodyParts,
         })
-        // await newExercise.save( (err,exerciece) => {
-        //    const exercieceId = exerciece._id 
-        //    console.log(exercieceId)
-        // })
-
-         const ex =  await newExercise.save()
-        //  console.log(ex._id.toString())
-         await User.updateOne({_id: userId}, {$push: {exercises: ex._id}})
-
-        // console.log(exercieceId)
         
-        // await User.updateOne({_id: id},{$push: {exercises}})
+         const newEx =  await newExercise.save()
+         await User.updateOne({_id: userId}, {$push: {exercises: newEx._id}})
 
+        const result = await getAllSavedExercieses(userId)
 
-        // const exercises = await GlobalExercise.find({_id: 0})
-        // if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
-        // res.status(201).json({exercises})
-        // console.log(id)
-        const exercisesID = await User.findOne(
-            {_id: userId},
-            {exercises: 1 ,_id: 0})
-
-        console.log(exercisesID)
-        // const exercises = Exercise.find({_id: {$in: {exercisesID}} })
-        // const exercises = Exercise.findOne({_id: exercisesID[0].toString() })
-        // console.log(exercises)
-
-        res.status(201).json({message: "Exercise added!" })
+        res.status(201).json({message: "Exercise added!", result})
 
 
     } catch (err) {
@@ -101,5 +80,22 @@ const serachExercieses = async(req,res) =>{
         }
     }
 } 
+
+const getAllSavedExercieses = async(userId) => {
+
+    try {
+        const exercisesObjIds = await User.findOne(
+            {_id: userId},
+            {exercises: 1 ,_id: 0}).lean()
+    
+        const exercisesIDs = exercisesObjIds.exercises.map(id => id.toString());
+        const exercises = await Exercise.find({_id: {$in: exercisesIDs}},
+            {_id: 0,createdAt: 0, updatedAt: 0, __v: 0});
+        return exercises
+    } catch (error) {
+        console.log(error)
+        return error
+    }
+}
 
 module.exports = {getExercises, postExercise, serachExercieses}

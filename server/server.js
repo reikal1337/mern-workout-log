@@ -23,6 +23,7 @@ app.use("/", authRouter)
 
 app.use(authenticateToken)
 
+
 app.use("/global", globalRouter)
 app.use("/savedexercises", savedExRouter)
 

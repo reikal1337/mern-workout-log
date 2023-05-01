@@ -24,15 +24,12 @@ const serachExercieses = async(serachQuery,token) => {
 }
 
 const postExerciese = async(formData,token) => {
-    console.log(formData);
     const config ={
         headers: {
             Authorization: `Bearer ${token}`
         },
-        data: formData
     }
-    console.log(config)
-    const response = await axios.post(API_URL + `/add`,config)
+    const response = await axios.post(API_URL + `/add`,formData,config)
     console.log(response.data)
     return response.data
 }
