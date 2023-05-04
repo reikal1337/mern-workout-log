@@ -20,7 +20,7 @@ function Exercise(props) {
             <span>{returnBodyParts(props.bodyParts)}</span>
             <SimpleButtonRed>{props.public ? "Save" : "Remove"}</SimpleButtonRed>
             {!props.public ? 
-              <SimpleButtonBlue>Publish</SimpleButtonBlue> : ""
+              <SimpleButtonBlue onClick={() => props.onPublish(props._id)}>Publish</SimpleButtonBlue> : ""
           
             }
             <span>Creadet by: {props.createdBy}</span>

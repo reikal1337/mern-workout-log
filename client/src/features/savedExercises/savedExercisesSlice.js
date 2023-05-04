@@ -79,7 +79,8 @@ export const savedExerciesesSlice = createSlice({
             .addCase(getExercieses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.savedExercises = action.payload.savedExercises
+                state.isSuccess = false
+                state.message = action.payload
             })
             .addCase(serachExercieses.pending, (state) => {
                 state.isLoading = true
@@ -87,12 +88,28 @@ export const savedExerciesesSlice = createSlice({
             .addCase(serachExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.savedExercises = action.payloadsavedExercises
+                state.savedExercises = action.payloadsaved.Exercises
             })
             .addCase(serachExercieses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.savedExercises = action.payload.exercises
+                state.isSuccess = false
+                state.message = action.payload
+            })
+            .addCase(postExerciese.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(postExerciese.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.savedExercises = action.payload.savedExercises
+                state.message = action.payload.message
+            })
+            .addCase(postExerciese.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
             })
     }
 })

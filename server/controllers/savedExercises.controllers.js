@@ -78,11 +78,11 @@ const getAllSavedExercieses = async(userId) => {
     try {
         const exercisesObjIds = await User.findOne(
             {_id: userId},
-            {exercises: 1 ,_id: 0}).lean()
+            {exercises: 1 , _id: 0}).lean()
     
         const exercisesIDs = exercisesObjIds.exercises.map(id => id.toString());
         const exercises = await Exercise.find({_id: {$in: exercisesIDs}},
-            {_id: 0,createdAt: 0, updatedAt: 0, __v: 0});
+            {createdAt: 0, updatedAt: 0, __v: 0});
         return exercises
     } catch (error) {
         console.log(error)

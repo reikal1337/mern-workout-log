@@ -23,12 +23,17 @@ function SavedExercises() {
     }
   },[dispatch])
 
+  const handlePublish = (id) => {
+    console.log(id)
+
+  }
+
   const getSearchData = (data) => {
     console.log(data)
   }
 
   const getCreateData = (data) => {
-
+    console.log(data)
     dispatch(postExerciese(data))
     dispatch(reset())
   }
@@ -58,7 +63,7 @@ function SavedExercises() {
       {
       savedExercises.map(object => {
         return( 
-          <Exercise key={object._id} {...object} public={false}/>
+          <Exercise key={object._id} {...object} public={false} onPublish={handlePublish}/>
           )
         
       })}

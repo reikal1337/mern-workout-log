@@ -56,12 +56,6 @@ function Exercises() {
     <ExercisesStyled>
       <h2>Exercises</h2>
       <ExercisesSearch onSubmit={getSearchData} />
-
-      {/* {mockData.map(object => {
-        return object.public ? <Exercise key={object.id} {...object}/> : "" 
-        
-      })} */}
-
       {
         exercises.length === 0 && <h4>No exercises</h4>
       }
