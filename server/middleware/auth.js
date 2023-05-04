@@ -8,7 +8,7 @@ const authenticateToken = async(req , res, next) => {
         // console.log(token)
         if(!token){
             // console.log("Lol")
-            return res.status(403).send("Accses Denied!") //change to json so front end can use
+            return res.status(401).send("Accses Denied!") //change to json so front end can use
             
         }
         if(token.startsWith("Bearer ")){

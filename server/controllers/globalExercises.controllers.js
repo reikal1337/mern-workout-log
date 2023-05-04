@@ -19,6 +19,7 @@ const getGlobalExercises = async(req, res) => {
 }
 
 const postGlobalExercise = async(req, res) => {
+    
     try {
         const{
             createdBy,

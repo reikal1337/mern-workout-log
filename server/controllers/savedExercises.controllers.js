@@ -73,6 +73,22 @@ const serachExercieses = async(req,res) =>{
     }
 } 
 
+const publishExercise = async(req, res) => {
+    
+    const userId = req.user.id
+    const exerciseId = req.params.id
+    try {
+        const publishedExerciese = Exercise.findOneAndUpdate({_id: exerciseId}, {published: true}, {new: true})
+
+        console.log("works!")
+
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message})
+    }
+}
+
 const getAllSavedExercieses = async(userId) => {
 
     try {
@@ -90,4 +106,6 @@ const getAllSavedExercieses = async(userId) => {
     }
 }
 
-module.exports = {getExercises, postExercise, serachExercieses}
+
+
+module.exports = {getExercises, postExercise, serachExercieses, publishExercise}

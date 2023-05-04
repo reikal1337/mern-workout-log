@@ -23,6 +23,11 @@ const ExerciseSchema = new mongoose.Schema(
             type: Array,
             default: [],
         },
+        published: {
+            type: Boolean,
+            required: true,
+            default: false
+        }
         // workouts: {
         //     type: Array,
         //     default: [],
@@ -31,11 +36,7 @@ const ExerciseSchema = new mongoose.Schema(
         //     type: Array,
         //     default: [],
         // },
-        // public: {
-        //     type: Boolean,
-        //     required: true,
-        //     default: false
-        // }
+       
         
     },
     { timestamps: true, collection : 'exercises' }

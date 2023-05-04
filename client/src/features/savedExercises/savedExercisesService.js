@@ -34,13 +34,26 @@ const postExerciese = async(formData,token) => {
     return response.data
 }
 
+const publishExerciese = async(id,token) => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+    const data = {}
+    const response = await axios.post(API_URL + `/publish` + `/${id}`,data,config)
+    console.log(response.data)
+    return response.data
+}
+
 
 
 
 const savedExercisesService = {
     getExercieses,
     serachExercieses,
-    postExerciese
+    postExerciese,
+    publishExerciese
 }
 
 export default savedExercisesService
