@@ -5,8 +5,8 @@ export const ExerciseStyled = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    margin-inline: 20px;
+    /* margin-top: 10px; */
+    margin-block: 12px;
     max-width: 600px;
     padding: 10px;
     border-radius: 10px;

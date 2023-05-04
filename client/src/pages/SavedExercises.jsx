@@ -1,22 +1,27 @@
 import { SavedExercisesStyled } from "./styles"
-import { Exercise, ExercisesSearch, CreateExerciseForm } from "../components";
+import { Exercise, ExercisesSearch, CreateExerciseForm, Loading } from "../components";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
-import { useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
-import { postExerciese } from "../features/savedExercises/savedExercisesSlice";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getExercieses, postExerciese, reset } from "../features/savedExercises/savedExercisesSlice";
 
 function SavedExercises() {
   const[popUp,setPopUp] = useState(false)
-   const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
+  const {savedExercises, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.savedExercieses
+  )
+  useEffect(() => {
+    dispatch(getExercieses())
+    if(isError){
+      console.log(message)//Change to diplay error...
+    }
 
-  // useEffect(() => {
-  //   dispatch(postExerciese(user.toke))
-
-  //   return () => {
-  //     dispatch(reset())
-  //   }
-  // },[dispatch])
+    return () => {
+      dispatch(reset())
+    }
+  },[dispatch])
 
   const getSearchData = (data) => {
     console.log(data)
@@ -25,12 +30,17 @@ function SavedExercises() {
   const getCreateData = (data) => {
 
     dispatch(postExerciese(data))
+    dispatch(reset())
   }
 
   const handleButton = () => {
     console.log("lol")
     setPopUp(true)
   }
+
+  if(isLoading){
+    return <Loading size={"100"} speed={"4"} />
+ }
 
   return (
     <SavedExercisesStyled>
@@ -42,6 +52,16 @@ function SavedExercises() {
         return !object.public ? <Exercise key={object.id} {...object}/> : "" 
         
       })} */}
+      {
+        savedExercises.length === 0 && <h4>No exercises</h4>
+      }
+      {
+      savedExercises.map(object => {
+        return( 
+          <Exercise key={object._id} {...object} public={false}/>
+          )
+        
+      })}
 
     </SavedExercisesStyled>
     

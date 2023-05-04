@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExercieses, serachExercieses, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
-import { Exercise, ExercisesSearch } from "../components";
+import { Exercise, ExercisesSearch, Loading } from "../components";
 import { useSearchParams } from "react-router-dom";
 
 
@@ -26,7 +26,7 @@ function Exercises() {
 
   useEffect(() =>{
     if(isError){
-      console.log(message)
+      console.log(message)//Change to diplay error...
     }
     
     
@@ -47,6 +47,10 @@ function Exercises() {
     }
     dispatch(serachExercieses(serachQuery))
   }
+
+  if(isLoading){
+    return <Loading size={"100"} speed={"4"} />
+ }
 
   return (
     <ExercisesStyled>

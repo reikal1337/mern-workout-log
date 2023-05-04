@@ -5,24 +5,16 @@ const { User } = require("../models/User.model")
 
 const getExercises = async(req, res) => {
     
-    const id = req.user.id
+    const userId = req.user.id
     try {
-        const exercises = await Exercise.find(
-            {createdBy: createdBy},
-            {createdBy:1, name: 1, description: 1, _id: 0})
-        console.log(exercises)
-        if(!exercises) return res.status(404).json({message: "No saved exercises exist!"})
+        const savedExercises = await getAllSavedExercieses(userId)
+        if(!savedExercises) return res.status(404).json({message: "No saved exercises exist!"})
 
-        exercises.forEach( exercise => {
-            
-            delete exercise.createdAt
-            delete exercise.updatedAt
-            delete exercise.__v
-        })
-        res.status(200).json({exercises})
+        return res.status(200).json({savedExercises})
         
-    } catch (err) {
-        res.status(500).json({ error: err.message})
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message})
     }
 }
 
@@ -48,9 +40,9 @@ const postExercise = async(req, res) => {
          const newEx =  await newExercise.save()
          await User.updateOne({_id: userId}, {$push: {exercises: newEx._id}})
 
-        const result = await getAllSavedExercieses(userId)
+        const savedExercises = await getAllSavedExercieses(userId)
 
-        res.status(201).json({message: "Exercise added!", result})
+        return res.status(201).json({message: "Exercise added!", savedExercises})
 
 
     } catch (err) {

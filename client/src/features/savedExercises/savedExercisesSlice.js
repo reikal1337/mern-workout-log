@@ -55,8 +55,8 @@ export const postExerciese = createAsyncThunk(
 )
 
 
-export const exercisesSlice = createSlice({
-    name: "globalExercises",
+export const savedExerciesesSlice = createSlice({
+    name: "savedExercises",
     initialState,
     reducers: {
         reset: (state) => {
@@ -74,12 +74,12 @@ export const exercisesSlice = createSlice({
             .addCase(getExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.exercises = action.payload.exercises
+                state.savedExercises = action.payload.savedExercises
             })
             .addCase(getExercieses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.Exercises = action.payload.exercises
+                state.savedExercises = action.payload.savedExercises
             })
             .addCase(serachExercieses.pending, (state) => {
                 state.isLoading = true
@@ -87,16 +87,16 @@ export const exercisesSlice = createSlice({
             .addCase(serachExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.exercises = action.payload
+                state.savedExercises = action.payloadsavedExercises
             })
             .addCase(serachExercieses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.Exercises = action.payload.exercises
+                state.savedExercises = action.payload.exercises
             })
     }
 })
 
-export const { reset } = exercisesSlice.actions
-export default exercisesSlice.reducer
+export const { reset } = savedExerciesesSlice.actions
+export default savedExerciesesSlice.reducer
 
