@@ -68,6 +68,20 @@ export const publishExerciese = createAsyncThunk(
     }
 )
 
+export const removeExerciese = createAsyncThunk(
+    "savedexercises/remove",
+    async(id,thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await savedExercisesService.removeExerciese(id,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
 export const savedExerciesesSlice = createSlice({
     name: "savedExercises",
     initialState,
@@ -130,7 +144,8 @@ export const savedExerciesesSlice = createSlice({
             .addCase(publishExerciese.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.message = action.payload
+                state.savedExercises = action.payload.savedExercises
+                state.message = action.payload.message
             })
             .addCase(publishExerciese.rejected, (state, action) => {
                 state.isLoading = false

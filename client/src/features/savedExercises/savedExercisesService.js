@@ -46,6 +46,17 @@ const publishExerciese = async(id,token) => {
     return response.data
 }
 
+const removeExerciese = async(id,token) => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+    const response = await axios.post(API_URL + `/delete` + `/${id}`,config)
+    console.log(response.data)
+    return response.data
+}
+
 
 
 
