@@ -153,6 +153,21 @@ export const savedExerciesesSlice = createSlice({
                 state.isSuccess = false
                 state.message = action.payload
             })
+            .addCase(removeExerciese.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(removeExerciese.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.savedExercises = action.payload.savedExercises
+                state.message = action.payload.message
+            })
+            .addCase(removeExerciese.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
     }
 })
 

@@ -18,8 +18,10 @@ function Exercise(props) {
         <p>{props.description}</p>
         <div id="span-container">
             <span>{returnBodyParts(props.bodyParts)}</span>
-            <SimpleButtonRed>{props.public ? "Save" : "Remove"}</SimpleButtonRed>
-            {!props.public ? 
+            {props.public ?
+              <SimpleButtonRed>Save</SimpleButtonRed>:
+            <SimpleButtonRed onClick={() => props.onRemove(props._id)}>Remove</SimpleButtonRed>}
+            {!props.public && !props.published ? 
               <SimpleButtonBlue onClick={() => props.onPublish(props._id)}>Publish</SimpleButtonBlue> : ""
           
             }

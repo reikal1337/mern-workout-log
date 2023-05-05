@@ -52,7 +52,7 @@ const removeExerciese = async(id,token) => {
             Authorization: `Bearer ${token}`
         },
     }
-    const response = await axios.post(API_URL + `/delete` + `/${id}`,config)
+    const response = await axios.delete(API_URL + `/delete` + `/${id}`,config)
     console.log(response.data)
     return response.data
 }
@@ -64,7 +64,8 @@ const savedExercisesService = {
     getExercieses,
     serachExercieses,
     postExerciese,
-    publishExerciese
+    publishExerciese,
+    removeExerciese
 }
 
 export default savedExercisesService

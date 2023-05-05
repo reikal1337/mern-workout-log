@@ -15,10 +15,11 @@ const UserSchema = new mongoose.Schema(
             minLength: 6,
             maxLength: 100,
         },
-        exercises: {
-            type: Array,
+        exercises: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "exercises",
             default: [],
-        },
+        }],
         workouts: {
             type: Array,
             default: [],

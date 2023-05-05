@@ -11,7 +11,7 @@ const getGlobalExercises = async(req, res) => {
             delete exercise.updatedAt
             delete exercise.__v
         })
-        res.status(200).status(200).json({exercises})
+        res.status(200).json({exercises})
         
     } catch (err) {
         res.status(500).json({ error: err.message})

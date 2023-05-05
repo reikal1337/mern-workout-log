@@ -24,6 +24,7 @@ function Navbar() {
             <div>
               {user ?
                 <>
+                <li><NavLink to="/">{user.username}</NavLink></li>
                 <li><NavLink to="/">Home</NavLink></li>
                 <li><NavLink to="/exercises">Exercises</NavLink></li>
                 <li><NavLink to="/savedexercises">Saved Exercises</NavLink></li>
