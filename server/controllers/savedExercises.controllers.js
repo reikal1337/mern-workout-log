@@ -107,20 +107,37 @@ const publishExercise = async(req, res) => {
     }
 }
 
-const removeExercise = async(req, res) => {
+const deleteExercise = async(req, res) => {
     const userId = req.user.id
     const exerciseId = req.params.id
     try {
-        const removeExerciese = await User.findByIdAndUpdate({_id: userId}, {$pull: {exercises: exerciseId}}, {new: true})
-        if(removeExerciese){
+        const deleteExerciese = await User.findByIdAndUpdate({_id: userId}, {$pull: {exercises: exerciseId}}, {new: true})
+        if(deleteExerciese){
             await Exercise.deleteOne({_id: exerciseId})
         }else{
             return res.status(404).json({message: "Unable to find this exercise!"})
         }
 
         const savedExercises = await getAllSavedExercieses(userId)
-        res.status(200).json({message: "Exercise removed!", savedExercises})
+        res.status(200).json({message: "Exercise deleted!", savedExercises})
         
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message})
+    }
+}
+
+const removeExercise = async(req, res) => {
+    const userId = req.user.id
+    const exerciseId = req.params.id
+    try {
+        const removeExerciese = await User.findByIdAndUpdate({_id: userId}, {$pull: {exercises: exerciseId}}, {new: true})
+        if(removeExerciese){
+            const savedExercises = await getAllSavedExercieses(userId)
+            return res.status(200).json({message: "Exercise removed!", savedExercises})
+        }else{
+            return res.status(404).json({message: "Unable to find this exercise!"})
+        }
     } catch (error) {
         console.log(error)
         res.status(500).json({ error: error.message})
@@ -130,24 +147,10 @@ const removeExercise = async(req, res) => {
 
 
 const getAllSavedExercieses = async(userId) => {
-
     try {
         const exercisesObjIds = await User.findOne(
             {_id: userId},
             {exercises: 1 , _id: 0}).lean()
-        
-        
-        // if(exercisesObjIds.exercises.length === 1){
-            
-        //     if(exercisesObjIds.exercises[0] === ""){
-        //         console.log("Empty!")
-        //         return []
-        //     }else{
-        //         console.log("1 only")
-        //         return await Exercise.find({_id: {$in: exercisesIDs}},
-        //             {createdAt: 0, updatedAt: 0, __v: 0})
-        //     }
-        // }
 
         const exercisesIDs = exercisesObjIds.exercises.map(id => id.toString())
         const exercisesSaved = await Exercise.find({_id: {$in: exercisesIDs}},
@@ -172,5 +175,6 @@ module.exports = {
     postExercise, 
     serachExercieses, 
     publishExercise, 
+    deleteExercise,
     removeExercise
 }

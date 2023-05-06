@@ -12,16 +12,27 @@ function Exercise(props) {
   return result.slice(0,-1)
 }
 
+const returnRedButton = () =>{
+  if(props.public){
+    return (<SimpleButtonRed onClick={() => props.onSave(props._id)}>Save</SimpleButtonRed>)
+  }else if(props.global && !props.public){
+    return (<SimpleButtonRed onClick={() => props.onRemove(props._id)}>Remove</SimpleButtonRed>)
+  }else if(!props.public){
+    return (<SimpleButtonRed onClick={() => props.onDelete(props._id)}>Delete</SimpleButtonRed>)
+  }
+}
+
   return (
     <ExerciseStyled>
         <h3>{props.name}</h3>
         <p>{props.description}</p>
         <div id="span-container">
             <span>{returnBodyParts(props.bodyParts)}</span>
-            {props.public ?
+            {/* {props.public ?
               <SimpleButtonRed onClick={() => props.onSave(props._id)}>Save</SimpleButtonRed>:
-            <SimpleButtonRed onClick={() => props.onRemove(props._id)}>Remove</SimpleButtonRed>}
-            {!props.public && !props.published ? 
+            <SimpleButtonRed onClick={() => props.onDelete(props._id)}>Delete</SimpleButtonRed>} */}
+            {returnRedButton()}
+            {!props.public && !props.published && !props.global ? 
               <SimpleButtonBlue onClick={() => props.onPublish(props._id)}>Publish</SimpleButtonBlue> : ""
           
             }

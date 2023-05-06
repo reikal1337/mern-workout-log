@@ -3,7 +3,7 @@ import { Exercise, ExercisesSearch, CreateExerciseForm, Loading } from "../compo
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getExercieses, postExerciese, publishExerciese, removeExerciese, reset } from "../features/savedExercises/savedExercisesSlice";
+import { getExercieses, postExerciese, publishExerciese, deleteExerciese, removeExerciese, reset } from "../features/savedExercises/savedExercisesSlice";
 
 function SavedExercises() {
   const[popUp,setPopUp] = useState(false)
@@ -25,6 +25,12 @@ function SavedExercises() {
 
   const handlePublish = (id) => {
     dispatch(publishExerciese(id))
+    dispatch(reset())
+  }
+
+  const handleDelete = (id) => {
+    console.log(id)
+    dispatch(deleteExerciese(id))
     dispatch(reset())
   }
 
@@ -66,7 +72,7 @@ function SavedExercises() {
       {
       savedExercises.map(object => {
         return( 
-          <Exercise key={object._id} {...object} public={false} onRemove={handleRemove} onPublish={handlePublish}/>
+          <Exercise key={object._id} {...object} public={false} onDelete={handleDelete} onRemove={handleRemove} onPublish={handlePublish}/>
           )
         
       })}

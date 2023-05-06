@@ -46,13 +46,24 @@ const publishExerciese = async(id,token) => {
     return response.data
 }
 
-const removeExerciese = async(id,token) => {
+const deleteExerciese = async(id,token) => {
     const config ={
         headers: {
             Authorization: `Bearer ${token}`
         },
     }
     const response = await axios.delete(API_URL + `/delete` + `/${id}`,config)
+    console.log(response.data)
+    return response.data
+}
+
+const removeExerciese = async(id,token) => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+    const response = await axios.delete(API_URL + `/remove` + `/${id}`,config)
     console.log(response.data)
     return response.data
 }
@@ -65,6 +76,7 @@ const savedExercisesService = {
     serachExercieses,
     postExerciese,
     publishExerciese,
+    deleteExerciese,
     removeExerciese
 }
 
