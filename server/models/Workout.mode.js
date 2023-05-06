@@ -10,7 +10,6 @@ const WorkoutSchema = new mongoose.Schema(
         },
         exercises: {
             type: Array,
-            required: true,
             default: [],
         }
         

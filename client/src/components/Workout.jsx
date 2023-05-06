@@ -15,7 +15,7 @@ function Workout(props) {
     return data.map( object => {
      return (
       <div className={"exercise-content"}>
-        <h4>{object.name}</h4>
+        <h4>{object.exerciseName}</h4>
         <h6 >{object.bodyParts}</h6>
         {object.sets.map( object => {
 

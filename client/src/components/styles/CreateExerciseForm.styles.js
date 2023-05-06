@@ -46,6 +46,7 @@ export const CreateForm = styled.div`
                 border: 2px inset #ccc;
                 box-shadow: inset 1px 1px 10px 1px grey;
                 margin-right: 7px;
+                margin-bottom: 10px;
                 font-size: .9rem;
                 
             }

@@ -6,5 +6,6 @@ import CreateExerciseForm from "./CreateExerciseForm";
 import Workout from "./Workout";
 import WorkoutSearch from "./WorkoutSearch";
 import Loading from "./Loading";
+import CreateWorkouteForm from "./CreateWorkoutForm";
 
-export { Navbar, Footer, Exercise, ExercisesSearch, CreateExerciseForm, Workout, WorkoutSearch, Loading}
+export { Navbar, Footer, Exercise, ExercisesSearch, CreateExerciseForm, Workout, WorkoutSearch, Loading, CreateWorkouteForm}

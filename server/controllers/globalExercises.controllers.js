@@ -40,10 +40,6 @@ const postGlobalExercise = async(req, res) => {
             bodyParts,
         })
         await newGlobalExercise.save()
-
-        // const exercises = await GlobalExercise.find({_id: 0})
-        // if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
-        // res.status(201).json({exercises})
         res.status(201).json({message: "Exercise added!"})
 
 

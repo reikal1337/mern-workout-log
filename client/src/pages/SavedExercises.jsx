@@ -29,6 +29,7 @@ function SavedExercises() {
     }
   },[dispatch,isError])
 
+
   const handlePublish = (id) => {
     dispatch(publishExerciese(id))
     dispatch(reset())
@@ -64,20 +65,19 @@ function SavedExercises() {
     setPopUp(false)
   }
 
-  const handleButton = () => {
-    console.log("lol")
+  const handleCreateButton = () => {
     setPopUp(true)
   }
 
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />
  }
-  console.log(savedExercises.length)
+
   return (
     <SavedExercisesStyled>
       <h2>Saved Exercises</h2> 
       <ExercisesSearch onSubmit={getSearchData} />
-      <SimpleButtonBlue onClick={handleButton} id="buttton-create">Create Exerciece</SimpleButtonBlue>
+      <SimpleButtonBlue onClick={handleCreateButton} id="buttton-create">Create Exerciece</SimpleButtonBlue>
       <CreateExerciseForm popUp={popUp} setPopUp={setPopUp} onSubmit={getCreateData} />
       {
         savedExercises.length === 0 && <h4>No exercises</h4>
