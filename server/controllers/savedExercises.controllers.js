@@ -5,7 +5,6 @@ const { GlobalExercise } = require("../models/GlobalExercise.model")
 
 
 const getExercises = async(req, res) => {
-    
     const userId = req.user.id
     try {
         const savedExercises = await getAllSavedExercieses(userId)
@@ -151,8 +150,14 @@ const getAllSavedExercieses = async(userId) => {
         // }
 
         const exercisesIDs = exercisesObjIds.exercises.map(id => id.toString())
-        const exercises = await Exercise.find({_id: {$in: exercisesIDs}},
+        const exercisesSaved = await Exercise.find({_id: {$in: exercisesIDs}},
             {createdAt: 0, updatedAt: 0, __v: 0})
+
+        const exercisesGlobal = await GlobalExercise.find({_id: {$in: exercisesIDs}},
+            {createdAt: 0, updatedAt: 0, __v: 0})
+
+        const exercises = exercisesSaved.concat(exercisesGlobal)
+
         return exercises
     } catch (error) {
         console.log(error)

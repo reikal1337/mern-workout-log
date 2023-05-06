@@ -27,7 +27,8 @@ const ExerciseSchema = new mongoose.Schema(
             type: Boolean,
             required: true,
             default: false
-        }
+        },
+        
         // workouts: {
         //     type: Array,
         //     default: [],

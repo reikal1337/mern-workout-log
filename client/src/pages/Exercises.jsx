@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getExercieses, serachExercieses, reset } from "../features/globalExercises/globalExercisesSlice";
+import { getExercieses, serachExercieses, saveExercies, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
 import { Exercise, ExercisesSearch, Loading } from "../components";
 import { useSearchParams } from "react-router-dom";
@@ -32,11 +32,6 @@ function Exercises() {
     
   },[isError, message])
 
-
-
-
-
-  
   const getSearchData = (data) => {
     setSearchParams({name: data.field, bodypart: data.bodyPart})
     const name =  data.field
@@ -46,6 +41,10 @@ function Exercises() {
       bodypart
     }
     dispatch(serachExercieses(serachQuery))
+  }
+  const handleSave = (id) => {
+    dispatch(saveExercies(id))
+    dispatch(reset())
   }
 
   if(isLoading){
@@ -62,7 +61,7 @@ function Exercises() {
       {
       exercises.map(object => {
         return( 
-          <Exercise key={object._id} {...object} public={true}/>
+          <Exercise key={object._id} {...object} public={true} onSave={handleSave}/>
           )
         
       })}

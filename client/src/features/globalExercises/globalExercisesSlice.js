@@ -39,6 +39,20 @@ export const serachExercieses = createAsyncThunk(
     }
 )
 
+export const saveExercies = createAsyncThunk(
+    "exercises/save",
+    async(exerciseId,thunkAPI) =>{
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await globalExercisesService.saveExercies(exerciseId,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
 
 export const exercisesSlice = createSlice({
     name: "globalExercises",
@@ -77,7 +91,20 @@ export const exercisesSlice = createSlice({
             .addCase(serachExercieses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
-                state.Exercises = action.payload.exercises
+                state.exercises = action.payload.exercises
+            })
+            .addCase(saveExercies.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(saveExercies.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.message = action.payload
+            })
+            .addCase(saveExercies.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.message = action.payload
             })
     }
 })

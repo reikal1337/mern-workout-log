@@ -23,12 +23,24 @@ const serachExercieses = async(serachQuery,token) => {
     return response.data
 }
 
+const saveExercies = async(exerciseId,token) => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+    const data ={}
+    const response = await axios.post(API_URL + `/save/${exerciseId}`,data,config)
+    return response.data
+}
+
 
 
 
 const globalExercisesService = {
     getExercieses,
-    serachExercieses
+    serachExercieses,
+    saveExercies
 }
 
 export default globalExercisesService

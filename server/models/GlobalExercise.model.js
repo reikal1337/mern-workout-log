@@ -22,6 +22,11 @@ const GlobalExerciseSchema = new mongoose.Schema(
         bodyParts: {
             type: Array,
             default: [],
+        },
+        global: {
+            type: Boolean,
+            required: true,
+            default: true
         }
         
     },
