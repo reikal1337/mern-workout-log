@@ -28,9 +28,6 @@ const returnRedButton = () =>{
         <p>{props.description}</p>
         <div id="span-container">
             <span>{returnBodyParts(props.bodyParts)}</span>
-            {/* {props.public ?
-              <SimpleButtonRed onClick={() => props.onSave(props._id)}>Save</SimpleButtonRed>:
-            <SimpleButtonRed onClick={() => props.onDelete(props._id)}>Delete</SimpleButtonRed>} */}
             {returnRedButton()}
             {!props.public && !props.published && !props.global ? 
               <SimpleButtonBlue onClick={() => props.onPublish(props._id)}>Publish</SimpleButtonBlue> : ""

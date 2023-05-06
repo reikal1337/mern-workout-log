@@ -85,18 +85,22 @@ const serachGlobalExercieses = async(req,res) =>{
 const saveGlobalExercise = async(req, res) => {
     const userId = req.user.id
     const exerciseId = req.params.id
-    console.log("lol")
     try {
         
         const savedGlobalExercise = await GlobalExercise.findOne({_id: exerciseId})
+
         if(savedGlobalExercise){
-            await User.updateOne({_id: userId}, {$push: {exercises: exerciseId}})
-            return res.status(200).json({message: "Exercies saved!"})
+            const checkIfNotAdded = await User.find({_id: userId, exercises: { $in: [exerciseId]}})
+           
+            if(checkIfNotAdded.length === 0){
+                await User.updateOne({_id: userId}, {$push: {exercises: exerciseId}})
+                return res.status(200).json({message: "Exercies saved!"})
+            }else{
+                return res.status(406).json({message: "Exercies already saved!"})
+            }
+            
         }
-        return res.status(404).json({message: "Exercies doesn't exist!"})
-        
-        
-        
+        return res.status(404).json({message: "Exercies doesn't exist!"})  
     } catch (err) {
         res.status(500).json({ error: err.message})
     }
