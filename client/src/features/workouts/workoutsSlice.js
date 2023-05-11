@@ -40,6 +40,20 @@ export const postWorkout = createAsyncThunk(
     }
 )
 
+export const deleteWorkout = createAsyncThunk(
+    "workouts/delete",
+    async(id,thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await workoutsService.deleteWorkout(id,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
 // export const publishExerciese = createAsyncThunk(
 //     "savedexercises/publish",
 //     async(id,thunkAPI) => {
@@ -54,19 +68,7 @@ export const postWorkout = createAsyncThunk(
 //     }
 // )
 
-// export const deleteExerciese = createAsyncThunk(
-//     "savedexercises/delete",
-//     async(id,thunkAPI) => {
-//         try {
-//             const token = thunkAPI.getState().auth.user.token
-//             return await savedExercisesService.deleteExerciese(id,token)
-//         } catch (error) {
-//             const message = (error.response && error.response.data && error.response.data.message) 
-//         || error.message || error.toString()
-//         return thunkAPI.rejectWithValue(message)
-//         }
-//     }
-// )
+
 
 // export const removeExerciese = createAsyncThunk(
 //     "savedexercises/remove",
@@ -120,6 +122,21 @@ export const workoutsSlice = createSlice({
                 state.message = action.payload.message
             })
             .addCase(postWorkout.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
+            .addCase(deleteWorkout.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deleteWorkout.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.workouts = action.payload.workouts
+                state.message = action.payload.message
+            })
+            .addCase(deleteWorkout.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.isSuccess = false

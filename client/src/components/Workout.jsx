@@ -44,7 +44,7 @@ function Workout(props) {
         {returnFullExercises(props.exercises)}
         <div className="button-container">
           <SimpleButtonBlue>Edit</SimpleButtonBlue>
-          <SimpleButtonRed>Delete</SimpleButtonRed>
+          <SimpleButtonRed onClick={() => props.onDelete(props._id)}>Delete</SimpleButtonRed>
         </div>
       </div>
       

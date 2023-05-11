@@ -42,6 +42,7 @@ function Exercises() {
     }
     dispatch(serachExercieses(serachQuery))
   }
+  
   const handleSave = (id) => {
     dispatch(saveExercies(id))
     dispatch(reset())

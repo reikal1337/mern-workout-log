@@ -4,7 +4,7 @@ import mockData from "../components/mockWorkoutData";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWorkouts, postWorkout, reset } from "../features/workouts/workoutsSlice";
+import { getWorkouts, postWorkout, deleteWorkout, reset } from "../features/workouts/workoutsSlice";
 
 
 function Workouts() {
@@ -41,6 +41,13 @@ function Workouts() {
     setPopUp(true)
   }
 
+  const handleDelete = (id) => {
+    dispatch(deleteWorkout(id))
+    dispatch(reset())
+
+  }
+
+
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />
  }
@@ -57,7 +64,7 @@ function Workouts() {
         {
           workouts.map(object => {
             return( 
-              <Workout key={object._id} {...object} />
+              <Workout key={object._id} {...object} onDelete={handleDelete} />
               )
             
           })

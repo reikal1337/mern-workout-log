@@ -9,7 +9,7 @@ const getWorkouts= async(token) => {
         }
     }
 
-    const response = await axios.get(API_URL + "/all",config)
+    const response = await axios.get(API_URL + "/all", config)
     return response.data
 }
 
@@ -19,9 +19,18 @@ const postWorkout = async(formData,token) => {
             Authorization: `Bearer ${token}`
         },
     }
-    console.log("Req:")
-    console.log(formData)
-    const response = await axios.post(API_URL + `/add`,formData,config)
+    const response = await axios.post(API_URL + `/add`, formData, config)
+    console.log(response.data)
+    return response.data
+}
+
+const deleteWorkout = async(id,token) => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+    const response = await axios.delete(API_URL + `/delete` + `/${id}`, config)
     console.log(response.data)
     return response.data
 }
@@ -38,16 +47,7 @@ const postWorkout = async(formData,token) => {
 //     return response.data
 // }
 
-// const deleteExerciese = async(id,token) => {
-//     const config ={
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         },
-//     }
-//     const response = await axios.delete(API_URL + `/delete` + `/${id}`,config)
-//     console.log(response.data)
-//     return response.data
-// }
+
 
 // const removeExerciese = async(id,token) => {
 //     const config ={
@@ -65,7 +65,8 @@ const postWorkout = async(formData,token) => {
 
 const workoutsService = {
     getWorkouts,
-    postWorkout
+    postWorkout,
+    deleteWorkout
 }
 
 export default workoutsService
