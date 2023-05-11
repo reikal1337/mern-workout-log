@@ -8,10 +8,8 @@ const getWorkouts= async(token) => {
             Authorization: `Bearer ${token}`
         }
     }
-    console.log("Req:")
+
     const response = await axios.get(API_URL + "/all",config)
-    console.log("Response:")
-    console.log(response.data)
     return response.data
 }
 

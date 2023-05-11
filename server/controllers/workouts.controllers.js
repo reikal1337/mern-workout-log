@@ -8,7 +8,6 @@ const getWorkouts = async(req, res) => {
     
     try {
         const workouts = await getAllWorkouts(userId)
-        
         if(workouts.length === 0) {
             console.log("204")
             return res.status(404).json({message: "No workouts exist!"})
@@ -26,7 +25,6 @@ const postWorkout = async(req, res) => {
     const userId = req.user.id
     try {
         const { name } = req.body
-        console.log(req.body)
         if(!name){
             return res.status(406).json({message: "Missing data!"})
         }
@@ -42,6 +40,28 @@ const postWorkout = async(req, res) => {
         res.status(406).json({ error: err.message})
     }
 }
+
+const deleteWorkout = async(req, res) => {
+    const userId = req.user.id
+    const exerciseId = req.params.id
+    try {
+        const deleteWorkout = await User.findByIdAndUpdate({_id: userId}, {$pull: {workouts: exerciseId}}, {new: true})
+        if(deleteWorkout){
+            await Workout.deleteOne({_id: exerciseId})
+        }else{
+            return res.status(404).json({message: "Unable to find this workout!"})
+        }
+
+        const workouts = await getAllWorkouts(userId)
+        res.status(200).json({message: "Workout deleted!", workouts})
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message})
+    }
+}
+
+
 
 const getAllWorkouts = async(userId) => {
     try {
@@ -62,4 +82,4 @@ const getAllWorkouts = async(userId) => {
 
 
 
-module.exports = { getWorkouts, postWorkout}
+module.exports = { getWorkouts, postWorkout, deleteWorkout}
