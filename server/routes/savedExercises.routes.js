@@ -5,7 +5,7 @@ const {getExercises, postExercise, serachExercieses, publishExercise, deleteExer
 const savedExRouter = express.Router()
 
 savedExRouter.get("/all", getExercises)
-.get("/save", serachExercieses)
+// .get("/save", serachExercieses)
 .post("/add", postExercise)
 .post("/publish/:id", publishExercise)
 .delete("/delete/:id", deleteExercise)

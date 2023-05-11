@@ -20,10 +20,11 @@ const UserSchema = new mongoose.Schema(
             ref: "exercises",
             default: [],
         }],
-        workouts: {
-            type: Array,
+        workouts: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "workouts",
             default: [],
-        },
+        }],
         workoutLogs: {
             type: Array,
             default: [],
