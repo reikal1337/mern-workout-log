@@ -8,20 +8,25 @@ const getWorkouts= async(token) => {
             Authorization: `Bearer ${token}`
         }
     }
+    console.log("Req:")
     const response = await axios.get(API_URL + "/all",config)
+    console.log("Response:")
+    console.log(response.data)
     return response.data
 }
 
-// const postExerciese = async(formData,token) => {
-//     const config ={
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         },
-//     }
-//     const response = await axios.post(API_URL + `/add`,formData,config)
-//     console.log(response.data)
-//     return response.data
-// }
+const postWorkout = async(formData,token) => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+    console.log("Req:")
+    console.log(formData)
+    const response = await axios.post(API_URL + `/add`,formData,config)
+    console.log(response.data)
+    return response.data
+}
 
 // const publishExerciese = async(id,token) => {
 //     const config ={
@@ -60,8 +65,9 @@ const getWorkouts= async(token) => {
 
 
 
-const savedExercisesService = {
-    getWorkouts
+const workoutsService = {
+    getWorkouts,
+    postWorkout
 }
 
-export default savedExercisesService
+export default workoutsService

@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./features/auth/authSlice";
 import exercisesReducer from "./features/globalExercises/globalExercisesSlice"
 import savedExercisesReducer from "./features/savedExercises/savedExercisesSlice";
+import workoutsReducer from "./features/workouts/workoutsSlice"
 
 
 
@@ -10,6 +11,7 @@ export const store = configureStore({
         auth: authReducer,
         globalExerciese: exercisesReducer,
         savedExercieses: savedExercisesReducer,
+        workouts: workoutsReducer,
 
     },
 })

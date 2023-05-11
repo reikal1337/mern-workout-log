@@ -17,7 +17,7 @@ export const getWorkouts = createAsyncThunk(
     async(_,thunkAPI) =>{
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await workoutsService.getExercieses(token)
+            return await workoutsService.getWorkouts(token)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) 
         || error.message || error.toString()
@@ -26,19 +26,19 @@ export const getWorkouts = createAsyncThunk(
     }
 )
 
-// export const postExerciese = createAsyncThunk(
-//     "savedexercises/add",
-//     async(formData,thunkAPI) =>{
-//         try {
-//             const token = thunkAPI.getState().auth.user.token
-//             return await savedExercisesService.postExerciese(formData,token)
-//         } catch (error) {
-//             const message = (error.response && error.response.data && error.response.data.message) 
-//         || error.message || error.toString()
-//         return thunkAPI.rejectWithValue(message)
-//         }
-//     }
-// )
+export const postWorkout = createAsyncThunk(
+    "workouts/add",
+    async(formData,thunkAPI) =>{
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await workoutsService.postWorkout(formData,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
 
 // export const publishExerciese = createAsyncThunk(
 //     "savedexercises/publish",
@@ -110,9 +110,24 @@ export const workoutsSlice = createSlice({
                 state.isSuccess = false
                 state.message = action.payload
             })
+            .addCase(postWorkout.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(postWorkout.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.workouts = action.payload.workouts
+                state.message = action.payload.message
+            })
+            .addCase(postWorkout.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
     }
 })
 
-export const { reset } = savedExerciesesSlice.actions
-export default savedExerciesesSlice.reducer
+export const { reset } = workoutsSlice.actions
+export default workoutsSlice.reducer
 

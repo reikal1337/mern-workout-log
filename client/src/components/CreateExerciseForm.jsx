@@ -34,7 +34,7 @@ function CreateExerciseForm(props) {
     }
 
     const handleNameChange = (event) => {
-        const result = event.target.value.replace(/[^a-z\s]/gi, '')
+        const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
         setFormData({...formData, [event.target.name]: result})
     }
     const handleDescriptionChange = (event) => {

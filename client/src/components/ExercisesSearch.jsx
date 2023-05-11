@@ -15,8 +15,7 @@ function ExercisesSearch(props) {
   }
 
   const handleChange = (event) => {
-    const result = event.target.value.replace(/[^a-z\s]/gi, '')
-
+    const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
     setSearch({...search, [event.target.name]: result})
   }
     

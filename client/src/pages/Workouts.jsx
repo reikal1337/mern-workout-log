@@ -4,7 +4,7 @@ import mockData from "../components/mockWorkoutData";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWorkouts, reset } from "../features/workouts/workoutsSlice";
+import { getWorkouts, postWorkout, reset } from "../features/workouts/workoutsSlice";
 
 
 function Workouts() {
@@ -32,7 +32,8 @@ function Workouts() {
   }
 
   const getCreateData = (data) => {
-    
+    dispatch(postWorkout({name: data}))
+    dispatch(reset())
     setPopUp(false)
   }
 
@@ -43,8 +44,6 @@ function Workouts() {
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />
  }
- console.log(workouts.length)
- console.log(workouts)
  
   return (
     <WorkoutsStyled>

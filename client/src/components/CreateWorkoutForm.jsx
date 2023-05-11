@@ -12,11 +12,19 @@ function CreateWorkouteForm(props) {
 
     const [formData,setFormData] = useState("")
 
+    
+
+    const handleChange = (event) => {
+      const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
+      setFormData(result)
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault()
        
         props.onSubmit(formData)
     }
+
 
   return  props.popUp && ReactDom.createPortal(
     <CreateForm >
@@ -26,7 +34,7 @@ function CreateWorkouteForm(props) {
             <SimpleButtonRed id="button-exit" onClick={() => props.setPopUp(false)}>{<AiOutlineClose />}</SimpleButtonRed>
             <h3>Create Workout</h3>
             <h4>Name</h4>
-            <input name="name" id="input-field" value={formData.name} onChange={ (e) => setFormData(e.target.value)}  type="text" maxLength="50" placeholder="Workout name..." />
+            <input name="name" id="input-field" value={formData} onChange={handleChange}  type="text" minLength="2" maxLength="50" placeholder="Workout name..." />
             <SimpleButtonBlue type="Submit">Create</SimpleButtonBlue>
         </form>
         </div>

@@ -49,28 +49,28 @@ const postExercise = async(req, res) => {
     }
 }
 
-const serachExercieses = async(req,res) =>{
-    const queryName = new RegExp(req.query.name, "i")
-    const queryBodyPart = new RegExp(req.query.bodypart, "i")
-    if(queryName !== "" || queryBodyPart !== ""){
-        try {
-            let query = {}
-            if(queryName !== ""){
-                Object.assign(query,{name: queryName});
-            }
-            if(queryBodyPart != "/all/i"){
-                Object.assign(query,{bodyParts: {$all: [queryBodyPart]}});
-            }
-            console.log(query)
-            const exercises = await Exercise.find(query)
-            console.log(exercises)
-            res.status(200).json(exercises)
-        } catch (err) {
-            console.log(err)
-            res.status(404).json({ error: "Not found!"})
-        }
-    }
-} 
+// const serachExercieses = async(req,res) =>{
+//     const queryName = new RegExp(req.query.name, "i")
+//     const queryBodyPart = new RegExp(req.query.bodypart, "i")
+//     if(queryName !== "" || queryBodyPart !== ""){
+//         try {
+//             let query = {}
+//             if(queryName !== ""){
+//                 Object.assign(query,{name: queryName});
+//             }
+//             if(queryBodyPart != "/all/i"){
+//                 Object.assign(query,{bodyParts: {$all: [queryBodyPart]}});
+//             }
+//             console.log(query)
+//             const exercises = await Exercise.find(query)
+//             console.log(exercises)
+//             res.status(200).json(exercises)
+//         } catch (err) {
+//             console.log(err)
+//             res.status(404).json({ error: "Not found!"})
+//         }
+//     }
+// } 
 
 const publishExercise = async(req, res) => {
     
@@ -173,7 +173,7 @@ const getAllSavedExercieses = async(userId) => {
 module.exports = {
     getExercises, 
     postExercise, 
-    serachExercieses, 
+    // serachExercieses, 
     publishExercise, 
     deleteExercise,
     removeExercise
