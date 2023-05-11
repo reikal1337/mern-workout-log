@@ -1,5 +1,5 @@
 import { WorkoutsStyled } from "./styles/Workouts.style"
-import { Workout, WorkoutSearch, CreateWorkouteForm, Loading } from "../components"
+import { Workout, WorkoutSearch, CreateWorkouteForm, Loading, Notification } from "../components"
 import mockData from "../components/mockWorkoutData";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
@@ -20,7 +20,9 @@ function Workouts() {
     dispatch(getWorkouts())
     if(isError){
       console.log(message)//Change to diplay error...
+      
     }
+
 
     return () => {
       dispatch(reset())
@@ -55,6 +57,13 @@ function Workouts() {
   return (
     <WorkoutsStyled>
         <h2>Workouts</h2>
+        {
+          isError && message ? <Notification isBlue={false} message={message}/> : ""
+        }
+        {
+          isSuccess && message ? <Notification isBlue={true} message={message}/> : ""
+        }
+        
         <WorkoutSearch onSubmit={getSearchData}/>
         <SimpleButtonBlue onClick={handleCreateButton} id="button-create">Create Workout</SimpleButtonBlue>
         <CreateWorkouteForm popUp={popUp} setPopUp={setPopUp} onSubmit={getCreateData}></CreateWorkouteForm>
