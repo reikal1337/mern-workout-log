@@ -26,20 +26,6 @@ export const getExercieses = createAsyncThunk(
     }
 )
 
-export const serachExercieses = createAsyncThunk(
-    "savedexercises/serach",
-    async(serachQuery,thunkAPI) =>{
-        try {
-            const token = thunkAPI.getState().auth.user.token
-            return await savedExercisesService.serachExercieses(serachQuery,token)
-        } catch (error) {
-            const message = (error.response && error.response.data && error.response.data.message) 
-        || error.message || error.toString()
-        return thunkAPI.rejectWithValue(message)
-        }
-    }
-)
-
 export const postExerciese = createAsyncThunk(
     "savedexercises/add",
     async(formData,thunkAPI) =>{
@@ -118,20 +104,6 @@ export const savedExerciesesSlice = createSlice({
                 state.savedExercises = action.payload.savedExercises
             })
             .addCase(getExercieses.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.isSuccess = false
-                state.message = action.payload
-            })
-            .addCase(serachExercieses.pending, (state) => {
-                state.isLoading = true
-            })
-            .addCase(serachExercieses.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.isSuccess = true
-                state.savedExercises = action.payloadsaved.Exercises
-            })
-            .addCase(serachExercieses.rejected, (state, action) => {
                 state.isLoading = false
                 state.isError = true
                 state.isSuccess = false
