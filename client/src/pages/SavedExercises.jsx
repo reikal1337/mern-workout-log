@@ -11,13 +11,14 @@ function SavedExercises() {
   const [search,setSearch] = useState({
     field: "",
     bodyPart: ""
-  });
+  })
 
   const dispatch = useDispatch()
 
   const {savedExercises, isLoading, isSuccess, isError, message } = useSelector(
-    (state) => state.savedExercieses
+    (state) => state.savedExercises
   )
+  
   useEffect(() => {
     dispatch(getExercieses())
     if(isError){

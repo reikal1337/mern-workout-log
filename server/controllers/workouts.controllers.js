@@ -35,7 +35,7 @@ const postWorkout = async(req, res) => {
 
         const workouts = await getAllWorkouts(userId)
 
-        return res.status(201).json({message: "Exercise added!", workouts})
+        return res.status(201).json({message: "Workout added!", workouts})
     } catch (err) {
         res.status(406).json({ error: err.message})
     }

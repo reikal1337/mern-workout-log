@@ -10,7 +10,7 @@ export const store = configureStore({
     reducer: {
         auth: authReducer,
         globalExerciese: exercisesReducer,
-        savedExercieses: savedExercisesReducer,
+        savedExercises: savedExercisesReducer,
         workouts: workoutsReducer,
 
     },

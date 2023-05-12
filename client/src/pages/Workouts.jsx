@@ -5,6 +5,7 @@ import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWorkouts, postWorkout, deleteWorkout, reset } from "../features/workouts/workoutsSlice";
+import { getExercieses, reset as savedExerciesesReset } from "../features/savedExercises/savedExercisesSlice";
 
 
 function Workouts() {
@@ -16,16 +17,15 @@ function Workouts() {
     (state) => state.workouts
   )
 
+  
+
   useEffect(() => {
     dispatch(getWorkouts())
-    if(isError){
-      console.log(message)//Change to diplay error...
-      
-    }
-
+    dispatch(getExercieses())
 
     return () => {
       dispatch(reset())
+      dispatch(savedExerciesesReset())
     }
   },[dispatch])
 
@@ -47,6 +47,10 @@ function Workouts() {
     dispatch(deleteWorkout(id))
     dispatch(reset())
 
+  }
+
+  const handleSaveExercises = (data) => {
+    console.log(data)
   }
 
 
@@ -73,7 +77,7 @@ function Workouts() {
         {
           workouts.map(object => {
             return( 
-              <Workout key={object._id} {...object} onDelete={handleDelete} />
+              <Workout key={object._id} {...object} onSave={handleSaveExercises} onDelete={handleDelete} />
               )
             
           })
