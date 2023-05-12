@@ -87,7 +87,6 @@ export const WorkoutStyled = styled.div`
         border-radius: 10px;
         border: 2px inset #ccc;
         box-shadow: inset 1px 1px 10px 1px grey;
-        
         font-size: .9rem;
         width: 150px;
     }
@@ -98,6 +97,11 @@ export const WorkoutStyled = styled.div`
             border-bottom-left-radius: 0px;
             border-bottom-right-radius: 0px;
         }
+    }
+    #input-container{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
     }
     #add-exercise-container{
         display: flex;
@@ -112,6 +116,9 @@ export const WorkoutStyled = styled.div`
         display: flex;
         input{
             width: 50px;
+        }
+        label{
+            margin: 7px;
         }
     }
 

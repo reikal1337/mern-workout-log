@@ -1,16 +1,8 @@
 import { ExerciseStyled } from "./styles/Exercise.style"
 import { SimpleButtonRed,  SimpleButtonBlue } from "./styles/Buttons.syles";
+import { formatBodyParts } from "../helpers/util";
 
 function Exercise(props) {
-
-  const returnBodyParts = (array) => {
-    let result = ""
-    
-    array.map( item => {
-      result += item.charAt(0).toUpperCase() + item.slice(1) + "/"
-  })
-  return result.slice(0,-1)
-}
 
 const returnRedButton = () =>{
   if(props.public){
@@ -27,7 +19,7 @@ const returnRedButton = () =>{
         <h3>{props.name}</h3>
         <p>{props.description}</p>
         <div id="span-container">
-            <span>{returnBodyParts(props.bodyParts)}</span>
+            <span>{formatBodyParts(props.bodyParts)}</span>
             {returnRedButton()}
             {!props.public && !props.published && !props.global ? 
               <SimpleButtonBlue onClick={() => props.onPublish(props._id)}>Publish</SimpleButtonBlue> : ""

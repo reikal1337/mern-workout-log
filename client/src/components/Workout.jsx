@@ -2,7 +2,8 @@ import { useState } from "react"
 import { SimpleButtonBlue, SimpleButtonRed } from "./styles/Buttons.syles"
 import { WorkoutStyled } from "./styles/Workout.styles"
 import { BiDownArrow } from "react-icons/bi"
-import { useSelector } from "react-redux";
+import { useSelector } from "react-redux"
+import WorkoutExercise from "./WorkoutExercise"
 
 function Workout(props) {
   const [collapsedIndex,setCollapsedIndex] = useState("")
@@ -12,6 +13,7 @@ function Workout(props) {
   const [editData, setEditData] = useState({
     _id: "",
     name: "",
+    bodyParts: [],
     sets: 1,
     reps: 1
   })
@@ -51,17 +53,19 @@ function Workout(props) {
         [name]: value
       })
     }else{
-      const [_idInput, nameInput] = value.split(",")
+      const [_idInput, nameInput, bodyPartsInput] = value.split(",")
       setEditData({
         ...editData,
         _id: _idInput,
-        name: nameInput
+        name: nameInput,
+        bodyParts: bodyPartsInput
       })
     }
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    console.log(editData)
     const newExercise = {...editData}
     setAddedExercises([
       ...addedExercises,
@@ -113,25 +117,31 @@ function Workout(props) {
         {
         returnFullExercises(props.exercises)
         }
-
+        {// Should instead create workoutExerciese...
+          addedExercises.map(object => {
+            return <WorkoutExercise {...object}/>
+          })
+        }
        { editMode &&
        <form onSubmit={handleSubmit}>
-        <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />
-        <select name="_id" value={`${editData._id},${editData.name}`} onChange={handleInputChange} >
-          {
-          savedExercises.filter(object =>(
-            object.name.toLowerCase().includes(search)
-          )).map(object => {
-            return <option value={`${object._id},${object.name}`}>{object.name}</option>
-          })
-          }
-        </select>
+        <div id="input-container">
+          <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />
+          <select name="_id" value={`${editData._id},${editData.name},${editData.bodyParts}`} onChange={handleInputChange} > //We pass this as string rather then array...
+            {
+            savedExercises.filter(object =>(
+              object.name.toLowerCase().includes(search)
+            )).map(object => {
+              return <option value={`${object._id},${object.name},${object.bodyParts}`}>{object.name}</option>
+            })
+            }
+          </select>
+        </div>
         <div id="set-rep-container">
           <label>Sets: <input type="number" name="sets" value={editData.sets} onChange={handleInputChange} /></label>
           <label>Reps: <input type="number" name="reps"  value={editData.reps} onChange={handleInputChange} /></label>
         </div>
         <div id="add-exercise-container">
-          <SimpleButtonBlue type="submit" >Add Exerciese</SimpleButtonBlue>
+          <SimpleButtonBlue type="submit" >Add Exercise</SimpleButtonBlue>
         </div>
       </form>
         }
