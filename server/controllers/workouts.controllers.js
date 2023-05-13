@@ -9,10 +9,8 @@ const getWorkouts = async(req, res) => {
     try {
         const workouts = await getAllWorkouts(userId)
         if(workouts.length === 0) {
-            console.log("204")
             return res.status(404).json({message: "No workouts exist!"})
         }
-        console.log("200")
         return res.status(200).json({workouts})
         
     } catch (error) {
@@ -75,7 +73,7 @@ const updateWorkout = async(req, res) => {
 
         const workouts = await getAllWorkouts(userId)
 
-        return res.status(201).json({message: "Workout added!", workouts})
+        return res.status(200).json({message: "Workout Updated!", workouts})
     } catch (err) {
         res.status(406).json({ error: err.message})
     }

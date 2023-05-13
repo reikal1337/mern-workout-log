@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import { SimpleButtonBlue, SimpleButtonRed } from "./styles/Buttons.syles"
 import { WorkoutStyled } from "./styles/Workout.styles"
 import { BiDownArrow } from "react-icons/bi"
@@ -15,24 +15,33 @@ function Workout(props) {
     (state) => state.savedExercises
   )
 
-
   const [editData, setEditData] = useState({
-    _id: savedExercises[0]._id,
-    name: savedExercises[0].name,
-    bodyParts: formatBodyParts(savedExercises[0].bodyParts),
-    sets: 1,
-    reps: 1
-  })
+      _id: "",
+      name:  "",
+      bodyParts: "",
+      sets: 1,
+      reps: 1
+    })
+  
 
   const [displayedExercises, setDisplayedExercises] = useState([])
 
-  useEffect(() => {
-    setDisplayedExercises([
-      ...displayedExercises,
-      props.exercises
-    ])
+  useLayoutEffect(() => {
+    resetDiplayedExercises()
 
   },[])
+
+  useEffect(() => {
+    if(savedExercises.length != 0){
+      setEditData({
+        ...editData,
+        _id: savedExercises[0]._id,
+        name: savedExercises[0].name,
+        bodyParts: formatBodyParts(savedExercises[0].bodyParts)
+      })
+    }
+    
+  },[savedExercises])
 
   
 
@@ -40,6 +49,8 @@ function Workout(props) {
     setCollapsedIndex( prevState => 
       prevState === id ? prevState = "" : prevState = id)
       setEditMode(false)
+      resetDiplayedExercises()
+
   }
 
   const handleSerachChange = (event) => {
@@ -58,10 +69,12 @@ function Workout(props) {
         })
       }
     }else if(name === "reps") {
-      setEditData({
-        ...editData,
-        [name]: value
-      })
+      if(value > 0){
+        setEditData({
+          ...editData,
+          [name]: value
+        })
+      }
     }else{
       const [_idInput, nameInput, bodyPartsInput] = value.split(",")
       setEditData({
@@ -73,20 +86,34 @@ function Workout(props) {
     }
   }
 
+  const resetDiplayedExercises = () => {
+    setDisplayedExercises([
+      ...props.exercises
+    ])
+  }
+
   const handleAddExercise = (event) => {
     event.preventDefault()
-    const newExercise = {...editData}
     setDisplayedExercises([
       ...displayedExercises,
-      newExercise
+      {...editData}
     ])
   }
 
   const handleSave = () => {
-    if(editMode === true){
+    if(editMode){
       props.onSave(props._id,displayedExercises)
     }
     setEditMode(prevState => !prevState)
+    
+  }
+  const handleDelete = () => {
+    if(editMode){
+      resetDiplayedExercises()
+      setEditMode(false)
+    }else{
+      props.onDelete(props._id)
+    }
     
   }
 
@@ -119,7 +146,8 @@ function Workout(props) {
   //    )
   //   })
   // }
-
+  // console.log("Disp:")
+  // console.log(displayedExercises)
   return (
     <WorkoutStyled>
       <div className={props.id !== collapsedIndex ? "workout-title" : "workout-title activetitle"} onClick={ () => handleClick(props.id)}>
@@ -132,6 +160,7 @@ function Workout(props) {
         returnFullExercises(props.exercises)
         } */}
         {
+          
           displayedExercises.map((object,i) => {
             return <WorkoutExercise  editMode={editMode} index={i} onRemove={handleRemoveExercise} {...object}/>
           })
@@ -161,7 +190,7 @@ function Workout(props) {
         }
         <div className="button-container">
           <SimpleButtonBlue onClick={handleSave}>{editMode ? "Save" : "Edit"}</SimpleButtonBlue>
-          <SimpleButtonRed onClick={() => props.onDelete(props._id)}>Delete</SimpleButtonRed>
+          <SimpleButtonRed onClick={handleDelete}>{editMode ? "Cancel" : "Delete"}</SimpleButtonRed>
         </div>
       </div>
       

@@ -17,6 +17,10 @@ function Workouts() {
     (state) => state.workouts
   )
 
+  const { savedExercises } = useSelector(
+    (state) => state.savedExercises
+  )
+
   
 
   useEffect(() => {
@@ -27,7 +31,7 @@ function Workouts() {
       dispatch(reset())
       dispatch(savedExerciesesReset())
     }
-  },[dispatch])
+  },[])
 
   const getSearchData = (data) => {
     console.log(data)
@@ -50,8 +54,6 @@ function Workouts() {
   }
 
   const handleSaveExercises = (id,data) => {
-    console.log(id)
-    console.log(data)
     dispatch(updateWorkout({id,data}))
   }
 
@@ -76,7 +78,7 @@ function Workouts() {
         {
           workouts.length === 0 && <h4>No Workouts</h4>
         }
-        {
+        { 
           workouts.map(object => {
             return( 
               <Workout key={object._id} {...object} onSave={handleSaveExercises} onDelete={handleDelete} />
@@ -84,11 +86,11 @@ function Workouts() {
             
           })
         }
-        {mockData.map( object => {
+        {/* {mockData.map( object => {
           return(
             <Workout key={object.id} {...object} />
           )
-        })}
+        })} */}
         
         
     </WorkoutsStyled>
