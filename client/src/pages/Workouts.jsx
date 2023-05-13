@@ -17,12 +17,6 @@ function Workouts() {
     (state) => state.workouts
   )
 
-  const { savedExercises } = useSelector(
-    (state) => state.savedExercises
-  )
-
-  
-
   useEffect(() => {
     dispatch(getWorkouts())
     dispatch(getExercieses())
@@ -55,6 +49,7 @@ function Workouts() {
 
   const handleSaveExercises = (id,data) => {
     dispatch(updateWorkout({id,data}))
+    dispatch(reset())
   }
 
 
@@ -65,11 +60,16 @@ function Workouts() {
   return (
     <WorkoutsStyled>
         <h2>Workouts</h2>
-        {
-          isError && message ? <Notification isBlue={false} message={message}/> : ""
+        {/* {
+          isError && message ? <Notification isBlue={false} text={message}/> : ""
         }
         {
-          isSuccess && message ? <Notification isBlue={true} message={message}/> : ""
+          isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
+        } */}
+
+        {
+          isError && message ? <Notification isBlue={false} text={message}/> :
+          isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
         }
         
         <WorkoutSearch onSubmit={getSearchData}/>

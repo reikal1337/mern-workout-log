@@ -99,7 +99,7 @@ export const exercisesSlice = createSlice({
             .addCase(saveExercies.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
-                state.message = action.payload
+                state.message = action.payload.message
             })
             .addCase(saveExercies.rejected, (state, action) => {
                 state.isLoading = false

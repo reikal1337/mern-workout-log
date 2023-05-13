@@ -31,6 +31,7 @@ const saveExercies = async(exerciseId,token) => {
     }
     const data ={}
     const response = await axios.post(API_URL + `/save/${exerciseId}`,data,config)
+    console.log(response.data)
     return response.data
 }
 

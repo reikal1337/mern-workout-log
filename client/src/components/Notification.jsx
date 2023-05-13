@@ -10,9 +10,9 @@ function Notification(props) {
     <>
     {
       props.isBlue ? 
-      <NotificationBlue> <AiFillCheckCircle className='notification-icon'/>{props.message}</NotificationBlue>
+      <NotificationBlue> <AiFillCheckCircle className='notification-icon'/>{props.text}</NotificationBlue>
       : 
-      <NotificationRed> <AiFillCloseCircle className='notification-icon'/>{props.message}</NotificationRed>
+      <NotificationRed> <AiFillCloseCircle className='notification-icon'/>{props.text}</NotificationRed>
     }
     </>,
     document.getElementById("root")

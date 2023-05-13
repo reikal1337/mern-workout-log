@@ -1,8 +1,8 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExercieses, serachExercieses, saveExercies, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
-import { Exercise, ExercisesSearch, Loading } from "../components";
+import { Exercise, ExercisesSearch, Loading, Notification } from "../components";
 import { useSearchParams } from "react-router-dom";
 
 
@@ -10,7 +10,7 @@ function Exercises() {
 
   const dispatch = useDispatch()
 
-  const { exercises, isLoading, isError, message } = useSelector(
+  const { exercises, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.globalExerciese
   )
   const [searchParams, setSearchParams] = useSearchParams();
@@ -24,13 +24,13 @@ function Exercises() {
     }
   },[dispatch])
 
-  useEffect(() =>{
-    if(isError){
-      console.log(message)//Change to diplay error...
-    }
+  // useEffect(() =>{
+  //   if(isError){
+  //     console.log(message)//Change to diplay error...
+  //   }
     
     
-  },[isError, message])
+  // },[isError, message])
 
   const getSearchData = (data) => {
     setSearchParams({name: data.field, bodypart: data.bodyPart})
@@ -55,6 +55,11 @@ function Exercises() {
   return (
     <ExercisesStyled>
       <h2>Exercises</h2>
+      {
+          isError && message ? <Notification isBlue={false} text={message}/> :
+          isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
+      }
+      
       <ExercisesSearch onSubmit={getSearchData} />
       {
         exercises.length === 0 && <h4>No exercises</h4>
@@ -66,6 +71,7 @@ function Exercises() {
           )
         
       })}
+
       
     </ExercisesStyled>
     
