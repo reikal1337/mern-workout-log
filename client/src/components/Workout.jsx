@@ -4,25 +4,28 @@ import { WorkoutStyled } from "./styles/Workout.styles"
 import { BiDownArrow } from "react-icons/bi"
 import { useSelector } from "react-redux"
 import WorkoutExercise from "./WorkoutExercise"
+import { formatBodyParts } from "../helpers/util"
 
 function Workout(props) {
   const [collapsedIndex,setCollapsedIndex] = useState("")
   const [editMode, setEditMode] = useState(false)
   const [search,setSearch] = useState("")
 
+  const { savedExercises } = useSelector(
+    (state) => state.savedExercises
+  )
+
   const [editData, setEditData] = useState({
-    _id: "",
-    name: "",
-    bodyParts: [],
+    _id: savedExercises[0]._id,
+    name: savedExercises[0].name,
+    bodyParts: formatBodyParts(savedExercises[0].bodyParts),
     sets: 1,
     reps: 1
   })
 
-  const [addedExercises, setAddedExercises] = useState([])
+  const [displayedExercises, setDisplayedExercises] = useState([])
 
-  const { savedExercises } = useSelector(
-    (state) => state.savedExercises
-  )
+ 
 
   
 
@@ -67,17 +70,25 @@ function Workout(props) {
     event.preventDefault()
     console.log(editData)
     const newExercise = {...editData}
-    setAddedExercises([
-      ...addedExercises,
+    setDisplayedExercises([
+      ...displayedExercises,
       newExercise
     ])
-    console.log(addedExercises)
+    console.log(displayedExercises)
     // props.onSave(editData)
   }
 
   const handleEditMode = () => {
     console.log("Edit mode change!")
     setEditMode(prevState => !prevState)
+  }
+
+  const handleRemoveExercise = (index) => {
+    setDisplayedExercises(
+      displayedExercises.filter(
+        (_, i) => i !== index
+      )
+    )
   }
 
   function returnFullExercises(data) { //Probbaly need to remove this and move it to Workout log.
@@ -105,6 +116,7 @@ function Workout(props) {
   function returnFullExercisesEdit(data) {
     
   }
+  // console.log(savedExercises)
 
   return (
     <WorkoutStyled>
@@ -118,20 +130,20 @@ function Workout(props) {
         returnFullExercises(props.exercises)
         }
         {// Should instead create workoutExerciese...
-          addedExercises.map(object => {
-            return <WorkoutExercise {...object}/>
+          displayedExercises.map((object,i) => {
+            return <WorkoutExercise index={i} onRemove={handleRemoveExercise} {...object}/>
           })
         }
        { editMode &&
        <form onSubmit={handleSubmit}>
         <div id="input-container">
           <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />
-          <select name="_id" value={`${editData._id},${editData.name},${editData.bodyParts}`} onChange={handleInputChange} > //We pass this as string rather then array...
+          <select name="_id" value={`${editData._id},${editData.name},${editData.bodyParts}`} onChange={handleInputChange} >
             {
             savedExercises.filter(object =>(
               object.name.toLowerCase().includes(search)
             )).map(object => {
-              return <option value={`${object._id},${object.name},${object.bodyParts}`}>{object.name}</option>
+              return <option value={`${object._id},${object.name},${formatBodyParts(object.bodyParts)}`}>{object.name}</option>
             })
             }
           </select>

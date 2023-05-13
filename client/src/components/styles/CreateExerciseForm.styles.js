@@ -32,6 +32,7 @@ export const CreateForm = styled.div`
             border-radius: 15px;
             padding: 5px;
             width: 30px;
+            height: 30px;
             margin-left: auto;
             }
 
