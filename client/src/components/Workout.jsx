@@ -165,7 +165,7 @@ function Workout(props) {
         {
           
           displayedExercises.map((object,i) => {
-            return <WorkoutExercise  editMode={editMode} index={i} onRemove={handleRemoveExercise} {...object}/>
+            return <WorkoutExercise key={object._id}  editMode={editMode} index={i} onRemove={handleRemoveExercise} {...object}/>
           })
         }
        { editMode &&
@@ -175,7 +175,7 @@ function Workout(props) {
           <select name="_id" value={`${editData._id},${editData.name},${editData.bodyParts}`} onChange={handleInputChange} >
             {
             savedExercises.filter(object =>(
-              object.name.toLowerCase().includes(search)
+              object.name.toLowerCase().includes(search.toLowerCase())
             )).map(object => {
               return <option value={`${object._id},${object.name},${formatBodyParts(object.bodyParts)}`}>{object.name}</option>
             })

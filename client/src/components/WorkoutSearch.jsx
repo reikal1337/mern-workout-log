@@ -18,7 +18,7 @@ function WorkoutSearch(props) {
 
   return (
     <SerachStyled onSubmit={handleSubmit}>
-        <input name="field" maxLength="50" value={search.field} onChange={handleChange} placeholder="search..." />
+        <input name="field" maxLength="50" value={search.field} onChange={handleChange} placeholder="Search..." />
         <button id="search-button" type="submit">{<TbSearch/>}</button>
     </SerachStyled>
   )

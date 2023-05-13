@@ -11,7 +11,7 @@ import { getExercieses, reset as savedExerciesesReset } from "../features/savedE
 function Workouts() {
   const[popUp,setPopUp] = useState(false)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const { workouts, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.workouts
