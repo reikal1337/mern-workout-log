@@ -94,10 +94,13 @@ function Workout(props) {
 
   const handleAddExercise = (event) => {
     event.preventDefault()
-    setDisplayedExercises([
-      ...displayedExercises,
-      {...editData}
-    ])
+    if(editData.name !== ""){
+      setDisplayedExercises([
+        ...displayedExercises,
+        {...editData}
+      ])
+    }
+    
   }
 
   const handleSave = () => {

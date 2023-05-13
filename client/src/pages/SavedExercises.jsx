@@ -1,5 +1,5 @@
 import { SavedExercisesStyled } from "./styles"
-import { Exercise, ExercisesSearch, CreateExerciseForm, Loading } from "../components";
+import { Exercise, ExercisesSearch, CreateExerciseForm, Loading, Notification } from "../components";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -77,6 +77,12 @@ function SavedExercises() {
   return (
     <SavedExercisesStyled>
       <h2>Saved Exercises</h2> 
+
+      {
+        isError && message ? <Notification isBlue={false} text={message}/> :
+        isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
+      }
+
       <ExercisesSearch onSubmit={getSearchData} />
       <SimpleButtonBlue onClick={handleCreateButton} id="buttton-create">Create Exerciece</SimpleButtonBlue>
       <CreateExerciseForm popUp={popUp} setPopUp={setPopUp} onSubmit={getCreateData} />

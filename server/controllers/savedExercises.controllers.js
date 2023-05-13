@@ -8,7 +8,7 @@ const getExercises = async(req, res) => {
     const userId = req.user.id
     try {
         const savedExercises = await getAllSavedExercieses(userId)
-        if(!savedExercises) return res.status(404).json({message: "No saved exercises exist!"})
+        if(!savedExercises) return res.status(404).json({message: "No saved exercises!"})
         return res.status(200).json({savedExercises})
         
     } catch (error) {
@@ -41,7 +41,7 @@ const postExercise = async(req, res) => {
 
         const savedExercises = await getAllSavedExercieses(userId)
 
-        return res.status(201).json({message: "Exercise added!", savedExercises})
+        return res.status(201).json({message: "Exercise created!", savedExercises})
 
 
     } catch (err) {
@@ -72,7 +72,7 @@ const postExercise = async(req, res) => {
 //     }
 // } 
 
-const publishExercise = async(req, res) => {
+const publishExercise = async(req, res) => {// BUG, able to publish created exerciese and then save it even if it still exists.
     
     const userId = req.user.id
     const userName = (await User.findOne({_id: userId}).distinct("username")).toString()
@@ -88,7 +88,7 @@ const publishExercise = async(req, res) => {
         } = publishedExerciese
 
         if(userName != createdBy){
-            return res.status(403).json({message: "You are forbiden to publish this exerciese!"})
+            return res.status(403).json({message: "You are forbiden to publish this exercise!"})
         }
         const newGlobalExercise = new GlobalExercise({
             createdBy,
@@ -115,7 +115,7 @@ const deleteExercise = async(req, res) => {
         if(deleteExerciese){
             await Exercise.deleteOne({_id: exerciseId})
         }else{
-            return res.status(404).json({message: "Unable to find this exercise!"})
+            return res.status(404).json({message: "Unable to delete this exercise!"})
         }
 
         const savedExercises = await getAllSavedExercieses(userId)
@@ -136,7 +136,7 @@ const removeExercise = async(req, res) => {
             const savedExercises = await getAllSavedExercieses(userId)
             return res.status(200).json({message: "Exercise removed!", savedExercises})
         }else{
-            return res.status(404).json({message: "Unable to find this exercise!"})
+            return res.status(404).json({message: "Unable to remove this exercise!"})
         }
     } catch (error) {
         console.log(error)
