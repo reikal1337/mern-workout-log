@@ -34,6 +34,16 @@ const deleteWorkout = async(id,token) => {
     console.log(response.data)
     return response.data
 }
+const updateWorkout = async(id,data,token) => {
+    const config ={
+        headers: {
+            Authorization: `Bearer ${token}`
+        },
+    }
+    const response = await axios.patch(API_URL + `/update` + `/${id}`,data, config)
+    console.log(response.data)
+    return response.data
+}
 
 // const publishExerciese = async(id,token) => {
 //     const config ={
@@ -66,7 +76,8 @@ const deleteWorkout = async(id,token) => {
 const workoutsService = {
     getWorkouts,
     postWorkout,
-    deleteWorkout
+    deleteWorkout,
+    updateWorkout
 }
 
 export default workoutsService

@@ -54,6 +54,21 @@ export const deleteWorkout = createAsyncThunk(
     }
 )
 
+export const updateWorkout = createAsyncThunk(
+    "workouts/update",
+    async(reqData,thunkAPI) => {
+        try {
+            const{ id, data} = reqData
+            const token = thunkAPI.getState().auth.user.token
+            return await workoutsService.updateWorkout(id,data,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
 // export const publishExerciese = createAsyncThunk(
 //     "savedexercises/publish",
 //     async(id,thunkAPI) => {
@@ -142,6 +157,22 @@ export const workoutsSlice = createSlice({
                 state.isSuccess = false
                 state.message = action.payload
             })
+            .addCase(updateWorkout.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(updateWorkout.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.workouts = action.payload.workouts
+                state.message = action.payload.message
+            })
+            .addCase(updateWorkout.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
+            
     }
 })
 

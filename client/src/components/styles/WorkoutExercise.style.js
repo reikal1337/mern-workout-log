@@ -29,6 +29,7 @@ export const StyledWorkoutExercise = styled.div`
     }
     h4{
         margin-top: 5px;
+        margin-inline: 7px;
         font-size: 0.9rem;
         color: black;
     }

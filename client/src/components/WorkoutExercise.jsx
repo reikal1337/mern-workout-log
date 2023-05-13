@@ -7,7 +7,8 @@ function WorkoutExercise(props) {
     <StyledWorkoutExercise>
       <div className="index-exit-container">
         <p>{`${props.index+1}.`}</p>
-        <SimpleButtonRed onClick={() => props.onRemove(props.index)} className="workout-button-exercise-remove"><AiOutlineClose/></SimpleButtonRed>
+        {props.editMode &&
+          <SimpleButtonRed onClick={() => props.onRemove(props.index)} className="workout-button-exercise-remove"><AiOutlineClose/></SimpleButtonRed>}
       </div>
       
       <h4>{props.name}</h4>

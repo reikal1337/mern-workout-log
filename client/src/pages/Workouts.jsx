@@ -4,7 +4,7 @@ import mockData from "../components/mockWorkoutData";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWorkouts, postWorkout, deleteWorkout, reset } from "../features/workouts/workoutsSlice";
+import { getWorkouts, postWorkout, deleteWorkout, updateWorkout, reset } from "../features/workouts/workoutsSlice";
 import { getExercieses, reset as savedExerciesesReset } from "../features/savedExercises/savedExercisesSlice";
 
 
@@ -49,8 +49,10 @@ function Workouts() {
 
   }
 
-  const handleSaveExercises = (data) => {
+  const handleSaveExercises = (id,data) => {
+    console.log(id)
     console.log(data)
+    dispatch(updateWorkout({id,data}))
   }
 
 

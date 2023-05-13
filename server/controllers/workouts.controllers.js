@@ -1,4 +1,4 @@
-const { Workout } = require("../models/Workout.mode")
+const { Workout } = require("../models/Workout.model")
 const { User } = require("../models/User.model")
 
 
@@ -61,7 +61,25 @@ const deleteWorkout = async(req, res) => {
     }
 }
 
+const updateWorkout = async(req, res) => {
+    const userId = req.user.id
+    const workoutId = req.params.id
+    const newExercises = req.body
+    try {
+        const workoutExists = User.findOne({_id: userId, workouts: {$in: [workoutId]}})
+        if(!workoutExists){
+            return res.status(404).json({message: "Unable to find this workout!"})
+        }
+        
+         await Workout.updateOne({_id: workoutId}, {exercises: newExercises})
 
+        const workouts = await getAllWorkouts(userId)
+
+        return res.status(201).json({message: "Workout added!", workouts})
+    } catch (err) {
+        res.status(406).json({ error: err.message})
+    }
+}
 
 const getAllWorkouts = async(userId) => {
     try {
@@ -82,4 +100,4 @@ const getAllWorkouts = async(userId) => {
 
 
 
-module.exports = { getWorkouts, postWorkout, deleteWorkout}
+module.exports = { getWorkouts, postWorkout, deleteWorkout, updateWorkout}

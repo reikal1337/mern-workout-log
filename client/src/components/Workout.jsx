@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { SimpleButtonBlue, SimpleButtonRed } from "./styles/Buttons.syles"
 import { WorkoutStyled } from "./styles/Workout.styles"
 import { BiDownArrow } from "react-icons/bi"
@@ -15,6 +15,7 @@ function Workout(props) {
     (state) => state.savedExercises
   )
 
+
   const [editData, setEditData] = useState({
     _id: savedExercises[0]._id,
     name: savedExercises[0].name,
@@ -25,7 +26,13 @@ function Workout(props) {
 
   const [displayedExercises, setDisplayedExercises] = useState([])
 
- 
+  useEffect(() => {
+    setDisplayedExercises([
+      ...displayedExercises,
+      props.exercises
+    ])
+
+  },[])
 
   
 
@@ -66,21 +73,21 @@ function Workout(props) {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleAddExercise = (event) => {
     event.preventDefault()
-    console.log(editData)
     const newExercise = {...editData}
     setDisplayedExercises([
       ...displayedExercises,
       newExercise
     ])
-    console.log(displayedExercises)
-    // props.onSave(editData)
   }
 
-  const handleEditMode = () => {
-    console.log("Edit mode change!")
+  const handleSave = () => {
+    if(editMode === true){
+      props.onSave(props._id,displayedExercises)
+    }
     setEditMode(prevState => !prevState)
+    
   }
 
   const handleRemoveExercise = (index) => {
@@ -91,32 +98,27 @@ function Workout(props) {
     )
   }
 
-  function returnFullExercises(data) { //Probbaly need to remove this and move it to Workout log.
-    return data.map( object => {
-     return (
-      <div className={"exercise-content"}>
-        <h4>{object.exerciseName}</h4>
-        <h6 >{object.bodyParts}</h6>
-        {object.sets.map( object => {
+  // function returnFullExercises(data) { //Probbaly need to remove this and move it to Workout log.
+  //   return data.map( object => {
+  //    return (
+  //     <div className={"exercise-content"}>
+  //       <h4>{object.exerciseName}</h4>
+  //       <h6 >{object.bodyParts}</h6>
+  //       {object.sets.map( object => {
 
-          return(
-          <div >
-            <span>Set: {object.set}</span>
-            <span>Reps: {object.reps}</span>
-            <span>Weight: {object.weight}kg</span>
-          </div>
-          )
-        })}
+  //         return(
+  //         <div >
+  //           <span>Set: {object.set}</span>
+  //           <span>Reps: {object.reps}</span>
+  //           <span>Weight: {object.weight}kg</span>
+  //         </div>
+  //         )
+  //       })}
 
-      </div>
-     )
-    })
-  }
-
-  function returnFullExercisesEdit(data) {
-    
-  }
-  // console.log(savedExercises)
+  //     </div>
+  //    )
+  //   })
+  // }
 
   return (
     <WorkoutStyled>
@@ -126,16 +128,16 @@ function Workout(props) {
       </div>
       <div className={props.id !== collapsedIndex ? "workout-content" : "workout-content active"}>
 
-        {
+        {/* {
         returnFullExercises(props.exercises)
-        }
-        {// Should instead create workoutExerciese...
+        } */}
+        {
           displayedExercises.map((object,i) => {
-            return <WorkoutExercise index={i} onRemove={handleRemoveExercise} {...object}/>
+            return <WorkoutExercise  editMode={editMode} index={i} onRemove={handleRemoveExercise} {...object}/>
           })
         }
        { editMode &&
-       <form onSubmit={handleSubmit}>
+       <form onSubmit={handleAddExercise}>
         <div id="input-container">
           <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />
           <select name="_id" value={`${editData._id},${editData.name},${editData.bodyParts}`} onChange={handleInputChange} >
@@ -158,7 +160,7 @@ function Workout(props) {
       </form>
         }
         <div className="button-container">
-          <SimpleButtonBlue onClick={handleEditMode}>{editMode ? "Save" : "Edit"}</SimpleButtonBlue>
+          <SimpleButtonBlue onClick={handleSave}>{editMode ? "Save" : "Edit"}</SimpleButtonBlue>
           <SimpleButtonRed onClick={() => props.onDelete(props._id)}>Delete</SimpleButtonRed>
         </div>
       </div>
