@@ -18,6 +18,7 @@ const WorkoutSchema = new mongoose.Schema(
             default: [],
         }
         
+        
     },
     { timestamps: true, collection : 'workouts' }
 )

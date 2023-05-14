@@ -19,6 +19,8 @@ function Workout(props) {
   const [editData, setEditData] = useState({
       _id: "",
       name:  "",
+      // uId: nanoid(),
+      // index: null,
       bodyParts: "",
       sets: 1,
       reps: 1
@@ -95,6 +97,20 @@ function Workout(props) {
 
   const handleAddExercise = (event) => {
     event.preventDefault()
+    // console.log("Before:")
+    // console.log(editData)
+    // const exerciseIndex = displayedExercises.length === 0 ? 1 : displayedExercises.length + 1
+    
+    // console.log(exerciseIndex) 
+    // setEditData(prevState => ({
+    //   ...prevState,
+    //   uId: nanoid(),
+    //   index: exerciseIndex
+      
+    // }))
+
+    // console.log("After:")
+    // console.log(editData)
     if(editData.name !== ""){
       setDisplayedExercises([
         ...displayedExercises,

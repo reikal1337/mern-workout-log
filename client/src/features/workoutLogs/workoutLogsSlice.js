@@ -12,19 +12,19 @@ const initialState = {
 }
 
 
-// export const getExercieses = createAsyncThunk(//Not used yet
-//     "workoutLogs/all",
-//     async(_,thunkAPI) =>{
-//         try {
-//             const token = thunkAPI.getState().auth.user.token
-//             return await savedExercisesService.getExercieses(token)
-//         } catch (error) {
-//             const message = (error.response && error.response.data && error.response.data.message) 
-//         || error.message || error.toString()
-//         return thunkAPI.rejectWithValue(message)
-//         }
-//     }
-// )
+export const getWorkoutLogs = createAsyncThunk(//Not used yet
+    "workoutLogs/all",
+    async(_,thunkAPI) =>{
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await workoutLogsService.getWorkoutLogs(token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
 
 export const postWorkoutLog = createAsyncThunk(
     "workoutLogs/add",
@@ -95,14 +95,15 @@ export const workoutLogsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-        // .addCase(getExercieses.fulfilled, (state, action) => {
-        //     state.isLoading = false
-        //     state.isSuccess = true
-        //     state.workoutLogs = action.payload.workoutLogs
-        // })
+        .addCase(getWorkoutLogs.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.workoutLogs = action.payload.workoutLogs
+        })
         .addMatcher(
             isAnyOf(
                 postWorkoutLog.pending,
+                getWorkoutLogs.pending,
                  ),
              (state) => {
                 state.isLoading = true
@@ -111,6 +112,7 @@ export const workoutLogsSlice = createSlice({
         .addMatcher(
             isAnyOf(
                 postWorkoutLog.rejected,
+                getWorkoutLogs.rejected,
                     ),
                 (state, action) => {
                     state.isLoading = false

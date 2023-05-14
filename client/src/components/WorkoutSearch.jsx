@@ -5,7 +5,6 @@ function WorkoutSearch(props) {
     const [search,setSearch] = useState("");
         useEffect(() => {
           props.onSubmit(search)
-            
         },[search])
         
     const handleChange = (event) => {

@@ -2,13 +2,15 @@ import { axiosAuth } from "../http"
 
 const API_URL = "/workoutlogs"
 
-const getWorkouts= async(token) => {//notUsed
+const getWorkoutLogs= async(token) => {
     const response = await axiosAuth(token).get(API_URL + "/all")
+    console.log(response.data)
     return response.data
 }
 
 const postWorkoutLog = async(id,token) => {
     const response = await axiosAuth(token).post(API_URL + `/add/${id}`)
+    console.log(response.data)
     return response.data
 }
 
@@ -24,7 +26,7 @@ const updateWorkout = async(id,data,token) => {//notUsed
 }
 
 const workoutLogsService = {
-    getWorkouts,
+    getWorkoutLogs,
     postWorkoutLog,
     deleteWorkout,
     updateWorkout

@@ -2,20 +2,26 @@ const mongoose = require("mongoose")
 
 const WorkoutLogSchema = new mongoose.Schema(
     {
-        name: {
-            type: String,
-            required: true,
-            minLength: 2,
-            maxLength: 50,
-        },
         workout: {
-            type: Array,
-            required: true,
-            default: [],
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "workouts",
+            required: true
         },
-        date: {
+        sets: {
+            type: Array ,//idk yet
+            default: []
+        },
+        startDate: {
             type: Date,
-            required: true,
+            
+        },
+        endDate: {
+            type: Date,
+            
+        },
+        duration:{
+            type: Number,
+
         }
         
     },

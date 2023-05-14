@@ -11,6 +11,7 @@ const { authRouter } = require("./routes/auth.routes")
 const { globalRouter } = require("./routes/globalExercises.routes")
 const { savedExRouter } = require("./routes/savedExercises.routes")
 const { workoutsRouter } = require("./routes/workouts.routes")
+const { workoutLogsRouter } = require("./routes/workoutLogs.routes")
 
 
 //Config
@@ -28,6 +29,8 @@ app.use(authenticateToken)
 app.use("/global", globalRouter)
 app.use("/savedexercises", savedExRouter)
 app.use("/workouts", workoutsRouter)
+app.use("/workoutlogs", workoutLogsRouter)
+
 
 
 //Db

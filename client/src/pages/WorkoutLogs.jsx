@@ -1,10 +1,10 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
 import { WorkoutLogsStyled } from './styles/WorkoutLogs.styles'
-import { WorkoutSearch } from '../components'
+import { WorkoutSearch, Notification, Loading } from '../components'
 import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
-import { getWorkouts, reset } from "../features/workouts/workoutsSlice"
+import { getWorkouts, reset as workoutsReset } from "../features/workouts/workoutsSlice"
 import { useDispatch, useSelector } from 'react-redux'
-import { postWorkoutLog } from '../features/workoutLogs/workoutLogsSlice'
+import { getWorkoutLogs, postWorkoutLog, reset } from '../features/workoutLogs/workoutLogsSlice'
 
 function WorkoutLogs() {
   const [search,setSearch] = useState("")
@@ -14,16 +14,21 @@ function WorkoutLogs() {
 
   const dispatch = useDispatch()
 
-  const { workouts, isLoading, isSuccess, isError, message } = useSelector(
+  const { workouts } = useSelector(
     (state) => state.workouts
+  )
+  const { workoutLogs, isLoading, isSuccess, isError, message } = useSelector(
+    (state) =>  state.workoutLogs
   )
   const [selectedWorkout, setSelectedWorkout] = useState("")
 
   useLayoutEffect(() => {
     dispatch(getWorkouts())
+    dispatch(getWorkoutLogs())
     console.log("Getting Workouts!")
     return () => {
       dispatch(reset())
+      dispatch(workoutsReset())
     }
   },[dispatch])
 
@@ -57,12 +62,21 @@ function WorkoutLogs() {
     event.preventDefault()
     console.log(selectedWorkout)
     dispatch(postWorkoutLog(selectedWorkout))
+    dispatch(reset())
   }
+
+  if(isLoading){
+    return <Loading size={"100"} speed={"4"} />
+ }
 
   return (
     <WorkoutLogsStyled>
       <h2>Workout log</h2>
-      
+      {
+        isError && message ? <Notification isBlue={false} text={message}/> :
+        isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
+      }
+
       <form onSubmit={handleCreateButton}>
         <div id="log-input-container">
           <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />

@@ -61,13 +61,6 @@ function Workouts() {
   return (
     <WorkoutsStyled>
         <h2>Workouts</h2>
-        {/* {
-          isError && message ? <Notification isBlue={false} text={message}/> : ""
-        }
-        {
-          isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
-        } */}
-
         {
           isError && message ? <Notification isBlue={false} text={message}/> :
           isSuccess && message ? <Notification isBlue={true} text={message}/> : ""

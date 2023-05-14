@@ -25,10 +25,11 @@ const UserSchema = new mongoose.Schema(
             ref: "workouts",
             default: [],
         }],
-        workoutLogs: {
-            type: Array,
+        workoutLogs: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "workoutLogs",
             default: [],
-        },
+        }],
         
     },
     { timestamps: true, collection : 'users' }
