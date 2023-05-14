@@ -8,6 +8,7 @@ import WorkoutSearch from "./WorkoutSearch";
 import Loading from "./Loading";
 import CreateWorkouteForm from "./CreateWorkoutForm";
 import Notification from "./Notification";
+import WorkoutLog from "./WorkoutLog";
 
 export { 
     Navbar,
@@ -19,5 +20,6 @@ export {
     WorkoutSearch,
     Loading,
     CreateWorkouteForm,
-    Notification
+    Notification,
+    WorkoutLog
 }

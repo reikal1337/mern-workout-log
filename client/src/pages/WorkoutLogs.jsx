@@ -2,31 +2,30 @@ import { useState, useEffect } from 'react'
 import { WorkoutLogsStyled } from './styles/WorkoutLogs.styles'
 import { WorkoutSearch } from '../components'
 import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
-import { getWorkouts, reset } from "../features/workouts/workoutsSlice";
-import { useDispatch, useSelector } from 'react-redux';
+import { getWorkouts, reset } from "../features/workouts/workoutsSlice"
+import { useDispatch, useSelector } from 'react-redux'
 
 function WorkoutLogs() {
   const [search,setSearch] = useState("")
+  
 
-  const [editData, setEditData] = useState({
-    _id: "",
-    name:  "",
-    bodyParts: "",
-    sets: 1,
-    reps: 1
-  })
+  
 
   const dispatch = useDispatch()
 
   const { workouts, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.workouts
   )
+  const [selectedWorkout, setSelectedWorkout] = useState("")
 
   
 
   useEffect(() => {
     dispatch(getWorkouts())
     return () => {
+      if(workouts.lenght != 0){
+        setSelectedWorkout(workouts[0]._id)
+      }
       dispatch(reset())
     }
   },[])
@@ -40,38 +39,17 @@ function WorkoutLogs() {
     console.log(data)
   }
 
-  const handleInputChange = (event) => {
-    const {name, value} = event.target
+  
 
-    if(name === "sets") {
-      if(value >= 1 && value <= 15){
-        setEditData({
-          ...editData,
-          [name]: value
-        })
-      }
-    }else if(name === "reps") {
-      if(value > 0){
-        setEditData({
-          ...editData,
-          [name]: value
-        })
-      }
-    }else{
-      const [_idInput, nameInput, bodyPartsInput] = value.split(",")
-      setEditData({
-        ...editData,
-        _id: _idInput,
-        name: nameInput,
-        bodyParts: bodyPartsInput
-      })
-    }
+  const handleInputChange = (event) => {
+    setSelectedWorkout(event.target.value)
+    
   }
 
 
   const handleCreateButton = (event) => {
     event.preventDefault()
-    console.log("Creating shit!")
+    console.log(selectedWorkout)
   }
 
   return (
@@ -81,19 +59,27 @@ function WorkoutLogs() {
       <form onSubmit={handleCreateButton}>
         <div id="log-input-container">
           <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />
-          <select name="_id" value={editData._id} onChange={handleInputChange} >
+          <select name="_id" value={selectedWorkout._id} onChange={handleInputChange} >
             {
             workouts.filter(object =>(
               object.name.toLowerCase().includes(search.toLowerCase())
             )).map(object => {
-              return <option value={object._id}>{object.name}</option>
+              return <option key={object._id} value={object._id}>{object.name}</option>
             })
             }
           </select>
         </div>
-        <SimpleButtonBlue type='submit'>Log Workout</SimpleButtonBlue>
+        <div id="log-create-button">
+          <SimpleButtonBlue  type='submit'>Create Workout Log</SimpleButtonBlue>
+        </div>
       </form>
-      <WorkoutSearch onSubmit={getSearchData}/>
+      <WorkoutSearch  onSubmit={getSearchData}/>
+
+      
+
+      
+
+      
       
     </WorkoutLogsStyled>
   )

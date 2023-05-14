@@ -1,25 +1,20 @@
-import { useState } from "react";
-import { TbSearch } from "react-icons/tb"
+import { useState, useEffect } from "react";
 import { SerachStyled } from "./styles/ExercisesSearch.style";
 
 function WorkoutSearch(props) {
     const [search,setSearch] = useState("");
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        //Should validate first
-        props.onSubmit(search)
-        }
+        useEffect(() => {
+          props.onSubmit(search)
+            
+        },[search])
         
     const handleChange = (event) => {
-
         setSearch(prevState => prevState = event.target.value)
         }
 
   return (
-    <SerachStyled onSubmit={handleSubmit}>
+    <SerachStyled >
         <input name="field" maxLength="50" value={search.field} onChange={handleChange} placeholder="Search..." />
-        <button id="search-button" type="submit">{<TbSearch/>}</button>
     </SerachStyled>
   )
 }

@@ -3,10 +3,13 @@ import { ExercisesStyled } from "./Exercises.style"
 
 export const WorkoutLogsStyled = styled(ExercisesStyled)`
 
-    form{
+
+    
+
+    #log-input-container{
         margin: 10px;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: center;
         justify-items: center;
 
@@ -26,8 +29,15 @@ export const WorkoutLogsStyled = styled(ExercisesStyled)`
         &:focus{
             border-bottom-left-radius: 0px;
             border-bottom-right-radius: 0px;
+            }
         }
     }
+
+    #log-create-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
     }
     
 `

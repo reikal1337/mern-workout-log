@@ -83,19 +83,17 @@ function SavedExercises() {
         isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
       }
 
-      <ExercisesSearch onSubmit={getSearchData} />
+      <ExercisesSearch local={true}onSubmit={getSearchData} />
       <SimpleButtonBlue onClick={handleCreateButton} id="buttton-create">Create Exerciece</SimpleButtonBlue>
       <CreateExerciseForm popUp={popUp} setPopUp={setPopUp} onSubmit={getCreateData} />
       {
         savedExercises.length === 0 && <h4>No exercises</h4>
       }
       {savedExercises.filter(object => (
-        object.name.toLowerCase().includes(search.field)
+        object.name.toLowerCase().includes(search.field.toLowerCase())
         && object.bodyParts.join("").toLowerCase().includes(search.bodyPart)
         
-      )
-      )
-      .map(object => {
+      )).map(object => {
         return( 
           <Exercise key={object._id} {...object} public={false} onDelete={handleDelete} onRemove={handleRemove} onPublish={handlePublish}/>
           )

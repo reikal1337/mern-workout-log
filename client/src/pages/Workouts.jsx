@@ -10,7 +10,7 @@ import { getExercieses, reset as savedExerciesesReset } from "../features/savedE
 
 function Workouts() {
   const[popUp,setPopUp] = useState(false)
-
+  const [search,setSearch] = useState("")
   const dispatch = useDispatch()
 
   const { workouts, isLoading, isSuccess, isError, message } = useSelector(
@@ -29,6 +29,7 @@ function Workouts() {
 
   const getSearchData = (data) => {
     console.log(data)
+    setSearch(data)
   }
 
   const getCreateData = (data) => {
@@ -78,8 +79,9 @@ function Workouts() {
         {
           workouts.length === 0 && <h4>No Workouts</h4>
         }
-        { 
-          workouts.map(object => {
+        { workouts.filter(object => (
+          object.name.toLowerCase().includes(search.toLowerCase())
+        )).map(object => {
             return( 
               <Workout key={object._id} {...object} onSave={handleSaveExercises} onDelete={handleDelete} />
               )

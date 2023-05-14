@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TbSearch } from "react-icons/tb"
 import { SerachStyled } from "./styles/ExercisesSearch.style";
+import { useEffect } from "react";
 
 function ExercisesSearch(props) {
 
@@ -8,6 +9,14 @@ function ExercisesSearch(props) {
     field: "",
     bodyPart: "all"
   });
+
+  useEffect(() => {
+    if(props.local){
+      props.onSubmit(search)
+    }
+
+  },[search])
+
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -18,6 +27,12 @@ function ExercisesSearch(props) {
     const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
     setSearch({...search, [event.target.name]: result})
   }
+
+  // const handleChangeLocal = (event) => {
+  //   const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
+  //   setSearch({...search, [event.target.name]: result})
+    
+  // }
     
   return (
     <SerachStyled onSubmit={handleSubmit}>
@@ -31,7 +46,9 @@ function ExercisesSearch(props) {
           <option value="legs">Legs</option>
           <option value="shoulders">Shoulders</option>
         </select>
-        <button id="search-button" type="submit">{<TbSearch/>}</button>
+        {!props.local &&
+          <button id="search-button" type="submit">{<TbSearch/>}</button>
+          }
       </SerachStyled>
   )
 }

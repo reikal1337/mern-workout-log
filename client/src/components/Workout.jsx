@@ -5,6 +5,7 @@ import { BiDownArrow } from "react-icons/bi"
 import { useSelector } from "react-redux"
 import WorkoutExercise from "./WorkoutExercise"
 import { formatBodyParts } from "../helpers/util"
+import { nanoid } from "@reduxjs/toolkit"
 
 function Workout(props) {
   const [collapsedIndex,setCollapsedIndex] = useState("")
@@ -165,7 +166,7 @@ function Workout(props) {
         {
           
           displayedExercises.map((object,i) => {
-            return <WorkoutExercise key={object._id}  editMode={editMode} index={i} onRemove={handleRemoveExercise} {...object}/>
+            return <WorkoutExercise key={`${object._id},${nanoid()}`}  editMode={editMode} index={i} onRemove={handleRemoveExercise} {...object}/>
           })
         }
        { editMode &&

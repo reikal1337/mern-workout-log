@@ -60,7 +60,7 @@ function Exercises() {
           isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
       }
       
-      <ExercisesSearch onSubmit={getSearchData} />
+      <ExercisesSearch local={false} onSubmit={getSearchData} />
       {
         exercises.length === 0 && <h4>No exercises</h4>
       }
