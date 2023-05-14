@@ -14,7 +14,7 @@ function WorkoutSearch(props) {
 
   return (
     <SerachStyled >
-        <input name="field" maxLength="50" value={search.field} onChange={handleChange} placeholder="Search..." />
+        <input name="field" maxLength="50" value={search} onChange={handleChange} placeholder="Search..." />
     </SerachStyled>
   )
 }

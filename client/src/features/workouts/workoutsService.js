@@ -1,4 +1,4 @@
-import { axios, axiosAuth } from "../http"
+import { axiosAuth } from "../http"
 
 const API_URL = "/workouts"
 

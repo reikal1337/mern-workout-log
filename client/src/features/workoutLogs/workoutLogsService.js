@@ -1,51 +1,33 @@
-import { axios,axiosAuth } from "../http"
+import { axiosAuth } from "../http"
 
 const API_URL = "/workoutlogs"
 
-const getExercieses = async(token) => {//Not used yet
+const getWorkouts= async(token) => {//notUsed
     const response = await axiosAuth(token).get(API_URL + "/all")
     return response.data
 }
 
-const postExerciese = async(formData,token) => {//Not used yet
-    const response = await axiosAuth(token).post(API_URL + `/add`,formData)
+const postWorkoutLog = async(id,token) => {
+    const response = await axiosAuth(token).post(API_URL + `/add/${id}`)
     return response.data
 }
 
-const publishExerciese = async(id,token) => {//Not used yet
-    const response = await axiosAuth(token).post(API_URL + `/publish` + `/${id}`)
+const deleteWorkout = async(id,token) => {//notUsed
+    const response = await axiosAuth(token).delete(API_URL + `/delete` + `/${id}`)
+    console.log(response.data)
     return response.data
 }
 
-const deleteExerciese = async(id,token) => {//Not used yet
-    const config ={
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    }
-    const response = await axios.delete(API_URL + `/delete` + `/${id}`,config)
+const updateWorkout = async(id,data,token) => {//notUsed
+    const response = await axiosAuth(token).patch(API_URL + `/update` + `/${id}`,data)
     return response.data
 }
-
-const removeExerciese = async(id,token) => {//Not used yet
-    const config ={
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    }
-    const response = await axios.delete(API_URL + `/remove` + `/${id}`,config)
-    return response.data
-}
-
-
-
 
 const workoutLogsService = {
-    getExercieses,
-    postExerciese,
-    publishExerciese,
-    deleteExerciese,
-    removeExerciese
+    getWorkouts,
+    postWorkoutLog,
+    deleteWorkout,
+    updateWorkout
 }
 
 export default workoutLogsService

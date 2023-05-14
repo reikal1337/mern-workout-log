@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import { WorkoutLogsStyled } from './styles/WorkoutLogs.styles'
 import { WorkoutSearch } from '../components'
 import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
 import { getWorkouts, reset } from "../features/workouts/workoutsSlice"
 import { useDispatch, useSelector } from 'react-redux'
+import { postWorkoutLog } from '../features/workoutLogs/workoutLogsSlice'
 
 function WorkoutLogs() {
   const [search,setSearch] = useState("")
@@ -18,17 +19,22 @@ function WorkoutLogs() {
   )
   const [selectedWorkout, setSelectedWorkout] = useState("")
 
-  
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getWorkouts())
+    console.log("Getting Workouts!")
     return () => {
-      if(workouts.lenght != 0){
-        setSelectedWorkout(workouts[0]._id)
-      }
       dispatch(reset())
     }
-  },[])
+  },[dispatch])
+
+  useEffect(() => {
+    if(workouts.length !== 0){
+      setSelectedWorkout(workouts[0]._id)
+    }
+    
+  },[workouts])
+
+
 
   const handleSerachChange = (event) => {
     const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
@@ -50,6 +56,7 @@ function WorkoutLogs() {
   const handleCreateButton = (event) => {
     event.preventDefault()
     console.log(selectedWorkout)
+    dispatch(postWorkoutLog(selectedWorkout))
   }
 
   return (
@@ -73,7 +80,7 @@ function WorkoutLogs() {
           <SimpleButtonBlue  type='submit'>Create Workout Log</SimpleButtonBlue>
         </div>
       </form>
-      <WorkoutSearch  onSubmit={getSearchData}/>
+      <WorkoutSearch onSubmit={getSearchData}/>
 
       
 
