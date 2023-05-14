@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
+import {createSlice, createAsyncThunk, isAnyOf} from "@reduxjs/toolkit"
 
 import globalExercisesService from "./globalExercisesService"
 
@@ -67,45 +67,48 @@ export const exercisesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getExercieses.pending, (state) => {
-                state.isLoading = true
-            })
             .addCase(getExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.exercises = action.payload.exercises
             })
-            .addCase(getExercieses.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.Exercises = action.payload.exercises
-            })
-            .addCase(serachExercieses.pending, (state) => {
-                state.isLoading = true
-            })
+
             .addCase(serachExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.exercises = action.payload
             })
-            .addCase(serachExercieses.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.exercises = action.payload.exercises
-            })
-            .addCase(saveExercies.pending, (state) => {
-                state.isLoading = true
-            })
+
             .addCase(saveExercies.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.message = action.payload.message
             })
-            .addCase(saveExercies.rejected, (state, action) => {
-                state.isLoading = false
-                state.isError = true
-                state.message = action.payload
-            })
+            
+            .addMatcher(
+                isAnyOf(
+                    getExercieses.pending,
+                    serachExercieses.pending,
+                    saveExercies.pending,
+                    ),
+                    (state) => {
+                        state.isLoading = true
+                    }
+                )
+
+                .addMatcher(
+                    isAnyOf(
+                        getExercieses.rejected,
+                        serachExercieses.rejected,
+                        saveExercies.rejected,
+                        ),
+                    (state, action) => {
+                        state.isLoading = false
+                        state.isError = true
+                        state.message = action.payload
+        
+                    }
+                )
     }
 })
 

@@ -1,10 +1,10 @@
-import {createSlice, createAsyncThunk, isAnyOf} from "@reduxjs/toolkit"
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 
-import savedExercisesService from "./savedExercisesService"
+import workoutLogsService from "./workoutLogsService"
 
 
 const initialState = {
-    savedExercises: [],
+    workoutLogs: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -95,53 +95,86 @@ export const savedExerciesesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-
+            .addCase(getExercieses.pending, (state) => {
+                state.isLoading = true
+            })
             .addCase(getExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
                 state.savedExercises = action.payload.savedExercises
             })
-            .addMatcher(
-                isAnyOf(
-                    getExercieses.pending,
-                    postExerciese.pending,
-                    publishExerciese.pending,
-                    deleteExerciese.pending,
-                    removeExerciese.pending,
-                     ),
-                 (state) => {
-                    state.isLoading = true
-                    }
-                )
-            .addMatcher(
-                isAnyOf(
-                    getExercieses.rejected,
-                    postExerciese.rejected,
-                    publishExerciese.rejected,
-                    deleteExerciese.rejected,
-                    removeExerciese.rejected,
-                        ),
-                    (state, action) => {
-                        state.isLoading = false
-                        state.isError = true
-                        state.isSuccess = false
-                        state.message = action.payload
-                    }
-                )
-            .addMatcher(
-                isAnyOf(
-                    postExerciese.fulfilled,
-                    publishExerciese.fulfilled,
-                    deleteExerciese.fulfilled,
-                    removeExerciese.fulfilled,
-                        ),
-                    (state, action) => {
-                        state.isLoading = false
-                        state.isSuccess = true
-                        state.savedExercises = action.payload.savedExercises
-                        state.message = action.payload.message
-                    }
-                )
+            .addCase(getExercieses.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
+
+
+
+
+            .addCase(postExerciese.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(postExerciese.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.savedExercises = action.payload.savedExercises
+                state.message = action.payload.message
+            })
+            .addCase(postExerciese.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
+
+            
+            .addCase(publishExerciese.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(publishExerciese.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.savedExercises = action.payload.savedExercises
+                state.message = action.payload.message
+            })
+            .addCase(publishExerciese.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
+            .addCase(deleteExerciese.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(deleteExerciese.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.savedExercises = action.payload.savedExercises
+                state.message = action.payload.message
+            })
+            .addCase(deleteExerciese.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
+            .addCase(removeExerciese.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(removeExerciese.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.isSuccess = true
+                state.savedExercises = action.payload.savedExercises
+                state.message = action.payload.message
+            })
+            .addCase(removeExerciese.rejected, (state, action) => {
+                state.isLoading = false
+                state.isError = true
+                state.isSuccess = false
+                state.message = action.payload
+            })
     }
 })
 
