@@ -1,4 +1,4 @@
-import axios from "../http"
+import { axios } from "../http"
 
 const register = async (userData) => {
     const response = await axios.post("/register", userData)

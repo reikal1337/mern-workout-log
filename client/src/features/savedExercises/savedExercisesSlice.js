@@ -95,7 +95,6 @@ export const savedExerciesesSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-
             .addCase(getExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true

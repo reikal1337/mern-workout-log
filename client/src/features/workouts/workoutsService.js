@@ -1,77 +1,27 @@
-import axios from "../http"
+import { axios, axiosAuth } from "../http"
 
 const API_URL = "/workouts"
 
 const getWorkouts= async(token) => {
-    const config ={
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
-
-    const response = await axios.get(API_URL + "/all", config)
+    const response = await axiosAuth(token).get(API_URL + "/all")
     return response.data
 }
 
 const postWorkout = async(formData,token) => {
-    const config ={
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    }
-    const response = await axios.post(API_URL + `/add`, formData, config)
-    console.log(response.data)
+    const response = await axiosAuth(token).post(API_URL + `/add`, formData)
     return response.data
 }
 
 const deleteWorkout = async(id,token) => {
-    const config ={
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    }
-    const response = await axios.delete(API_URL + `/delete` + `/${id}`, config)
+    const response = await axiosAuth(token).delete(API_URL + `/delete` + `/${id}`)
     console.log(response.data)
     return response.data
 }
+
 const updateWorkout = async(id,data,token) => {
-    const config ={
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    }
-    const response = await axios.patch(API_URL + `/update` + `/${id}`,data, config)
-    console.log(response.data)
+    const response = await axiosAuth(token).patch(API_URL + `/update` + `/${id}`,data)
     return response.data
 }
-
-// const publishExerciese = async(id,token) => {
-//     const config ={
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         },
-//     }
-//     const data = {}
-//     const response = await axios.post(API_URL + `/publish` + `/${id}`,data,config)
-//     console.log(response.data)
-//     return response.data
-// }
-
-
-
-// const removeExerciese = async(id,token) => {
-//     const config ={
-//         headers: {
-//             Authorization: `Bearer ${token}`
-//         },
-//     }
-//     const response = await axios.delete(API_URL + `/remove` + `/${id}`,config)
-//     console.log(response.data)
-//     return response.data
-// }
-
-
-
 
 const workoutsService = {
     getWorkouts,
