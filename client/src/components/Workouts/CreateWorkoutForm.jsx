@@ -1,12 +1,12 @@
 
 import { useState } from "react"
-import { SimpleButtonBlue, SimpleButtonRed } from "./styles/Buttons.syles"
-import { CreateForm } from "./styles/CreateExerciseForm.styles"
+import { SimpleButtonBlue, SimpleButtonRed } from "../styles/Buttons.syles"
+import { CreateForm } from "../styles/CreateExerciseForm.styles"
 import { AiOutlineClose } from "react-icons/ai"
 import ReactDom from "react-dom"
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
-import { getExercieses, reset } from "../features/savedExercises/savedExercisesSlice"
+import { getExercieses, reset } from "../../features/savedExercises/savedExercisesSlice"
 
 function CreateWorkouteForm(props) {
 

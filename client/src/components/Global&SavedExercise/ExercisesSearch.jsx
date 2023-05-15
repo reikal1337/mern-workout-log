@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TbSearch } from "react-icons/tb"
-import { SerachStyled } from "./styles/ExercisesSearch.style";
+import { SerachStyled } from "../styles/ExercisesSearch.style";
 import { useEffect } from "react";
 
 function ExercisesSearch(props) {

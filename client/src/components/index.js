@@ -1,14 +1,14 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import Exercise from "./Exercise";
-import ExercisesSearch from "./ExercisesSearch";
-import CreateExerciseForm from "./CreateExerciseForm";
-import Workout from "./Workout";
+import Exercise from "./Global&SavedExercise/Exercise";
+import ExercisesSearch from "./Global&SavedExercise/ExercisesSearch";
+import CreateExerciseForm from "./Global&SavedExercise/CreateExerciseForm";
+import Workout from "./Workouts/Workout";
 import WorkoutSearch from "./WorkoutSearch";
 import Loading from "./Loading";
-import CreateWorkouteForm from "./CreateWorkoutForm";
+import CreateWorkouteForm from "./Workouts/CreateWorkoutForm";
 import Notification from "./Notification";
-import WorkoutLog from "./WorkoutLog";
+import WorkoutLog from "./WorkoutLog/WorkoutLog";
 
 
 export { 

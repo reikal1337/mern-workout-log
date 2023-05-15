@@ -1,7 +1,7 @@
 
 import { useState } from "react"
-import { SimpleButtonBlue, SimpleButtonRed } from "./styles/Buttons.syles"
-import { CreateForm } from "./styles/CreateExerciseForm.styles"
+import { SimpleButtonBlue, SimpleButtonRed } from "../styles/Buttons.syles"
+import { CreateForm } from "../styles/CreateExerciseForm.styles"
 import { AiOutlineClose } from "react-icons/ai"
 import ReactDom from "react-dom"
 

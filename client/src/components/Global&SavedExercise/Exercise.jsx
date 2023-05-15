@@ -1,6 +1,6 @@
-import { ExerciseStyled } from "./styles/Exercise.style"
-import { SimpleButtonRed,  SimpleButtonBlue } from "./styles/Buttons.syles";
-import { formatBodyParts } from "../helpers/util";
+import { ExerciseStyled } from "../styles/Exercise.style"
+import { SimpleButtonRed,  SimpleButtonBlue } from "../styles/Buttons.syles";
+import { formatBodyParts } from "../../helpers/util";
 
 function Exercise(props) {
 

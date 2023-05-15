@@ -1,5 +1,5 @@
-import React from 'react'
-import { StyledWorkoutLogExerciese } from './styles/WorkoutLogExercise.styles'
+import { StyledWorkoutLogExerciese } from '../styles/WorkoutLogExercise.styles'
+import WorkoutLogSets from './WorkoutLogSets'
 function WorkoutLogExercise(props) {
   return (
     <StyledWorkoutLogExerciese>
@@ -15,7 +15,11 @@ function WorkoutLogExercise(props) {
       <h6>{props.bodyParts}</h6>
       
       <div>
-        <span>Sets: {props.sets.length}</span>
+        {
+          props.sets.map((object,i) => {
+            return <WorkoutLogSets key={object._id} index={i} {...object} />
+          })
+        }
       </div>
     </StyledWorkoutLogExerciese>
   )

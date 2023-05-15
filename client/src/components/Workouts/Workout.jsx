@@ -1,10 +1,10 @@
 import { useEffect, useLayoutEffect, useState } from "react"
-import { SimpleButtonBlue, SimpleButtonRed } from "./styles/Buttons.syles"
-import { WorkoutStyled } from "./styles/Workout.styles"
+import { SimpleButtonBlue, SimpleButtonRed } from "../styles/Buttons.syles"
+import { WorkoutStyled } from "../styles/Workout.styles"
 import { BiDownArrow } from "react-icons/bi"
 import { useSelector } from "react-redux"
 import WorkoutExercise from "./WorkoutExercise"
-import { formatBodyParts } from "../helpers/util"
+import { formatBodyParts } from "../../helpers/util"
 import { nanoid } from "@reduxjs/toolkit"
 
 function Workout(props) {

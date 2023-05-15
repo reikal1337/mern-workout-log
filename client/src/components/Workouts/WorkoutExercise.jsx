@@ -1,6 +1,6 @@
-import { StyledWorkoutExercise } from "./styles/WorkoutExercise.style"
+import { StyledWorkoutExercise } from "../styles/WorkoutExercise.style"
 import { AiOutlineClose } from "react-icons/ai"
-import { SimpleButtonRed } from "./styles/Buttons.syles"
+import { SimpleButtonRed } from "../styles/Buttons.syles"
 
 function WorkoutExercise(props) {
   return (
