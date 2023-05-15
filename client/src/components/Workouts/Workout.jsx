@@ -72,7 +72,7 @@ function Workout(props) {
         })
       }
     }else if(name === "reps") {
-      if(value > 0){
+      if(value > 0 && value < 200){
         setEditData({
           ...editData,
           [name]: value
@@ -187,7 +187,7 @@ function Workout(props) {
         }
        { editMode &&
        <form onSubmit={handleAddExercise}>
-        <div id="input-container">
+        <div className="input-container">
           <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />
           <select name="_id" value={`${editData._id},${editData.name},${editData.bodyParts}`} onChange={handleInputChange} >
             {
@@ -199,11 +199,11 @@ function Workout(props) {
             }
           </select>
         </div>
-        <div id="set-rep-container">
+        <div className="set-rep-container">
           <label>Sets: <input type="number" name="sets" value={editData.sets} onChange={handleInputChange} /></label>
           <label>Reps: <input type="number" name="reps"  value={editData.reps} onChange={handleInputChange} /></label>
         </div>
-        <div id="add-exercise-container">
+        <div className="add-exercise-container">
           <SimpleButtonBlue type="submit" >Add Exercise</SimpleButtonBlue>
         </div>
       </form>
