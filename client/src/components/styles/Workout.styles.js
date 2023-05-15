@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const WorkoutStyled = styled.div`
     margin: 10px;
-    
+    min-width: 400px;
     .workout-title{
         display: flex;
         justify-content: space-between;
@@ -98,18 +98,18 @@ export const WorkoutStyled = styled.div`
             border-bottom-right-radius: 0px;
         }
     }
-    #input-container{
+    .input-container{
         display: flex;
         justify-content: center;
         margin-top: 20px;
     }
-    #add-exercise-container{
+    .add-exercise-container{
         display: flex;
         align-items: center;
         justify-content: center;
         margin-block: 15px;
     }
-    #set-rep-container{
+    .set-rep-container{
         margin-block: 7px;
         align-items: center;
         justify-content: center;

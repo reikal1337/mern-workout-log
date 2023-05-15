@@ -14,13 +14,13 @@ function WorkoutLogExercise(props) {
       <h4>{props.name}</h4>
       <h6>{props.bodyParts}</h6>
       
-      <div>
+      
         {
           props.sets.map((object,i) => {
             return <WorkoutLogSets key={object._id} index={i} {...object} />
           })
         }
-      </div>
+      
     </StyledWorkoutLogExerciese>
   )
 }

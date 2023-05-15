@@ -38,7 +38,7 @@ const WorkoutLogSchema = new mongoose.Schema(
             type: Date,
         },
         endDate: {
-            type: Date,navigator
+            type: Date,
         },
         
     },

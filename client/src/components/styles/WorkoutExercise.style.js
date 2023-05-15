@@ -32,6 +32,7 @@ export const StyledWorkoutExercise = styled.div`
         margin-inline: 7px;
         font-size: 0.9rem;
         color: black;
+        text-transform: capitalize;
     }
     h6{
         color: grey;
