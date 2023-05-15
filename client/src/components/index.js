@@ -10,6 +10,7 @@ import CreateWorkouteForm from "./CreateWorkoutForm";
 import Notification from "./Notification";
 import WorkoutLog from "./WorkoutLog";
 
+
 export { 
     Navbar,
     Footer,
@@ -21,5 +22,5 @@ export {
     Loading,
     CreateWorkouteForm,
     Notification,
-    WorkoutLog
+    WorkoutLog,
 }

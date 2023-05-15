@@ -1,6 +1,6 @@
 import { useState, useEffect, useLayoutEffect } from 'react'
 import { WorkoutLogsStyled } from './styles/WorkoutLogs.styles'
-import { WorkoutSearch, Notification, Loading } from '../components'
+import { WorkoutSearch, Notification, Loading, WorkoutLog } from '../components'
 import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
 import { getWorkouts, reset as workoutsReset } from "../features/workouts/workoutsSlice"
 import { useDispatch, useSelector } from 'react-redux'
@@ -68,8 +68,8 @@ function WorkoutLogs() {
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />
  }
- console.log("Logs:")
- console.log(workoutLogs)
+//  console.log("Logs:")
+//  console.log(workoutLogs)
   return (
     <WorkoutLogsStyled>
       <h2>Workout log</h2>
@@ -100,6 +100,11 @@ function WorkoutLogs() {
           workoutLogs.length === 0 && <h4>No Workout Logs</h4>
       }
 
+      {
+      workoutLogs.map(object => {
+              return <WorkoutLog key={object._id} {...object}/>
+        })
+      }
     </WorkoutLogsStyled>
   )
 }
