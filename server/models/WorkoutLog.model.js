@@ -29,11 +29,16 @@ const WorkoutLogSchema = new mongoose.Schema(
             type: [logExerciseSchema],
             required: true,
         },
+        submited: {
+            type: Boolean,
+            require: true,
+            default: false,
+        },
         startDate: {
             type: Date,
         },
         endDate: {
-            type: Date,
+            type: Date,navigator
         },
         
     },
