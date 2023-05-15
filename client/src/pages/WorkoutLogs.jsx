@@ -68,7 +68,8 @@ function WorkoutLogs() {
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />
  }
-
+ console.log("Logs:")
+ console.log(workoutLogs)
   return (
     <WorkoutLogsStyled>
       <h2>Workout log</h2>
@@ -95,13 +96,10 @@ function WorkoutLogs() {
         </div>
       </form>
       <WorkoutSearch onSubmit={getSearchData}/>
+      {
+          workoutLogs.length === 0 && <h4>No Workout Logs</h4>
+      }
 
-      
-
-      
-
-      
-      
     </WorkoutLogsStyled>
   )
 }
