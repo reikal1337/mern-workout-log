@@ -27,11 +27,11 @@ function WorkoutLogSets(props) {
 
   return (
     <>
-        <form>
+        {/* <form> */}
             <label>Set {props.index+1}.</label>
             <label>Reps: <input type="number" name="reps" disabled="true" value={setsData.reps} onChange={handleChange}/></label>
             <label>Weight: <input type="number" name="weight" disabled="true" value={setsData.weight} onChange={handleChange}/> Kg</label>
-        </form>
+        {/* </form> */}
     </>
   )
 }
