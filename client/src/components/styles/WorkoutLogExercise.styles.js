@@ -3,7 +3,7 @@ import { StyledWorkoutExercise } from "./WorkoutExercise.style";
 
 export const StyledWorkoutLogExerciese = styled(StyledWorkoutExercise)`
 
-    form{
+    .sets-container{
         margin-top: 5px;
         input{
             width: 50px;

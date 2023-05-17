@@ -15,23 +15,26 @@ function WorkoutLogSets(props) {
                     ...setsData,
                     [name]: value
                 })
-        }}else if(name === "weight") {
+            }
+        }else if(name === "weight") {
             if(value >= 0 && value <= 5000){
                 setSetsData({
                 ...setsData,
                 [name]: value
                 })
             }
-            }
+        }
+        props.handleSetsChange(setsData)
+
     }
 
   return (
     <>
-        {/* <form> */}
+        <div className="sets-container">
             <label>Set {props.index+1}.</label>
-            <label>Reps: <input type="number" name="reps" disabled="true" value={setsData.reps} onChange={handleChange}/></label>
-            <label>Weight: <input type="number" name="weight" disabled="true" value={setsData.weight} onChange={handleChange}/> Kg</label>
-        {/* </form> */}
+            <label>Reps: <input type="number" name="reps" value={setsData.reps} onChange={handleChange}/></label>
+            <label>Weight: <input type="number" name="weight" value={setsData.weight} onChange={handleChange}/> Kg</label>
+        </div>
     </>
   )
 }
