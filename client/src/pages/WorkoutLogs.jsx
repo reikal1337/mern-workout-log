@@ -22,7 +22,7 @@ function WorkoutLogs() {
   )
   const [selectedWorkout, setSelectedWorkout] = useState("")
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(getWorkouts())
     dispatch(getWorkoutLogs())
     console.log("Getting Workouts!")
@@ -30,7 +30,7 @@ function WorkoutLogs() {
       dispatch(reset())
       dispatch(workoutsReset())
     }
-  },[dispatch])
+  },[])
 
   useEffect(() => {
     if(workouts.length !== 0){
@@ -64,6 +64,10 @@ function WorkoutLogs() {
     dispatch(postWorkoutLog(selectedWorkout))
     dispatch(reset())
   }
+
+  
+
+  
 
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />

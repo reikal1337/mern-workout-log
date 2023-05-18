@@ -41,11 +41,11 @@ const postWorkout = async(req, res) => {
 
 const deleteWorkout = async(req, res) => {
     const userId = req.user.id
-    const exerciseId = req.params.id
+    const workoutId = req.params.id
     try {
-        const deleteWorkout = await User.findByIdAndUpdate({_id: userId}, {$pull: {workouts: exerciseId}}, {new: true})
+        const deleteWorkout = await User.findByIdAndUpdate({_id: userId}, {$pull: {workouts: workoutId}}, {new: true})
         if(deleteWorkout){
-            await Workout.deleteOne({_id: exerciseId})
+            await Workout.deleteOne({_id: workoutId})
         }else{
             return res.status(404).json({message: "Unable to find this workout!"})
         }

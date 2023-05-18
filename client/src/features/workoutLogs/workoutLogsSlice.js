@@ -40,33 +40,19 @@ export const postWorkoutLog = createAsyncThunk(
     }
 )
 
-// export const publishExerciese = createAsyncThunk(//Not used yet
-//     "workoutLogs/publish",
-//     async(id,thunkAPI) => {
-//         try {
-//             const token = thunkAPI.getState().auth.user.token
-//             return await savedExercisesService.publishExerciese(id,token)
-//         } catch (error) {
-//             const message = (error.response && error.response.data && error.response.data.message) 
-//         || error.message || error.toString()
-//         return thunkAPI.rejectWithValue(message)
-//         }
-//     }
-// )
-
-// export const deleteExerciese = createAsyncThunk(//Not used yet
-//     "workoutLogs/delete",
-//     async(id,thunkAPI) => {
-//         try {
-//             const token = thunkAPI.getState().auth.user.token
-//             return await savedExercisesService.deleteExerciese(id,token)
-//         } catch (error) {
-//             const message = (error.response && error.response.data && error.response.data.message) 
-//         || error.message || error.toString()
-//         return thunkAPI.rejectWithValue(message)
-//         }
-//     }
-// )
+export const deleteWorkoutLog = createAsyncThunk(//Not used yet
+    "workoutLogs/delete",
+    async(id,thunkAPI) => {
+        try {
+            const token = thunkAPI.getState().auth.user.token
+            return await workoutLogsService.deleteWorkoutLog(id,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
 
 // export const removeExerciese = createAsyncThunk(//Not used yets
 //     "workoutLogs/remove",
@@ -104,6 +90,7 @@ export const workoutLogsSlice = createSlice({
             isAnyOf(
                 postWorkoutLog.pending,
                 getWorkoutLogs.pending,
+                deleteWorkoutLog.pending
                  ),
              (state) => {
                 state.isLoading = true
@@ -113,6 +100,7 @@ export const workoutLogsSlice = createSlice({
             isAnyOf(
                 postWorkoutLog.rejected,
                 getWorkoutLogs.rejected,
+                deleteWorkoutLog.rejected
                     ),
                 (state, action) => {
                     state.isLoading = false
@@ -124,6 +112,7 @@ export const workoutLogsSlice = createSlice({
         .addMatcher(
             isAnyOf(
                 postWorkoutLog.fulfilled,
+                deleteWorkoutLog.fulfilled
                     ),
                 (state, action) => {
                     state.isLoading = false

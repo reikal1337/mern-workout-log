@@ -14,7 +14,8 @@ const postWorkoutLog = async(id,token) => {
     return response.data
 }
 
-const deleteWorkout = async(id,token) => {//notUsed
+const deleteWorkoutLog = async(id,token) => {
+    console.log("Del service")
     const response = await axiosAuth(token).delete(API_URL + `/delete` + `/${id}`)
     console.log(response.data)
     return response.data
@@ -28,7 +29,7 @@ const updateWorkout = async(id,data,token) => {//notUsed
 const workoutLogsService = {
     getWorkoutLogs,
     postWorkoutLog,
-    deleteWorkout,
+    deleteWorkoutLog,
     updateWorkout
 }
 

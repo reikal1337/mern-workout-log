@@ -58,6 +58,28 @@ const postWorkoutLog = async(req, res) => {
     }
 }
 
+const deleteWorkoutLog = async(req, res) => {
+    const userId = req.user.id
+    const workouLogId = req.params.id
+    try {
+        const deleteWorkoutLog = await User.findByIdAndUpdate({_id: userId}, {$pull: {workoutLogs: workouLogId}}, {new: true})
+        if(deleteWorkoutLog){
+            await WorkoutLog.deleteOne({_id: workouLogId})
+        }else{
+            return res.status(404).json({message: "Unable to find this workout log!"})
+        }
+
+        const workoutLogs = await getAllWorkoutLogs(userId)
+        res.status(200).json({message: "Workout log deleted!", workoutLogs})
+        
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: error.message})
+    }
+}
+
+
+
 
 const getAllWorkoutLogs = async(userId) => {
     try {
@@ -81,4 +103,5 @@ const getAllWorkoutLogs = async(userId) => {
 module.exports = { 
     getWorkoutLogs,
     postWorkoutLog,
+    deleteWorkoutLog,
 }
