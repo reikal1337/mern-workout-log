@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useState } from "react"
 
 function WorkoutLogSets(props) {
@@ -6,26 +7,30 @@ function WorkoutLogSets(props) {
         reps: props.reps,
         weight: props.weight
     })
+
+    useEffect(() => {
+        const {_id, reps, weight} = setsData
+        props.handleSetsChange(_id,reps,weight)
+        
+    },[setsData])
     
     const handleChange = (event) => {
         const {name, value} = event.target
         if(name === "reps") {
             if(value >= 0 && value <= 200){
-                setSetsData({
-                    ...setsData,
+                setSetsData( prevState =>({
+                    ...prevState,
                     [name]: value
-                })
+                }))
             }
         }else if(name === "weight") {
             if(value >= 0 && value <= 5000){
-                setSetsData({
-                ...setsData,
-                [name]: value
-                })
+                setSetsData(prevState => ({
+                    ...prevState,
+                    [name]: value
+                }))
             }
         }
-        props.handleSetsChange(setsData)
-
     }
 
   return (
