@@ -38,7 +38,7 @@ const WorkoutLogSchema = new mongoose.Schema(
             type: Date,
         },
         duration: {
-            type: Number,
+            type: String,
         },
         
     },

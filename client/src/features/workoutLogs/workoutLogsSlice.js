@@ -91,7 +91,8 @@ export const workoutLogsSlice = createSlice({
             isAnyOf(
                 postWorkoutLog.pending,
                 getWorkoutLogs.pending,
-                deleteWorkoutLog.pending
+                deleteWorkoutLog.pending,
+                submitWorkoutLog.pending
                  ),
              (state) => {
                 state.isLoading = true
@@ -101,7 +102,8 @@ export const workoutLogsSlice = createSlice({
             isAnyOf(
                 postWorkoutLog.rejected,
                 getWorkoutLogs.rejected,
-                deleteWorkoutLog.rejected
+                deleteWorkoutLog.rejected,
+                submitWorkoutLog.rejected
                     ),
                 (state, action) => {
                     state.isLoading = false
@@ -113,7 +115,8 @@ export const workoutLogsSlice = createSlice({
         .addMatcher(
             isAnyOf(
                 postWorkoutLog.fulfilled,
-                deleteWorkoutLog.fulfilled
+                deleteWorkoutLog.fulfilled,
+                submitWorkoutLog.fulfilled
                     ),
                 (state, action) => {
                     state.isLoading = false

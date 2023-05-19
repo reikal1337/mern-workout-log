@@ -64,7 +64,7 @@ const updateWorkout = async(req, res) => {
     const workoutId = req.params.id
     const newExercises = req.body
     try {
-        const workoutExists = User.findOne({_id: userId, workouts: {$in: [workoutId]}})
+        const workoutExists = await User.findOne({_id: userId, workouts: {$in: [workoutId]}})
         if(!workoutExists){
             return res.status(404).json({message: "Unable to find this workout!"})
         }

@@ -26,17 +26,6 @@ function WorkoutLog(props) {
 
     const dispatch = useDispatch()
 
-    // useEffect(() => {// Should be in updateLogWorkout...
-    //   const { _id, name}= props
-    //   props.updateLogWorkout({
-    //     _id,
-    //     name,
-    //     exercises
-    //   })
-    //   // console.log(exercises)
-
-    // },[exercises])
-
     function handleClick(id) {
         setCollapsedIndex( prevState => 
           prevState === id ? prevState = "" : prevState = id)
@@ -60,7 +49,6 @@ function WorkoutLog(props) {
           id: props._id
 
         }
-        console.log(reqData)
         dispatch(submitWorkoutLog(reqData))
       }
 

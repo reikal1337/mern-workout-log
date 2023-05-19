@@ -38,6 +38,7 @@ function WorkoutLogs() {
     }
     
   },[workouts])
+  console.log(message)
 
 
 
