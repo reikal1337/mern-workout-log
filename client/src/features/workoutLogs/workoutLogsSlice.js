@@ -54,19 +54,20 @@ export const deleteWorkoutLog = createAsyncThunk(//Not used yet
     }
 )
 
-// export const removeExerciese = createAsyncThunk(//Not used yets
-//     "workoutLogs/remove",
-//     async(id,thunkAPI) => {
-//         try {
-//             const token = thunkAPI.getState().auth.user.token
-//             return await savedExercisesService.removeExerciese(id,token)
-//         } catch (error) {
-//             const message = (error.response && error.response.data && error.response.data.message) 
-//         || error.message || error.toString()
-//         return thunkAPI.rejectWithValue(message)
-//         }
-//     }
-// )
+export const submitWorkoutLog = createAsyncThunk(
+    "workoutLogs/submit",
+    async(reqData,thunkAPI) => {
+        try {
+            const{ id, data} = reqData
+            const token = thunkAPI.getState().auth.user.token
+            return await workoutLogsService.submitWorkoutLog(id,data,token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) 
+        || error.message || error.toString()
+        return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
 
 export const workoutLogsSlice = createSlice({
     name: "workoutLogs",

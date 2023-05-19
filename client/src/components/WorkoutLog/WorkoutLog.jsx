@@ -6,7 +6,7 @@ import { SimpleButtonBlue, SimpleButtonRed } from '../styles/Buttons.syles'
 import Exercise from '../Global&SavedExercise/Exercise'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { deleteWorkoutLog, reset } from '../../features/workoutLogs/workoutLogsSlice'
+import { deleteWorkoutLog, submitWorkoutLog, reset } from '../../features/workoutLogs/workoutLogsSlice'
 
 function WorkoutLog(props) {
     const [collapsedIndex,setCollapsedIndex] = useState("")
@@ -51,8 +51,17 @@ function WorkoutLog(props) {
 
       const updateLogWorkout = (event) => {
         event.preventDefault()
-        console.log("Submited")
-        console.log(event.target)
+        const reqData ={
+          data:{
+            exercises,
+            startDate: `${dateTime.date}T${dateTime.time}`,
+            duration: dateTime.duration
+          },
+          id: props._id
+
+        }
+        console.log(reqData)
+        dispatch(submitWorkoutLog(reqData))
       }
 
       const handleDateTimeChange = (event) => {

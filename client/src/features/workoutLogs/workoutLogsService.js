@@ -21,8 +21,8 @@ const deleteWorkoutLog = async(id,token) => {
     return response.data
 }
 
-const updateWorkout = async(id,data,token) => {//notUsed
-    const response = await axiosAuth(token).patch(API_URL + `/update` + `/${id}`,data)
+const submitWorkoutLog = async(id,data,token) => {
+    const response = await axiosAuth(token).patch(API_URL + `/submit` + `/${id}`, data)
     return response.data
 }
 
@@ -30,7 +30,7 @@ const workoutLogsService = {
     getWorkoutLogs,
     postWorkoutLog,
     deleteWorkoutLog,
-    updateWorkout
+    submitWorkoutLog
 }
 
 export default workoutLogsService
