@@ -13,6 +13,17 @@ function WorkoutLog(props) {
     const [editMode, setEditMode] = useState(false)
     const [exercises,setExercises] = useState([...props.exercises])
 
+
+    const currentDateTime = new Date()
+    const currentDate = currentDateTime.toISOString().split('T')[0]
+    const currentTime = `${currentDateTime.getHours().toString().padStart(2,"0")}:${currentDateTime.getMinutes().toString().padStart(2,"0")}`
+
+    const [dateTime, setDateTime ] = useState({
+      date: currentDate,
+      time: currentTime,
+      duration: "00:00"
+    })
+
     const dispatch = useDispatch()
 
     // useEffect(() => {// Should be in updateLogWorkout...
@@ -38,15 +49,22 @@ function WorkoutLog(props) {
         dispatch(reset())
       }
 
-      const updateLogWorkout = () => {
-        
+      const updateLogWorkout = (event) => {
+        event.preventDefault()
+        console.log("Submited")
+        console.log(event.target)
+      }
+
+      const handleDateTimeChange = (event) => {
+        const { name, value} = event.target
+        setDateTime(prevSate => ({
+          ...prevSate,
+          [name]: value
+        }))
       }
 
 
     const handleExerciseChange = (ex,index) => {
-      // console.log(exercises)
-      // console.log(ex)
-
       setExercises(prevState => {
         const newState = [...prevState]
         newState[index] = { ...newState[index], ...ex}
@@ -61,14 +79,25 @@ function WorkoutLog(props) {
         <BiDownArrow className={props.id !== collapsedIndex ? "icon-arrow" : "icon-arrow activeicon"}/>
     </div>
     <div className={props.id !== collapsedIndex ? "workout-content" : "workout-content active"}>
-      <form>
+      <form onSubmit={updateLogWorkout}>
         {
           props.exercises.map((object,i) => {
             return <WorkoutLogExercise handleExerciseChange={handleExerciseChange}  key={object._id} index={i} {...object} />
           })
         }
+        <div className="date-time-container">
+          <label htmlFor="date">Date: </label>
+          <input type="date" name='date' value={dateTime.date} onChange={handleDateTimeChange} />
+
+          <label htmlFor="time">Time: </label>
+          <input type="time" name="time" value={dateTime.time} onChange={handleDateTimeChange} />
+
+          <label htmlFor="duration">Duration: </label>
+          <input type="time" name="duration" value={dateTime.duration} onChange={handleDateTimeChange} />
+
+        </div>
         <div className="button-container">
-          <SimpleButtonBlue type='button' onClick={updateLogWorkout} >{editMode ? "Submit" : "Input"}</SimpleButtonBlue>
+          <SimpleButtonBlue type='submit' >{editMode ? "Submit" : "Input"}</SimpleButtonBlue>
           <SimpleButtonRed type='button' onClick={deleteLog} >{editMode ? "Cancel" : "Delete"}</SimpleButtonRed>
         </div>
         </form>
