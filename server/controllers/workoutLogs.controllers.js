@@ -78,6 +78,35 @@ const deleteWorkoutLog = async(req, res) => {
     }
 }
 
+const submitWorkoutLog = async(req, res) => {
+    const userId = req.user.id
+    const workoutLogId = req.params.id
+    const newExercises = req.body.exercises
+    const date = req.body.startDate
+    const duration = req.body.duration
+    try {
+        const workoutLogExists = await User.findOne({_id: userId, workoutLogs: {$in: [workoutLogId]}})
+        if(!workoutLogExists){
+            return res.status(404).json({message: "Unable to find this workout log!"})
+        }
+        
+        const workoutLog = await WorkoutLog.find({_id: workoutLogId})
+        console.log(workoutLog[0].submited)
+        if(workoutLog[0].submited === true){
+            return res.status(404).json({message: "This workout log is already submited!"})
+        }
+        
+         await WorkoutLog.updateOne({_id: workoutLogId}, {exercises: newExercises, submited: true, startDate: date, duration: duration})
+
+         const workoutLogs = await getAllWorkoutLogs(userId)
+
+        return res.status(200).json({message: "Workout log Submited!", workoutLogs})
+} catch (err) {
+        console.log(err)
+        res.status(406).json({ error: err.message})
+    }
+}
+
 
 
 
@@ -104,4 +133,5 @@ module.exports = {
     getWorkoutLogs,
     postWorkoutLog,
     deleteWorkoutLog,
+    submitWorkoutLog
 }
