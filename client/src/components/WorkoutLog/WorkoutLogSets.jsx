@@ -37,8 +37,8 @@ function WorkoutLogSets(props) {
     <>
         <div className="sets-container">
             <label>Set {props.index+1}.</label>
-            <label>Reps: <input type="number" name="reps" value={setsData.reps} onChange={handleChange}/></label>
-            <label>Weight: <input type="number" name="weight" value={setsData.weight} onChange={handleChange}/> Kg</label>
+            <label>Reps: <input type="number" disabled={props.submited} name="reps" value={setsData.reps} onChange={handleChange}/></label>
+            <label>Weight: <input type="number" disabled={props.submited} name="weight" value={setsData.weight} onChange={handleChange}/> Kg</label>
         </div>
     </>
   )

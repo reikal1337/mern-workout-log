@@ -25,8 +25,32 @@ function WorkoutLog(props) {
     })
 
     const dispatch = useDispatch()
+    
+    const returnWorkoutLogName = () => {
+      console.log(props.startDate)
+      if(props.submited){
+        // const { hDuration, minDuration} = props.duration.split(":")
+        const [ date, time] = props.startDate.split("T")
+        const [ h, min] = time.split(":")
+        return `${props.name} ${date} ${h}:${min}`
+      }else{
+        return props.name
+      }
+    }
 
-    function handleClick(id) {
+    const returnDuration = () => {
+      const [hour,minute] = props.duration.split(":")
+      const h = parseInt(hour,10).toString()
+      const min = parseInt(minute,10).toString()
+
+      if(h > 0){
+        return `${h}h ${min}min`
+      }
+      return`${min}min`
+      
+    }
+
+    const handleClick = (id) => {
         setCollapsedIndex( prevState => 
           prevState === id ? prevState = "" : prevState = id)
     
@@ -72,30 +96,34 @@ function WorkoutLog(props) {
   return (
     <WorkoutLogStyled>
     <div className={props.id !== collapsedIndex ? "workout-title" : "workout-title activetitle"} onClick={ () => handleClick(props.id)}>
-        <h3 >{props.name} </h3>
+        <h3 >{returnWorkoutLogName()}</h3>
         <BiDownArrow className={props.id !== collapsedIndex ? "icon-arrow" : "icon-arrow activeicon"}/>
     </div>
     <div className={props.id !== collapsedIndex ? "workout-content" : "workout-content active"}>
+    {props.submited &&
+     <label className='workoutlog-duration' >Duration: {returnDuration()} </label>
+     }
       <form onSubmit={updateLogWorkout}>
         {
           props.exercises.map((object,i) => {
-            return <WorkoutLogExercise handleExerciseChange={handleExerciseChange}  key={object._id} index={i} {...object} />
+            return <WorkoutLogExercise submited={props.submited} handleExerciseChange={handleExerciseChange}  key={object._id} index={i} {...object} />
           })
         }
-        <div className="date-time-container">
-          <label htmlFor="date">Date: </label>
-          <input type="date" name='date' value={dateTime.date} onChange={handleDateTimeChange} />
+        {!props.submited &&
+          <div className="date-time-container">
+            <label htmlFor="date">Date: </label>
+            <input type="date" name='date' value={dateTime.date} onChange={handleDateTimeChange} />
 
-          <label htmlFor="time">Time: </label>
-          <input type="time" name="time" value={dateTime.time} onChange={handleDateTimeChange} />
+            <label htmlFor="time">Time: </label>
+            <input type="time" name="time" value={dateTime.time} onChange={handleDateTimeChange} />
 
-          <label htmlFor="duration">Duration: </label>
-          <input type="time" name="duration" value={dateTime.duration} onChange={handleDateTimeChange} />
-
-        </div>
+            <label htmlFor="duration">Duration: </label>
+            <input type="time" name="duration" value={dateTime.duration} onChange={handleDateTimeChange} />
+          </div>
+          }
         <div className="button-container">
-          <SimpleButtonBlue type='submit' >{editMode ? "Submit" : "Input"}</SimpleButtonBlue>
-          <SimpleButtonRed type='button' onClick={deleteLog} >{editMode ? "Cancel" : "Delete"}</SimpleButtonRed>
+          {!props.submited && <SimpleButtonBlue type='submit'>Submit</SimpleButtonBlue>}
+          <SimpleButtonRed type='button' onClick={deleteLog} >Delete</SimpleButtonRed>
         </div>
         </form>
       </div>
