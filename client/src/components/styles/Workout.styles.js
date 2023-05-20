@@ -40,7 +40,7 @@ export const WorkoutStyled = styled.div`
     
     
     .workout-content{
-        max-height: 0px;
+        max-height: 0;
         overflow: hidden;
         transition: all 0.5s ease-out;
         background-color: white;
@@ -74,8 +74,9 @@ export const WorkoutStyled = styled.div`
     }
     .active{
         transition: all 0.5s ease-out;
-        max-height: 1000px; // need to find better solution... Maybe find height with refs...?
-        overflow: hidden;
+        max-height: none;
+        // need to find better solution... Maybe find height with refs...?
+        /* overflow: hidden; */
     }
     form{
         margin: 12px;
