@@ -8,6 +8,7 @@ import { getWorkoutLogs, postWorkoutLog, reset } from '../features/workoutLogs/w
 
 function WorkoutLogs() {
   const [search,setSearch] = useState("")
+  const [filter,setFilter] = useState("")
   
 
   
@@ -42,13 +43,13 @@ function WorkoutLogs() {
 
 
 
-  const handleSerachChange = (event) => {
+  const handleFilterChange = (event) => {
     const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
-    setSearch(result)
+    setFilter(result)
   }
 
   const getSearchData = (data) => {
-    console.log(data)
+    setSearch(data)
   }
 
   
@@ -85,11 +86,11 @@ function WorkoutLogs() {
 
       <form onSubmit={handleCreateButton}>
         <div id="log-input-container">
-          <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />
+          <input type="text" maxLength="50" value={filter} onChange={handleFilterChange} placeholder="Filter..." />
           <select name="_id" value={selectedWorkout._id} onChange={handleInputChange} >
             {
             workouts.filter(object =>(
-              object.name.toLowerCase().includes(search.toLowerCase())
+              object.name.toLowerCase().includes(filter.toLowerCase())
             )).map(object => {
               return <option key={object._id} value={object._id}>{object.name}</option>
             })
@@ -105,8 +106,9 @@ function WorkoutLogs() {
           workoutLogs.length === 0 && <h4>No Workout Logs</h4>
       }
 
-      {
-      workoutLogs.map(object => {
+      {workoutLogs.filter(object => (
+        object.name.toLowerCase().includes(search.toLowerCase())
+      )).map(object => {
               return <WorkoutLog key={object._id} {...object}/>
         })
       }
