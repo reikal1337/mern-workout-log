@@ -114,11 +114,12 @@ const getAllWorkoutLogs = async(userId) => {
     try {
         const workoutLogsObjIds = await User.findOne(
             {_id: userId},
-            {workoutLogs: 1 , _id: 0}).lean()
+            {workoutLogs: 1 , _id: 0})
             
         const workoutLogsIDs = workoutLogsObjIds.workoutLogs.map(id => id.toString())// Need to rework this
         const workoutLogs = await WorkoutLog.find({_id: {$in: workoutLogsIDs}},
-            {createdAt: 0, updatedAt: 0, __v: 0})
+            {createdAt: 0, updatedAt: 0, __v: 0}).sort({startDate: -1})
+            
 
         return workoutLogs
     } catch (error) {
