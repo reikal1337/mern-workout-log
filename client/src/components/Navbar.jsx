@@ -4,12 +4,12 @@ import logoImg from "../assets/images/logo.png"
 import { Link, NavLink, useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { logout, reset } from "../features/auth/authSlice"
-
+import { FaUserAlt } from "react-icons/fa"
 
 function Navbar() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const {user} = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth)
 
   const handleLogOut = () => {
     dispatch(logout())
@@ -36,7 +36,9 @@ function Navbar() {
             </div>
               {user ?
                 <>
-                  <li id="profile-nav"><NavLink  to={`/profile/${user.username}`}>{user.username}</NavLink></li>
+                  <li id="profile-nav"><NavLink  to={`/profile/${user.username}`}>
+                    <FaUserAlt id="navbar-profile-icon"/>{user.username}
+                    </NavLink></li>
                   <li><LogOutButton onClick={handleLogOut}>Log out</LogOutButton></li>
                   
                 </>

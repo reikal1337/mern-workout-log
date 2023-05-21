@@ -15,11 +15,16 @@ export const NavStyled = styled.nav`
             font-size: 1.3rem;
             text-transform: capitalize;
             margin: 5px;
-            margin-right: 10px;
+            margin-right: 12px;
+
+            #navbar-profile-icon{
+                margin-right: 10px;
+                font-size: 20px;
+            }
         }
         
     }
-
+ 
     #nav-logo{
         margin: 10px;
         margin-left: 50px;
@@ -58,6 +63,9 @@ export const NavStyled = styled.nav`
 
     .active{
         border-bottom: 2px solid red;
+        #navbar-profile-icon{
+            color: red;
+        }
     }
     
     img{

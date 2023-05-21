@@ -50,9 +50,15 @@ const login = async (req,res) => {
         const correctPassword = await bcrypt.compare(password, user.password)
         if(!correctPassword) return res.status(403).json({message: "Wrong password!"})
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET)
-        // delete user.password
-        res.status(200).json({username, token})
+        
+        res.status(200).json({
+            username,
+            exercisesNr: user.exercises.length,
+            workoutsNr: user.workouts.length,
+            workoutLogsNr: user.workoutLogs.length,
+            token})
     } catch(err) {
+        console.log(err)
         res.status(500).json({ error: err.message})
     }
 }

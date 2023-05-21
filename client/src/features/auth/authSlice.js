@@ -13,7 +13,7 @@ const initialState = {
     message: ""
 }
 
-//Register user
+
 export const register = createAsyncThunk('/register', async (user, thunkAPI) => {
     try {
         return await authService.register(user)
@@ -34,16 +34,10 @@ export const login = createAsyncThunk('/login', async (user, thunkAPI) => {
     }
 })
 
-
-
 export const logout = createAsyncThunk("/logout", async () => {
        authService.logout()
     
 })
-
-
-
-
 
 export const authSlice = createSlice({
     name: "auth",
