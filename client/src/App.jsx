@@ -1,8 +1,7 @@
-import { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs} from "./pages"
+import { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs, Profile} from "./pages"
 import { Navbar, Footer } from "./components";
 import { GlobalStyle } from "./GlobalStyles.styles";
 import {BrowserRouter, Route, Routes } from "react-router-dom"
-
 
 function App() {
   return (
@@ -20,6 +19,7 @@ function App() {
         <Route path="/savedexercises" element={<SavedExercises />} />
         <Route path="/workouts" element={<Workouts />} />
         <Route path="/workoutlogs" element={<WorkoutLogs />} />
+        <Route path="/profile/*" element={<Profile />} />
       </Routes>
       <Footer />
       </BrowserRouter>

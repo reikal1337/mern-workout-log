@@ -24,18 +24,22 @@ function Navbar() {
             <div>
               {user ?
                 <>
-                <li><NavLink to="/">{user.username}</NavLink></li>
                 <li><NavLink to="/">Home</NavLink></li>
                 <li><NavLink to="/exercises">Exercises</NavLink></li>
                 <li><NavLink to="/savedexercises">Saved Exercises</NavLink></li>
                 <li><NavLink to="/workouts">Workouts</NavLink></li>
                 <li><NavLink to="/workoutlogs">Workout Logs</NavLink></li>
+                
                 </>
                 : ""
                 }
             </div>
               {user ?
-                <li><LogOutButton onClick={handleLogOut}>Log out</LogOutButton></li>
+                <>
+                  <li id="profile-nav"><NavLink  to={`/profile/${user.username}`}>{user.username}</NavLink></li>
+                  <li><LogOutButton onClick={handleLogOut}>Log out</LogOutButton></li>
+                  
+                </>
                 :
                 <>
                 <li><LogInButton onClick={() => navigate("/register")}>Register</LogInButton></li> 

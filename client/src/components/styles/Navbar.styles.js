@@ -11,6 +11,12 @@ export const NavStyled = styled.nav`
         display: flex;
         justify-content: center;
         align-items: center;
+        #profile-nav{
+            font-size: 1.3rem;
+            text-transform: capitalize;
+            margin: 5px;
+            margin-right: 10px;
+        }
         
     }
 
