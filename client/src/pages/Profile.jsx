@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
 import { changePassword, reset } from '../features/auth/authSlice'
+import { Loading, Notification } from '../components'
 
 function Profile() {
-  const { user } = useSelector((state) => state.auth)
+  const { user, isLoading, isSuccess, isError, message  } = useSelector((state) => state.auth)
   const [formData, setFormData] = useState({
       oldPassword: "",
       password: "",
@@ -60,9 +61,19 @@ const handleChange =  (event) => {
       })
 }
 
+  if(isLoading){
+    return <Loading size={"100"} speed={"4"} />
+  }
+  
   return (
     <ProfileStyled>
       <h2>Profile</h2> 
+
+      {
+        isError && message ? <Notification isBlue={false} text={message}/> :
+        isSuccess && message ? <Notification isBlue={true} text={message}/> : ""
+      }
+
       <div id='profile-container'>
         <h3>Hello, {user.username}</h3>
         <h4>Saved exercises: {user.exercisesNr}</h4>

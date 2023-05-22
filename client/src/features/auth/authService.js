@@ -20,8 +20,8 @@ const register = async (userData) => {
 }
 
 const changePassword = async (token,userData) => {
-    // console.log(userData)
     const response = await axiosAuth(token).patch("/changepassword", userData)
+    console.log(response.data)
     return response.data
 }
 

@@ -28,11 +28,8 @@ const login = async (req,res) => {
 
 const changePassword = async (req,res) => {
     try{
-
         const userId = req.user.id
         const { oldPassword, newPassword} = req.body
-        console.log(req.body)
-        
         const user = await User.findOne({_id: userId})
 
         const correctPassword = await bcrypt.compare(oldPassword, user.password)

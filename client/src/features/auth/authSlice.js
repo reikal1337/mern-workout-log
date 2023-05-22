@@ -66,9 +66,16 @@ export const authSlice = createSlice({
             .addCase(logout.fulfilled, (state) => {
                 state.user = null
             })
+            .addCase(changePassword.fulfilled, (state,action) => {
+                state.isLoading = false
+                state.isError = false
+                state.isSuccess = true
+                state.message = action.payload.message
+            })
             .addCase(changePassword.rejected, (state,action) => {
                 state.isLoading = false
                 state.isError = true
+                state.isSuccess = false
                 state.message = action.payload
             })
             .addMatcher(
@@ -85,7 +92,6 @@ export const authSlice = createSlice({
             .addMatcher(
                 isAnyOf(
                     login.fulfilled,
-                    changePassword.fulfilled,
                     register.fulfilled,
                     
                         ),
