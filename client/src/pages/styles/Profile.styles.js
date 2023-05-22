@@ -5,7 +5,6 @@ export const ProfileStyled = styled(ExercisesStyled)`
 
     #profile-container{
         max-width: 400px;
-        /* height: 400px; */
         background-color: white;
         border-radius: 10px;
         margin-top: 40px;
@@ -21,9 +20,10 @@ export const ProfileStyled = styled(ExercisesStyled)`
             justify-content: center;
             align-items: center;
             margin-block: 10px;
+            margin-top: 25px;
             input{
                 margin-bottom: 7px;
-                /* margin-inline: 5px; */
+                margin-inline: 5px;
                 padding: 5px 10px 5px 10px;
                 border-radius: 10px;
                 border: 2px inset #ccc;
