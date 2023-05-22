@@ -1,17 +1,90 @@
 
 import { ProfileStyled } from './styles/Profile.styles'
 import { useSelector } from 'react-redux'
+import { useState } from 'react'
+import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
 
 function Profile() {
   const { user } = useSelector((state) => state.auth)
-  
+  const [formData, setFormData] = useState({
+      oldPassword: "",
+      password: "",
+      repPassword: ""
+})
+  const [error,setError] = useState("")
+
+  const badPassword = (errorMessage) => {
+    setError(errorMessage)
+
+    setFormData({
+        oldPassword: "",
+        password: "",
+        repPassword: ""
+      })
+  }
+
+const handleSubmit = (event) => {
+  event.preventDefault()
+  if(formData.password !== formData.repPassword){// should do all valadation
+      badPassword("Passwords don't match!")
+
+  }else if(formData.password.length > 100){
+      badPassword("Password can't be longer then 100 char!")
+
+  }else if(formData.password.length < 6){
+      badPassword("Password can't be shorter then 6 char!")
+
+  }else if(/\s/.test(formData.password)){
+      badPassword("Password can't have any spaces!")
+  }else if (user.username.toLowerCase() === formData.password.toLowerCase()){
+      badPassword("Username and password can't match!")
+  }else{
+      const userData = {
+        oldPassword: formData.oldPassword,
+        newPassword: formData.password,
+
+      }
+      badPassword("")
+      console.log(userData)
+  }
+}
+
+const handleChange =  (event) => {
+  setFormData({
+      ...formData,
+       [event.target.name]: event.target.value
+      })
+}
+
   return (
     <ProfileStyled>
-      <div>{user.username}</div>
-      <div>{user.exercisesNr}</div>
-      <div>{user.workoutsNr}</div>
-      <div>{user.workoutLogsNr}</div>
+      <h2>Profile</h2> 
+      <div id='profile-container'>
+        <h3>Hello, {user.username}</h3>
+        <h4>Saved exercises: {user.exercisesNr}</h4>
+        <h4>Workouts: {user.workoutsNr}</h4>
+        <h4>Workout logs: {user.workoutLogsNr}</h4>
+        <form onSubmit={handleSubmit}>
+          <label><b>Change password</b></label>
+          <label htmlFor="oldPassword">Old password: </label>
+          <input type="password" id="oldPassword" name="oldPassword"
+            value={formData.oldPassword} onChange={ handleChange}placeholder="Enter old password..."
+            maxLength="100" minLength="6" />
+          
+          
+          <label htmlFor="password">New password: </label>
+          <input type="password" id="password" name="password"
+            value={formData.password} onChange={handleChange} placeholder="Enter new passsword..."
+            maxLength="100" minLength="6" />
+          <span className="error-input">{error}</span>
 
+          <label htmlFor="repPassword">Confirm new password: </label>
+          <input type="password" id="repPassword" name="repPassword"
+            value={formData.repPassword} onChange={handleChange} placeholder="Repeat new passsword..."
+            maxLength="100" minLength="6" />
+            <SimpleButtonBlue type='submit'>Change</SimpleButtonBlue>
+        </form>
+      </div>
     </ProfileStyled>
   )
 }
