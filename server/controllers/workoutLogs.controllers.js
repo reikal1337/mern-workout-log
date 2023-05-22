@@ -18,9 +18,11 @@ const getWorkoutLogs = async(req, res) => {
 }
 
 const postWorkoutLog = async(req, res) => {
-    const userId = req.user.id
-    const workoutId = req.params.id
+    
+    console.log("Works?")
     try {
+        const userId = req.user.id
+        const workoutId = req.params.id
 
         const workoutIsUsers = await User.findOne({_id: userId, workouts: {$in: [workoutId]}}).lean()
         if(!workoutIsUsers){
@@ -118,7 +120,7 @@ const getAllWorkoutLogs = async(userId) => {
             
         const workoutLogsIDs = workoutLogsObjIds.workoutLogs.map(id => id.toString())// Need to rework this
         const workoutLogs = await WorkoutLog.find({_id: {$in: workoutLogsIDs}},
-            {createdAt: 0, updatedAt: 0, __v: 0}).sort({startDate: -1})
+            {createdAt: 0, updatedAt: 0, __v: 0}).sort({submited: 1, startDate: -1 })
             
 
         return workoutLogs

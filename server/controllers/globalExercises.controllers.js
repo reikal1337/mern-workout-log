@@ -3,15 +3,9 @@ const { User } = require("../models/User.model")
 
 const getGlobalExercises = async(req, res) => {
     try {
-        const exercises = await GlobalExercise.find().lean()
+        const exercises = await GlobalExercise.find({},{createdAt: 0, updatedAt: 0, __v: 0}).sort({name: 1})
         if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
 
-        exercises.forEach( exercise => {
-            
-            delete exercise.createdAt
-            delete exercise.updatedAt
-            delete exercise.__v
-        })
         res.status(200).json({exercises})
         
     } catch (err) {
@@ -38,6 +32,7 @@ const postGlobalExercise = async(req, res) => {
             name,
             description,
             bodyParts,
+            global: true
         })
         await newGlobalExercise.save()
         res.status(201).json({message: "Exercise added!"})
