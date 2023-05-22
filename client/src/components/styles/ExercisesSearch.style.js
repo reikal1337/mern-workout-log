@@ -21,7 +21,7 @@ export const SerachStyled = styled.form`
     }
     button{
         border: 2px inset #ccc;
-        font-size: 1rem;
+        font-size: 16px;
         border-radius: 5px;
         padding: 2px 4px;
         cursor: pointer;

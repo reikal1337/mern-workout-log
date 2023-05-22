@@ -22,8 +22,10 @@ export const AuthButton = styled.button`
 `
 
 export const SimpleButtonRed = styled.button`
+    /* max-width: 60px;
+    max-height: 32px; */
     background-color: red;
-    font-size: 1rem;
+    font-size: 16px;
     padding: 5px;
     border-radius: 10px;
     border: none;
@@ -43,13 +45,13 @@ export const SimpleButtonBlue = styled(SimpleButtonRed)`
 `
 
 export const LogOutButton = styled.button`
-    margin-right: 1rem;
+    margin-right: 16px;
     background-color: red;
     color: white;
-    font-size: 1.3rem;
+    font-size: 21px;
     border-radius: 5px;
-    padding-inline: 1rem;
-    padding-block: 0.7rem;
+    padding-inline: 16px;
+    padding-block: 11px;
     transition: ease-in-out 0.3s;
     &:hover{
         border-radius: 12px;

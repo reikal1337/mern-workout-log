@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExercieses, serachExercieses, saveExercies, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
@@ -16,21 +16,14 @@ function Exercises() {
   const [searchParams, setSearchParams] = useSearchParams();
 
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    console.log("Lol")
     dispatch(getExercieses())
 
     return () => {
       dispatch(reset())
     }
-  },[dispatch])
-
-  // useEffect(() =>{
-  //   if(isError){
-  //     console.log(message)//Change to diplay error...
-  //   }
-    
-    
-  // },[isError, message])
+  }, [])
 
   const getSearchData = (data) => {
     setSearchParams({name: data.field, bodypart: data.bodyPart})
@@ -41,16 +34,13 @@ function Exercises() {
       bodypart
     }
     dispatch(serachExercieses(serachQuery))
+    dispatch(reset())
   }
   
   const handleSave = (id) => {
     dispatch(saveExercies(id))
     dispatch(reset())
   }
-
-  if(isLoading){
-    return <Loading size={"100"} speed={"4"} />
- }
 
   return (
     <ExercisesStyled>
@@ -64,15 +54,16 @@ function Exercises() {
       {
         exercises.length === 0 && <h4>No exercises</h4>
       }
-      {
+      {!isLoading ?
       exercises.map(object => {
         return( 
           <Exercise key={object._id} {...object} public={true} onSave={handleSave}/>
           )
         
-      })}
-
-      
+      })
+      :
+      <Loading size={"100"} speed={"4"} />
+      } 
     </ExercisesStyled>
     
   )

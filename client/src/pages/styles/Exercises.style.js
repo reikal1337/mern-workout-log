@@ -8,13 +8,13 @@ export const ExercisesStyled = styled.section`
     background-color: whitesmoke;
     h2{
         
-        font-size: 1.5rem;
+        font-size: 24px;
         margin-block: 10px 5px;
         font-weight: 800;
     }
     h4{
         margin-top: 20px;
-        font-size: 1.3rem;
+        font-size: 21px;
         color: grey;
     }
 

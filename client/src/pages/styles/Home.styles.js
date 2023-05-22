@@ -26,7 +26,7 @@ export const SectionStyled = styled.section`
         align-items: center;
         
         li{
-            padding: 1.5rem;
+            padding: 24px;
             font-size: 20px;
             font-weight: 600;
             text-transform: capitalize;

@@ -87,7 +87,7 @@ const getAllWorkouts = async(userId) => {
 
         const workoutsIDs = workoutsObjIds.workouts.map(id => id.toString())
         const workouts = await Workout.find({_id: {$in: workoutsIDs}},
-            {createdAt: 0, updatedAt: 0, __v: 0}).sort({names: 1})
+            {createdAt: 0, updatedAt: 0, __v: 0}).sort({name: 1})
 
         return workouts
     } catch (error) {
