@@ -1,8 +1,9 @@
 
 import { ProfileStyled } from './styles/Profile.styles'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
+import { changePassword, reset } from '../features/auth/authSlice'
 
 function Profile() {
   const { user } = useSelector((state) => state.auth)
@@ -12,6 +13,8 @@ function Profile() {
       repPassword: ""
 })
   const [error,setError] = useState("")
+
+  const dispatch = useDispatch()
 
   const badPassword = (errorMessage) => {
     setError(errorMessage)
@@ -45,7 +48,8 @@ const handleSubmit = (event) => {
 
       }
       badPassword("")
-      console.log(userData)
+      dispatch(changePassword(userData))
+      dispatch(reset())
   }
 }
 
