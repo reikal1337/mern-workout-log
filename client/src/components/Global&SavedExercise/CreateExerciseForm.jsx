@@ -58,7 +58,7 @@ function CreateExerciseForm(props) {
             <SimpleButtonRed id="button-exit" onClick={() => props.setPopUp(false)}>{<AiOutlineClose />}</SimpleButtonRed>
             <h3>Create Exercise</h3>
             <h4>Name</h4>
-            <input name="name" id="input-field" value={formData.name} onChange={handleNameChange} type="text" maxLength="50" placeholder="Exerciece name..." />
+            <input name="name" id="input-field" value={formData.name} onChange={handleNameChange} type="text" minLength="2" maxLength="50" placeholder="Exerciece name..." />
             <h4>Description</h4>
             <textarea name="description" value={formData.description} onChange={handleDescriptionChange} type="text" maxLength="500" placeholder="Description..."  />
             <div>

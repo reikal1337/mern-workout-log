@@ -120,7 +120,7 @@ const getAllWorkoutLogs = async(userId) => {
             
         const workoutLogsIDs = workoutLogsObjIds.workoutLogs.map(id => id.toString())// Need to rework this
         const workoutLogs = await WorkoutLog.find({_id: {$in: workoutLogsIDs}},
-            {createdAt: 0, updatedAt: 0, __v: 0}).sort({submited: 1, startDate: -1 })
+            {createdAt: 0, updatedAt: 0, __v: 0}).collation({ locale: "en" }).sort({submited: 1, startDate: -1 }) //Maybe also add sort by name when it is not submited.
             
 
         return workoutLogs

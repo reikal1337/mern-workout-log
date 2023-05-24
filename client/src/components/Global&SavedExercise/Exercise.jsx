@@ -20,11 +20,12 @@ const returnRedButton = () =>{
         <p>{props.description}</p>
         <div className="exercise-footer">
             <span className="exercise-footer-bodyparts">{formatBodyParts(props.bodyParts)}</span>
-            {returnRedButton()}
-            {!props.public && !props.published && !props.global ? 
-              <SimpleButtonBlue className="centerButton" onClick={() => props.onPublish(props._id)}>Publish</SimpleButtonBlue> : ""
-          
-            }
+            <div className="button-container">
+              {returnRedButton()}
+              {!props.public && !props.published && !props.global ? 
+                <SimpleButtonBlue className="centerButton" onClick={() => props.onPublish(props._id)}>Publish</SimpleButtonBlue> : ""
+              }
+            </div>
             <span className="exercise-footer-item-createdby">Creadet by: {props.createdBy}</span>
         </div>
 

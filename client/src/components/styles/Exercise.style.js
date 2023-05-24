@@ -27,17 +27,22 @@ export const ExerciseStyled = styled.div`
         margin-top: 10px;
         width: 100%;
         font-size: 10px;
-        /* display: flex;
-        justify-content: space-between; */
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
+        grid-template-rows: 1;
         .centerButton{
             display: flex;
             justify-self: center;
             align-self: center;
-            max-width: 60px;
-            max-height: 30px;
+            max-width: 70px;
+            max-height: 35px;
+            margin: 5px;
+            
+        }
+        .button-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
             
         }
         .exercise-footer-bodyparts{

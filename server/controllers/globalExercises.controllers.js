@@ -3,7 +3,7 @@ const { User } = require("../models/User.model")
 
 const getGlobalExercises = async(req, res) => {
     try {
-        const exercises = await GlobalExercise.find({},{createdAt: 0, updatedAt: 0, __v: 0}).sort({name: 1})
+        const exercises = await GlobalExercise.find({},{createdAt: 0, updatedAt: 0, __v: 0}).collation({ locale: "en" }).sort({name: 1})
         if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
 
         res.status(200).json({exercises})

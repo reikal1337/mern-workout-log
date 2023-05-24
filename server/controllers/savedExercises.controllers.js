@@ -26,7 +26,9 @@ const postExercise = async(req, res) => {
             description,
             bodyParts,
         } = req.body
+        console.log(req.body)
         if(!createdBy || !name || !description || !bodyParts){
+            
             return res.status(406).json({message: "Missing data!"})
         }
         const newExercise = new Exercise({
@@ -154,12 +156,25 @@ const getAllSavedExercieses = async(userId) => {
 
         const exercisesIDs = exercisesObjIds.exercises.map(id => id.toString())
         const exercisesSaved = await Exercise.find({_id: {$in: exercisesIDs}},
-            {createdAt: 0, updatedAt: 0, __v: 0})
+            {createdAt: 0, updatedAt: 0, __v: 0}).lean()
 
         const exercisesGlobal = await GlobalExercise.find({_id: {$in: exercisesIDs}},
-            {createdAt: 0, updatedAt: 0, __v: 0})
+            {createdAt: 0, updatedAt: 0, __v: 0}).lean()
 
         const exercises = exercisesSaved.concat(exercisesGlobal)
+        
+        exercises.sort((x,y) => {
+            const nameX = x.name.toLowerCase()
+            const nameY = y.name.toLowerCase()
+
+            if(nameX < nameY){
+                return -1
+            }
+            if(nameX > nameY){
+                return 1
+            }
+            return 0
+        })
 
         return exercises
     } catch (error) {
