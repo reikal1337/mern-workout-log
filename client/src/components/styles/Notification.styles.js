@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-
+import { deviceSize } from "../../GlobalStyles.styles";
 
 const animation = keyframes`
     0%{
@@ -27,7 +27,7 @@ export const NotificationBlue = styled.div`
     color: #00a0dc;
     position: fixed;
     left: 0;
-    top: 110px; // Nav bar height, need better solution :/
+    top: 110px; 
     border-bottom-right-radius: 10px;
     text-align: center;
     font-size: 12px;
@@ -44,10 +44,21 @@ export const NotificationBlue = styled.div`
 
     }
 
+    @media ${deviceSize.desktop} {
+        top: 80px
+    }
+
+    @media ${deviceSize.laptop} {
+        top: 70px
+    }
+
 `
 
 export const NotificationRed = styled(NotificationBlue)`
     color: red;
 
 `
+
+
+
 

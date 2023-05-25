@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { deviceSize } from "../../GlobalStyles.styles";
 
 const animationGradiant = keyframes`
     0%{
@@ -24,13 +25,13 @@ export const SectionStyled = styled.section`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-align: center;
         
         li{
             padding: 24px;
             font-size: 20px;
             font-weight: 600;
             text-transform: capitalize;
-
             background-image: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(193,1,20,1) 100%);
             -webkit-background-clip: text;
             background-clip: text;
@@ -40,11 +41,29 @@ export const SectionStyled = styled.section`
         }
     }
     
-
-
     img{
         
         width: 60vw;
         object-fit: cover;
     }
+
+    @media ${deviceSize.tablet} {
+        ul{
+            width: 60vw;
+            
+            background: none;
+            border: none;
+            position: absolute;
+            top: 35%;
+            li{
+                font-size: 18px;
+            }
+
+        }
+        img{
+            width: 100vw;
+        }
+    }
+
 `
+

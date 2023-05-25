@@ -26,7 +26,7 @@ const returnRedButton = () =>{
                 <SimpleButtonBlue className="centerButton" onClick={() => props.onPublish(props._id)}>Publish</SimpleButtonBlue> : ""
               }
             </div>
-            <span className="exercise-footer-item-createdby">Creadet by: {props.createdBy}</span>
+            <span className="exercise-footer-createdby">Creadet by: {props.createdBy}</span>
         </div>
 
     </ExerciseStyled>

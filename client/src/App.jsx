@@ -22,7 +22,6 @@ function App() {
         <Route path="/profile/*" element={<Profile />} />
         {/* <ScrollRestoration/> */}
       </Routes>
-      <Notification  text={"testing some shit!"}/>
       <Footer />
       
       </BrowserRouter>
