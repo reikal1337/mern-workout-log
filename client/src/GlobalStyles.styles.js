@@ -16,3 +16,13 @@ export const GlobalStyle = createGlobalStyle`
     }
 
 `
+
+export const deviceSize = {
+    mobileS: `(max-width: 320px)`,
+    mobileM: `(max-width: 375px)`,
+    mobileL: `(max-width: 425px)`,
+    tablet: `(max-width: 768px)`,
+    customS: `(max-width: 850px)`,
+    laptop: `(max-width: 1024px)`,
+    desktop: `(max-width: 1440px)`
+  };

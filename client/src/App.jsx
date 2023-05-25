@@ -1,5 +1,5 @@
 import { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs, Profile} from "./pages"
-import { Navbar, Footer } from "./components";
+import { Navbar, Footer, Notification } from "./components";
 import { GlobalStyle } from "./GlobalStyles.styles";
 import {BrowserRouter, Route, Routes, ScrollRestoration } from "react-router-dom"
 
@@ -22,6 +22,7 @@ function App() {
         <Route path="/profile/*" element={<Profile />} />
         {/* <ScrollRestoration/> */}
       </Routes>
+      <Notification  text={"testing some shit!"}/>
       <Footer />
       
       </BrowserRouter>

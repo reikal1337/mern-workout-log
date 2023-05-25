@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { deviceSize } from "../../GlobalStyles.styles";
 
 export const AuthButton = styled.button`
     background: rgba( 255, 255, 255, 0.075);
@@ -54,12 +55,35 @@ export const LogOutButton = styled.button`
     transition: ease-in-out 0.3s;
     &:hover{
         border-radius: 12px;
+        color: black;
     }
     &:focus{
         border-radius: 12px;
         color: black;
 
     }
+
+    @media ${deviceSize.desktop} {
+        margin-right: 10px;
+        font-size: 16px;
+        border-radius: 10px;
+        padding-inline: 13px;
+        padding-block: 8px;
+        
+         
+  }
+
+  @media ${deviceSize.laptop} {
+        margin-right: 5px;
+        font-size: 14px;
+        border-radius: 10px;
+        padding-inline: 8px;
+        padding-block: 4px;
+        
+         
+  }
+
+
 `
 
 export const LogInButton = styled(LogOutButton)`
