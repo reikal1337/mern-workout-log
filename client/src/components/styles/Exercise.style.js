@@ -14,15 +14,13 @@ export const ExerciseStyled = styled.div`
    
     
     h3{
-        width: 100%;
         font-size: 18px;
         margin-block: 10px;
         text-transform: capitalize;
         text-align: center;
-        width: 100%;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        
+
+        word-break: break-all;
+        white-space: normal;
     }
 
     p{
@@ -32,9 +30,8 @@ export const ExerciseStyled = styled.div`
         border-bottom: 2px solid red;
         border-radius: 5px;
 
-        width: 100%;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        word-break: break-all;
+        white-space: normal;
         
     }
     
