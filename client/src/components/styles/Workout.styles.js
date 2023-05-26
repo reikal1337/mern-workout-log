@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const WorkoutStyled = styled.div`
     margin: 10px;
-    min-width: 400px;
+    min-width: 300px;
+    
     .workout-title{
         display: flex;
         justify-content: space-between;
@@ -15,6 +16,9 @@ export const WorkoutStyled = styled.div`
         transition: all 0.5s ease;
         cursor: pointer;
 
+        word-break: break-all;
+        white-space: normal;
+
         &:hover{
             color: red;
         }
@@ -22,6 +26,8 @@ export const WorkoutStyled = styled.div`
         .icon-arrow{
             color: white;
             margin-left: 50px;
+            margin-left: auto;
+            font-size: 16px;
             transition: all 0.5s ease-out;
             
         }
