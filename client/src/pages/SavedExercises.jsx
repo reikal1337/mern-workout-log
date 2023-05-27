@@ -21,10 +21,6 @@ function SavedExercises() {
   
   useEffect(() => {
     dispatch(getExercieses())
-    if(isError){
-      console.log(message)//Change to diplay error...
-    }
-
     return () => {
       dispatch(reset())
     }
