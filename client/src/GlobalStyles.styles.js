@@ -9,6 +9,16 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Merienda', cursive;
         font-family: 'Roboto Slab', serif;
 
+        //Diable arrows near input type="number"....
+        /* input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        } */
+
     }
     a,li{
         text-decoration: none;
