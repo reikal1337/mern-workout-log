@@ -27,7 +27,6 @@ function WorkoutLog(props) {
     const dispatch = useDispatch()
     
     const returnWorkoutLogName = () => {
-      console.log(props.startDate)
       if(props.submited){
         // const { hDuration, minDuration} = props.duration.split(":")
         const [ date, time] = props.startDate.split("T")

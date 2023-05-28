@@ -25,6 +25,12 @@ const changePassword = async (token,userData) => {
     return response.data
 }
 
+const getUserData = async (token) => {
+    const response = await axiosAuth(token).get("/profile")
+    console.log(response.data)
+    return response.data
+}
+
 const logout = () => {
     localStorage.removeItem("user")
 }
@@ -33,7 +39,8 @@ const authService ={
     register,
     login,
     logout,
-    changePassword
+    changePassword,
+    getUserData
 }
 
 export default authService

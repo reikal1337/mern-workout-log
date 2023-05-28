@@ -15,9 +15,9 @@ const login = async (req,res) => {
         
         res.status(200).json({
             username,
-            // exercisesNr: user.exercises.length,
-            // workoutsNr: user.workouts.length,
-            // workoutLogsNr: user.workoutLogs.length,
+            exercisesNr: user.exercises.length,
+            workoutsNr: user.workouts.length,
+            workoutLogsNr: user.workoutLogs.length,
             token})
     } catch(err) {
         console.log(err)

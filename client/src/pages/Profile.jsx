@@ -1,13 +1,14 @@
 
 import { ProfileStyled } from './styles/Profile.styles'
 import { useSelector, useDispatch } from 'react-redux'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
-import { changePassword, reset } from '../features/auth/authSlice'
+import { changePassword, getUserData, reset } from '../features/auth/authSlice'
 import { Loading, Notification } from '../components'
 
 function Profile() {
   const { user, isLoading, isSuccess, isError, message  } = useSelector((state) => state.auth)
+
   const [formData, setFormData] = useState({
       oldPassword: "",
       password: "",
@@ -16,6 +17,13 @@ function Profile() {
   const [error,setError] = useState("")
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserData())
+    return () => {
+      dispatch(reset())
+    }
+  },[])
 
   const badPassword = (errorMessage) => {
     setError(errorMessage)
