@@ -5,6 +5,8 @@ import globalExercisesService from "./globalExercisesService"
 
 const initialState = {
     exercises: [],
+    page: null,
+    pageMax: null,
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -13,10 +15,10 @@ const initialState = {
 
 export const getExercieses = createAsyncThunk(
     "exercises/all",
-    async(_,thunkAPI) =>{
+    async(query,thunkAPI) =>{
         try {
             const token = thunkAPI.getState().auth.user.token
-            return await globalExercisesService.getExercieses(token)
+            return await globalExercisesService.getExercieses(query,token)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) 
         || error.message || error.toString()
@@ -70,6 +72,8 @@ export const exercisesSlice = createSlice({
             .addCase(getExercieses.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.isSuccess = true
+                state.page = action.payload.page
+                state.pageMax = action.payload.pageMax
                 state.exercises = action.payload.exercises
             })
 

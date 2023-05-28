@@ -5,7 +5,8 @@ const {getGlobalExercises, postGlobalExercise, serachGlobalExercieses, saveGloba
 const globalRouter = express.Router()
 
 globalRouter.get("/exercises/all", getGlobalExercises)
-.get("/exercises",serachGlobalExercieses)
+.get("/exercises", getGlobalExercises)
+.get("/exercises/search", serachGlobalExercieses)
 .post("/exercises/add", postGlobalExercise)
 .post("/exercises/save/:id", saveGlobalExercise)
 

@@ -2,17 +2,24 @@ import { axios, axiosAuth } from "../http"
 
 const API_URL = "/global/exercises"
 
-const getExercieses = async(token) => {
-    
-    const response = await axiosAuth(token).get(API_URL + "/all")
+const getExercieses = async(query,token) => {
+    var response
+    if(query === undefined){
+        response = await axiosAuth(token).get(API_URL + "/all")
+        
+    }else{
+        response = await axiosAuth(token).get(API_URL + `?page=${query.page}&limit=${query.limit}`)
+    }
     return response.data
-    //action.payload.data.exercises
+    
 }
 
 const serachExercieses = async(serachQuery,token) => {
-    const response = await axiosAuth(token).get(API_URL + `?name=${serachQuery.name}&bodypart=${serachQuery.bodypart}`)
+    const response = await axiosAuth(token).get(API_URL + `/search?name=${serachQuery.name}&bodypart=${serachQuery.bodypart}`)
+    console.log(response.data)
     return response.data
 }
+
 
 const saveExercies = async(exerciseId,token) => {
     const response = await axiosAuth(token).post(API_URL + `/save/${exerciseId}`)

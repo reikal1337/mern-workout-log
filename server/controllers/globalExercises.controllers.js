@@ -3,6 +3,13 @@ const { User } = require("../models/User.model")
 
 const getGlobalExercises = async(req, res) => {
     try {
+        const page = req.query.page || 1
+        const limit =  10 < req.query.page < 100  ? req.query.page : 10
+        
+        
+        const count = await GlobalExercise.estimatedDocumentCount({})
+        
+
         const exercises = await GlobalExercise.find({},{createdAt: 0, updatedAt: 0, __v: 0}).collation({ locale: "en" }).sort({name: 1})
         if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
 
@@ -12,6 +19,8 @@ const getGlobalExercises = async(req, res) => {
         res.status(500).json({ error: err.message})
     }
 }
+
+
 
 const postGlobalExercise = async(req, res) => {
     
@@ -55,16 +64,10 @@ const serachGlobalExercieses = async(req,res) =>{
             if(queryBodyPart != "/all/i"){
                 Object.assign(query,{bodyParts: {$all: [queryBodyPart]}});
             }
-            // console.log(query)
-            const exercises = await GlobalExercise.find(query).lean()
+            console.log(query)
+            const exercises = await GlobalExercise.find(query,{createdAt: 0, updatedAt: 0, __v: 0}).collation({ locale: "en" }).sort({name: 1})
             if(!exercises) return res.status(404).json({message: "No searched exercises exist!"})
-            exercises.forEach( exercise => {
             
-                delete exercise.createdAt
-                delete exercise.updatedAt
-                delete exercise.__v
-            })
-            // console.log(exercises)
             res.status(200).json(exercises)
         } catch (err) {
             console.log(err)
