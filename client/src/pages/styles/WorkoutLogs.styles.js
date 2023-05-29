@@ -19,7 +19,7 @@ export const WorkoutLogsStyled = styled(ExercisesStyled)`
             border-radius: 10px;
             border: 2px inset #ccc;
             box-shadow: inset 1px 1px 10px 1px grey;
-            font-size: .9rem;
+            font-size: 14.4px;
             width: 150px;
         }
 

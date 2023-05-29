@@ -10,7 +10,7 @@ function Exercises() {
 
   const dispatch = useDispatch()
 
-  const { exercises, isLoading, isError, isSuccess, message } = useSelector(
+  const { exercises, page, pageMax, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.globalExerciese
   )
   const [searchParams, setSearchParams] = useSearchParams();
@@ -20,12 +20,12 @@ function Exercises() {
 
   useLayoutEffect(() => {
     console.log("Lol")
-    dispatch(getExercieses())
+    dispatch(getExercieses({limit: showLimti}))
 
     return () => {
       dispatch(reset())
     }
-  }, [])
+  }, [showLimti])
 
   const getSearchData = (data) => {
     setSearchParams({name: data.field, bodypart: data.bodyPart})
@@ -53,12 +53,13 @@ function Exercises() {
       }
       
       <ExercisesSearch local={false} onSubmit={getSearchData} />
-      <form>
-        <select name="limit" value={showLimti} onChange={() => setShowLimit()} >
-        <option value="10" >10</option>
-        <option value="25" >25</option>
-        <option value="50" >50</option>
-        <option value="100" >100</option>
+      <form id="limit-form">
+        <label for="limit"> Show per page: </label>
+        <select name="limit" value={showLimti} onChange={(e) => setShowLimit(e.target.value)} >
+          <option value="10" >10</option>
+          <option value="25" >25</option>
+          <option value="50" >50</option>
+          <option value="100" >100</option>
         </select>
       </form>
       {
@@ -74,6 +75,8 @@ function Exercises() {
       :
       <Loading size={"100"} speed={"4"} />
       } 
+      <p>Current Page: {page}</p>
+      <p>Max pages : {pageMax}</p>
     </ExercisesStyled>
     
   )

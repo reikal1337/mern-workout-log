@@ -4,20 +4,23 @@ const { User } = require("../models/User.model")
 const getGlobalExercises = async(req, res) => {
     console.log("LOl")
     try {
-        
-        const page = req.query.page || 1
-        const limit = req.query.limit > 10 && req.query.limit <= 100  ? req.query.page : 10
+        const qLimit = parseInt(req.query.limit, 10)
+        const qPage = parseInt(req.query.page, 10)
+
+        const page = qPage || 1
+        const limit = qLimit > 10 && qLimit <= 100  ? qLimit : 10
         const skip = (page - 1 ) * limit
         
         
         const count = await GlobalExercise.estimatedDocumentCount({})
         
+        const pageMax = Math.ceil(count / limit)
 
         const exercises = await GlobalExercise.find({},{createdAt: 0, updatedAt: 0, __v: 0})
         .collation({ locale: "en" }).sort({name: 1}).limit(limit).skip(skip)
 
         if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
-        const pageMax = count / limit
+        
 
         res.status(200).json({
             exercises,
