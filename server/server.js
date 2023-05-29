@@ -26,7 +26,7 @@ app.use("/", authRouter)
 app.use(authenticateToken)
 
 
-app.use("/global", globalRouter)
+app.use("/global/exercises", globalRouter)
 app.use("/savedexercises", savedExRouter)
 app.use("/workouts", workoutsRouter)
 app.use("/workoutlogs", workoutLogsRouter)

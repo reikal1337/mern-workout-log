@@ -26,7 +26,6 @@ function WorkoutLogs() {
   useEffect(() => {
     dispatch(getWorkouts())
     dispatch(getWorkoutLogs())
-    console.log("Getting Workouts!")
     return () => {
       dispatch(reset())
       dispatch(workoutsReset())
@@ -74,8 +73,6 @@ function WorkoutLogs() {
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />
  }
-//  console.log("Logs:")
-//  console.log(workoutLogs)
   return (
     <WorkoutLogsStyled>
       <h2>Workout log</h2>

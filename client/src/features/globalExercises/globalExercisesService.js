@@ -5,7 +5,7 @@ const API_URL = "/global/exercises"
 const getExercieses = async(query,token) => {
     var response
     if(query === undefined){
-        response = await axiosAuth(token).get(API_URL + "/all")
+        response = await axiosAuth(token).get(API_URL)
         
     }else{
         response = await axiosAuth(token).get(API_URL + `?page=${query.page}&limit=${query.limit}`)

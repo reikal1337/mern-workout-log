@@ -4,10 +4,11 @@ const {getGlobalExercises, postGlobalExercise, serachGlobalExercieses, saveGloba
 
 const globalRouter = express.Router()
 
-globalRouter.get("/exercises/all", getGlobalExercises)
-.get("/exercises", getGlobalExercises)
-.get("/exercises/search", serachGlobalExercieses)
-.post("/exercises/add", postGlobalExercise)
-.post("/exercises/save/:id", saveGlobalExercise)
+globalRouter
+// .get("/all", getGlobalExercises)
+.get("/", getGlobalExercises)
+.get("/search", serachGlobalExercieses)
+.post("/add", postGlobalExercise)
+.post("/save/:id", saveGlobalExercise)
 
 module.exports = { globalRouter }

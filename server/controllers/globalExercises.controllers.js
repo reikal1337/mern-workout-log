@@ -2,20 +2,31 @@ const { GlobalExercise } = require("../models/GlobalExercise.model")
 const { User } = require("../models/User.model")
 
 const getGlobalExercises = async(req, res) => {
+    console.log("LOl")
     try {
+        
         const page = req.query.page || 1
-        const limit =  10 < req.query.page < 100  ? req.query.page : 10
+        const limit = req.query.limit > 10 && req.query.limit <= 100  ? req.query.page : 10
+        const skip = (page - 1 ) * limit
         
         
         const count = await GlobalExercise.estimatedDocumentCount({})
         
 
-        const exercises = await GlobalExercise.find({},{createdAt: 0, updatedAt: 0, __v: 0}).collation({ locale: "en" }).sort({name: 1})
-        if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
+        const exercises = await GlobalExercise.find({},{createdAt: 0, updatedAt: 0, __v: 0})
+        .collation({ locale: "en" }).sort({name: 1}).limit(limit).skip(skip)
 
-        res.status(200).json({exercises})
+        if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
+        const pageMax = count / limit
+
+        res.status(200).json({
+            exercises,
+            page,
+            pageMax
+        })
         
     } catch (err) {
+        console.log(err)
         res.status(500).json({ error: err.message})
     }
 }
@@ -23,7 +34,6 @@ const getGlobalExercises = async(req, res) => {
 
 
 const postGlobalExercise = async(req, res) => {
-    
     try {
         const{
             createdBy,
@@ -48,6 +58,7 @@ const postGlobalExercise = async(req, res) => {
 
 
     } catch (err) {
+        console.log(err)
         res.status(406).json({ error: err.message})
     }
 }

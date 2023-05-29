@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExercieses, serachExercieses, saveExercies, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
@@ -14,6 +14,8 @@ function Exercises() {
     (state) => state.globalExerciese
   )
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [showLimti, setShowLimit] = useState("10")
 
 
   useLayoutEffect(() => {
@@ -51,6 +53,14 @@ function Exercises() {
       }
       
       <ExercisesSearch local={false} onSubmit={getSearchData} />
+      <form>
+        <select name="limit" value={showLimti} onChange={() => setShowLimit()} >
+        <option value="10" >10</option>
+        <option value="25" >25</option>
+        <option value="50" >50</option>
+        <option value="100" >100</option>
+        </select>
+      </form>
       {
         exercises.length === 0 && <h4>No exercises</h4>
       }
