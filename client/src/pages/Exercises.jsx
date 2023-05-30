@@ -25,10 +25,8 @@ function Exercises() {
     dispatch(getExercieses({
       limit: showLimti,
       page: 1,
-
     }))
-    
-
+    setCurrentPage(1)
     return () => {
       dispatch(reset())
     }
@@ -38,7 +36,6 @@ function Exercises() {
     dispatch(getExercieses({
       limit: showLimti,
       page: currentPage,
-
     }))
 
     return () => {
@@ -65,16 +62,19 @@ function Exercises() {
   }
 
   const changeCurrentPage = (page) => {
+    console.log("Change")
       setCurrentPage(page)
   }
 
   const nextPage = () => {
+    console.log("next")
     if(currentPage < pageMax ){
       setCurrentPage(prevState => prevState + 1)
     }
   }
 
   const prevousPage = () => {
+    console.log("prev")
     if(currentPage > 1){
       setCurrentPage(prevState => prevState - 1)
     }
@@ -92,7 +92,7 @@ function Exercises() {
       
       <ExercisesSearch local={false} onSubmit={getSearchData} />
       <form id="limit-form">
-        <label htmlFor="limit"> Show per page: </label>
+        <label htmlFor="limit">Show per page: </label>
         <select name="limit" value={showLimti} onChange={(e) => setShowLimit(e.target.value)} >
           <option value="10" >10</option>
           <option value="25" >25</option>

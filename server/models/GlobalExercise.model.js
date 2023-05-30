@@ -16,8 +16,8 @@ const GlobalExerciseSchema = new mongoose.Schema(
         },
         description: {
             type: String,
-            required: true,
             maxLength: 500,
+            default: ""
         },
         bodyParts: {
             type: Array,

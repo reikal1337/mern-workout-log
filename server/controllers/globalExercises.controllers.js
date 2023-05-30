@@ -94,19 +94,15 @@ const saveGlobalExercise = async(req, res) => {
     const userId = req.user.id
     const exerciseId = req.params.id
     try {
-        
         const savedGlobalExercise = await GlobalExercise.findOne({_id: exerciseId})
 
         if(savedGlobalExercise){
-            const checkIfNotAdded = await User.findOne({_id: userId, exercises: { $in: [exerciseId]}})
-           
-            if(!checkIfNotAdded){
-                await User.updateOne({_id: userId}, {$push: {exercises: exerciseId}})
-                return res.status(200).json({message: "Exercies saved!"})
-            }else{
-                return res.status(406).json({message: "Exercies already saved!"})
-            }
+            const checkIfSaved = await User.findOne({_id: userId, exercises: { $in: [exerciseId]}})
             
+            if(checkIfSaved){ return res.status(406).json({message: "Exercies already saved!"}) }
+
+            await User.updateOne({_id: userId}, {$push: {exercises: exerciseId}}) 
+            return res.status(200).json({message: "Exercies saved!"})
         }
         return res.status(404).json({message: "Exercies doesn't exist!"})  
     } catch (err) {

@@ -26,9 +26,9 @@ const postExercise = async(req, res) => {
             description,
             bodyParts,
         } = req.body
+
         console.log(req.body)
-        if(!createdBy || !name || !description || !bodyParts){
-            
+        if(!createdBy || !name || !bodyParts){
             return res.status(406).json({message: "Missing data!"})
         }
         const newExercise = new Exercise({
@@ -47,32 +47,10 @@ const postExercise = async(req, res) => {
 
 
     } catch (err) {
-        res.status(406).json({ error: err.message})
+        console.log(err)
+        res.status(500).json({ error: err.message})
     }
 }
-
-// const serachExercieses = async(req,res) =>{
-//     const queryName = new RegExp(req.query.name, "i")
-//     const queryBodyPart = new RegExp(req.query.bodypart, "i")
-//     if(queryName !== "" || queryBodyPart !== ""){
-//         try {
-//             let query = {}
-//             if(queryName !== ""){
-//                 Object.assign(query,{name: queryName});
-//             }
-//             if(queryBodyPart != "/all/i"){
-//                 Object.assign(query,{bodyParts: {$all: [queryBodyPart]}});
-//             }
-//             console.log(query)
-//             const exercises = await Exercise.find(query)
-//             console.log(exercises)
-//             res.status(200).json(exercises)
-//         } catch (err) {
-//             console.log(err)
-//             res.status(404).json({ error: "Not found!"})
-//         }
-//     }
-// } 
 
 const publishExercise = async(req, res) => {// BUG, able to publish created exerciese and then save it even if it still exists.
     
@@ -103,9 +81,9 @@ const publishExercise = async(req, res) => {// BUG, able to publish created exer
         const savedExercises = await getAllSavedExercieses(userId)
         res.status(200).json({message: "Exercise published!", savedExercises})
         
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: error.message})
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: err.message})
     }
 }
 
@@ -123,9 +101,9 @@ const deleteExercise = async(req, res) => {
         const savedExercises = await getAllSavedExercieses(userId)
         res.status(200).json({message: "Exercise deleted!", savedExercises})
         
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: error.message})
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: err.message})
     }
 }
 
@@ -140,9 +118,9 @@ const removeExercise = async(req, res) => {
         }else{
             return res.status(404).json({message: "Unable to remove this exercise!"})
         }
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({ error: error.message})
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({ error: err.message})
     }
 }
 
