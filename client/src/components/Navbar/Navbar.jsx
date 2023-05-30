@@ -22,7 +22,7 @@ function Navbar() {
   const handleLogOut = () => {
     dispatch(logout())
     dispatch(reset())
-    navigate("/")
+    navigate("/login")
   }
 
   const [isOpen,setIsOpne] = useState(false)

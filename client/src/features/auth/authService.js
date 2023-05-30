@@ -1,4 +1,4 @@
-import { axios, axiosAuth } from "../http"
+import { axios, axiosAuth } from "../apiService"
 
 const login = async (userData) => {
     // console.log(userData)
@@ -32,6 +32,7 @@ const getUserData = async (token) => {
 }
 
 const logout = () => {
+    console.log("Servide log out")
     localStorage.removeItem("user")
 }
 

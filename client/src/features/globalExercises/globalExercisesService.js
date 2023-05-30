@@ -1,4 +1,4 @@
-import { axios, axiosAuth } from "../http"
+import { axiosAuth } from "../apiService"
 
 const API_URL = "/global/exercises"
 
