@@ -44,6 +44,23 @@ export const SimpleButtonBlue = styled(SimpleButtonRed)`
 
 `
 
+export const PageButton = styled.button`
+    background: none;
+    border: none;
+    font-size: 25px;
+    padding: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color ease 0.2s;
+    &:hover{
+        color: red;
+    }
+`
+
+export const PageButtonActive = styled(PageButton)`
+    color: red;
+`
+
 export const LogOutButton = styled.button`
     margin-right: 16px;
     background-color: red;

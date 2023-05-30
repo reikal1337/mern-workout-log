@@ -9,6 +9,7 @@ import Loading from "./Loading";
 import CreateWorkouteForm from "./Workouts/CreateWorkoutForm";
 import Notification from "./Notification";
 import WorkoutLog from "./WorkoutLog/WorkoutLog";
+import PageBar from "./Global&SavedExercise/PageBar";
 
 
 export { 
@@ -23,4 +24,5 @@ export {
     CreateWorkouteForm,
     Notification,
     WorkoutLog,
+    PageBar,
 }

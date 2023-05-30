@@ -2,8 +2,9 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExercieses, serachExercieses, saveExercies, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
-import { Exercise, ExercisesSearch, Loading, Notification } from "../components";
+import { Exercise, ExercisesSearch, Loading, Notification, PageBar } from "../components";
 import { useSearchParams } from "react-router-dom";
+
 
 
 function Exercises() {
@@ -16,16 +17,32 @@ function Exercises() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [showLimti, setShowLimit] = useState("10")
+  const [currentPage, setCurrentPage] = useState(1)
 
 
   useLayoutEffect(() => {
-    console.log("Lol")
-    dispatch(getExercieses({limit: showLimti}))
+    dispatch(getExercieses({
+      limit: showLimti,
+      page: 1,
+
+    }))
 
     return () => {
       dispatch(reset())
     }
   }, [showLimti])
+
+  useLayoutEffect(() => {
+    dispatch(getExercieses({
+      limit: showLimti,
+      page: currentPage,
+
+    }))
+
+    return () => {
+      dispatch(reset())
+    }
+  }, [currentPage])
 
   const getSearchData = (data) => {
     setSearchParams({name: data.field, bodypart: data.bodyPart})
@@ -43,6 +60,24 @@ function Exercises() {
     dispatch(saveExercies(id))
     dispatch(reset())
   }
+
+  const changeCurrentPage = (page) => {
+      setCurrentPage(page)
+  }
+
+  const nextPage = () => {
+    if(currentPage < pageMax ){
+      setCurrentPage(prevState => prevState + 1)
+    }
+  }
+
+  const prevousPage = () => {
+    if(currentPage > 1){
+      setCurrentPage(prevState => prevState - 1)
+    }
+  }
+
+  
 
   return (
     <ExercisesStyled>
@@ -62,6 +97,7 @@ function Exercises() {
           <option value="100" >100</option>
         </select>
       </form>
+      <PageBar changeChange={changeCurrentPage} nextPage={nextPage} prevousPage={prevousPage} currentPage={currentPage} pageMax={pageMax} />
       {
         exercises.length === 0 && <h4>No exercises</h4>
       }
@@ -75,8 +111,9 @@ function Exercises() {
       :
       <Loading size={"100"} speed={"4"} />
       } 
-      <p>Current Page: {page}</p>
-      <p>Max pages : {pageMax}</p>
+      
+      <PageBar changeChange={changeCurrentPage} nextPage={nextPage} prevousPage={prevousPage} currentPage={currentPage} pageMax={pageMax} />
+
     </ExercisesStyled>
     
   )
