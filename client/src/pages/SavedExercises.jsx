@@ -4,8 +4,11 @@ import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExercieses, postExerciese, publishExerciese, deleteExerciese, removeExerciese, reset } from "../features/savedExercises/savedExercisesSlice";
+import { useCheckIfLogIn } from "../helpers/util"
 
 function SavedExercises() {
+  useCheckIfLogIn()
+  
   const[popUp,setPopUp] = useState(false)
 
   const [search,setSearch] = useState({

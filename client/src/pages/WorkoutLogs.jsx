@@ -5,14 +5,14 @@ import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
 import { getWorkouts, reset as workoutsReset } from "../features/workouts/workoutsSlice"
 import { useDispatch, useSelector } from 'react-redux'
 import { getWorkoutLogs, postWorkoutLog, reset } from '../features/workoutLogs/workoutLogsSlice'
+import { useCheckIfLogIn } from "../helpers/util"
 
 function WorkoutLogs() {
+  useCheckIfLogIn()
+
   const [search,setSearch] = useState("")
   const [filter,setFilter] = useState("")
   
-
-  
-
   const dispatch = useDispatch()
 
   const { workouts } = useSelector(

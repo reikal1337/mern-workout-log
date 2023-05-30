@@ -5,8 +5,13 @@ import { useState, useEffect } from 'react'
 import { SimpleButtonBlue } from '../components/styles/Buttons.syles'
 import { changePassword, getUserData, reset } from '../features/auth/authSlice'
 import { Loading, Notification } from '../components'
+import { useCheckIfLogIn } from "../helpers/util"
+
+
 
 function Profile() {
+  useCheckIfLogIn()
+
   const { user, isLoading, isSuccess, isError, message  } = useSelector((state) => state.auth)
 
   const [formData, setFormData] = useState({
@@ -72,7 +77,10 @@ const handleChange =  (event) => {
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />
   }
-  
+  if(!user){
+    return
+  }
+
   return (
     <ProfileStyled>
       <h2>Profile</h2> 

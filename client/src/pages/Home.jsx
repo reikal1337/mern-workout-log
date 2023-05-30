@@ -1,22 +1,9 @@
 import { SectionStyled } from "./styles"
 import workoutImage from "../assets/images/workout2.jpg"
-import { useSelector} from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useCheckIfLogIn } from "../helpers/util"
 
 function Home() {
-  const navigate = useNavigate()
-  const {user} = useSelector((state) => state.auth)
-
-  useEffect( () => {
-    if(!user){
-      navigate("/login")
-    }
-    
-  },[user,navigate])
-
-  
-
+  useCheckIfLogIn()
 
   return (
     <>

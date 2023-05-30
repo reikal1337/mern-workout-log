@@ -6,9 +6,11 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWorkouts, postWorkout, deleteWorkout, updateWorkout, reset } from "../features/workouts/workoutsSlice";
 import { getExercieses, reset as savedExerciesesReset } from "../features/savedExercises/savedExercisesSlice";
-
+import { useCheckIfLogIn } from "../helpers/util"
 
 function Workouts() {
+  useCheckIfLogIn()
+
   const[popUp,setPopUp] = useState(false)
   const [search,setSearch] = useState("")
   const dispatch = useDispatch()

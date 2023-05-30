@@ -4,11 +4,12 @@ import { getExercieses, serachExercieses, saveExercies, reset } from "../feature
 import { ExercisesStyled } from "./styles"
 import { Exercise, ExercisesSearch, Loading, Notification, PageBar } from "../components";
 import { useSearchParams } from "react-router-dom";
-
+import { useCheckIfLogIn } from "../helpers/util"
 
 
 function Exercises() {
-
+  useCheckIfLogIn()
+  
   const dispatch = useDispatch()
 
   const { exercises, page, pageMax, isLoading, isError, isSuccess, message } = useSelector(

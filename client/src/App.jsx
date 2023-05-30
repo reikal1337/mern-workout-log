@@ -1,4 +1,13 @@
-import { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs, Profile} from "./pages"
+import { Home,
+  Register,
+  Login,
+  Exercises,
+  SavedExercises,
+  Workouts,
+  WorkoutLogs,
+  Profile,
+  NotFound
+} from "./pages"
 import { Navbar, Footer } from "./components";
 import { GlobalStyle } from "./GlobalStyles.styles";
 import { createBrowserRouter,
@@ -24,7 +33,7 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<RouterLayout />} >
+      <Route errorElement={<NotFound />} element={<RouterLayout />} >
         <Route path="/register" element={<Register />} />
         <Route path="/login"  element={<Login />} />
         <Route path="/" index element={<Home />} />
@@ -33,9 +42,8 @@ function App() {
         <Route path="/workouts" element={<Workouts />} />
         <Route path="/workoutlogs" element={<WorkoutLogs />} />
         <Route path="/profile/*" element={<Profile />} />
-        
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Route>
-      
     )
   )
 

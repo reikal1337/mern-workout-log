@@ -6,6 +6,16 @@ import SavedExercises from "./SavedExercises"
 import Workouts from "./Workouts"
 import WorkoutLogs from "./WorkoutLogs";
 import Profile from "./Profile";
+import NotFound from "./NotFound";
 
 
-export { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs, Profile}
+export { Home,
+    Register,
+    Login,
+    Exercises,
+    SavedExercises,
+    Workouts,
+    WorkoutLogs,
+    Profile,
+    NotFound
+}
