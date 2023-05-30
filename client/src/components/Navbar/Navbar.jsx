@@ -11,6 +11,7 @@ import NavLinks from "./NavLinks"
 import { NavLinksDeskStyled, NavLinksMobStyled } from "../styles/NavLinks.styles"
 import NavMenu from "./NavMenu"
 import { useState } from "react"
+import { Outlet } from "react-router-dom"
 
 
 function Navbar() {
@@ -68,8 +69,7 @@ function Navbar() {
               </>
               }
         </ul>
-    </NavStyled>
-    
+    </NavStyled> 
   )
 }
 

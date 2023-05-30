@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Merienda', cursive;
         font-family: 'Roboto Slab', serif;
+        
 
         //Diable arrows near input type="number"....
         /* input::-webkit-outer-spin-button,

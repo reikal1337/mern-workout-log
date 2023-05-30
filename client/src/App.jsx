@@ -1,17 +1,30 @@
 import { Home , Register, Login, Exercises, SavedExercises, Workouts, WorkoutLogs, Profile} from "./pages"
-import { Navbar, Footer, Notification } from "./components";
+import { Navbar, Footer } from "./components";
 import { GlobalStyle } from "./GlobalStyles.styles";
-import {BrowserRouter, Route, Routes, ScrollRestoration } from "react-router-dom"
+import { createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+  Outlet,
+  ScrollRestoration } from "react-router-dom"
+
 
 function App() {
-  return (
-    <>
-      <header>
-        <GlobalStyle />
-      </header>
-      <BrowserRouter>
+
+  const RouterLayout = () => {
+    return (
+      <>
       <Navbar />
-      <Routes >
+      <ScrollRestoration />
+      <Outlet />
+      <Footer />
+      </>
+    )
+  }
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route element={<RouterLayout />} >
         <Route path="/register" element={<Register />} />
         <Route path="/login"  element={<Login />} />
         <Route path="/" index element={<Home />} />
@@ -20,11 +33,18 @@ function App() {
         <Route path="/workouts" element={<Workouts />} />
         <Route path="/workoutlogs" element={<WorkoutLogs />} />
         <Route path="/profile/*" element={<Profile />} />
-        {/* <ScrollRestoration/> */}
-      </Routes>
-      <Footer />
+        
+      </Route>
       
-      </BrowserRouter>
+    )
+  )
+
+  return (
+    <>
+      <header>
+        <GlobalStyle />
+      </header>
+      <RouterProvider router={router} />
     </>
   );
 }

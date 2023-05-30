@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getExercieses, serachExercieses, saveExercies, reset } from "../features/globalExercises/globalExercisesSlice";
 import { ExercisesStyled } from "./styles"
@@ -26,6 +26,7 @@ function Exercises() {
       page: 1,
 
     }))
+    
 
     return () => {
       dispatch(reset())
@@ -41,6 +42,7 @@ function Exercises() {
 
     return () => {
       dispatch(reset())
+      window.scrollTo(0, 0)
     }
   }, [currentPage])
 
@@ -89,7 +91,7 @@ function Exercises() {
       
       <ExercisesSearch local={false} onSubmit={getSearchData} />
       <form id="limit-form">
-        <label for="limit"> Show per page: </label>
+        <label htmlFor="limit"> Show per page: </label>
         <select name="limit" value={showLimti} onChange={(e) => setShowLimit(e.target.value)} >
           <option value="10" >10</option>
           <option value="25" >25</option>
