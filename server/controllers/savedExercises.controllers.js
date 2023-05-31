@@ -52,7 +52,7 @@ const postExercise = async(req, res) => {
     }
 }
 
-const publishExercise = async(req, res) => {// BUG, able to publish created exerciese and then save it even if it still exists.
+const publishExercise = async(req, res) => {
     
     const userId = req.user.id
     const userName = (await User.findOne({_id: userId}).distinct("username")).toString()

@@ -2,7 +2,6 @@ import { useSelector} from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 
-
 export const formatBodyParts = (array) => {
     let result = ""
     // console.log()
@@ -23,3 +22,4 @@ export const useCheckIfLogIn = () => {
     
   },[user,navigate])
 }
+

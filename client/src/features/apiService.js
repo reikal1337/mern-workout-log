@@ -1,7 +1,12 @@
 import axios from "axios";
-import { logout, reset } from "./auth/authSlice";
-import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom";
+import { logout, reset } from "../features/auth/authSlice";
+
+let store
+
+const setStore = (propStore) => {
+    store = propStore
+} 
+
 const api = axios.create({
     baseURL: "http://localhost:5000",
    
@@ -17,17 +22,19 @@ const apiAuth = (token) => {
 
     api.interceptors.response.use( (response) => response,(error) => {
         if(error.response && error.response.status === 401) {
-            console.log("Logout")
-            const dispatch = useDispatch()
-            const navigate = useNavigate()
-
-            dispatch(logout())
-            dispatch(reset())
-            navigate("/login")
+            console.log("Intersepted 401")
+            store.dispatch(logout())
+            store.dispatch(reset())
+            
         }
     }
     )
+
     return api
 }
 
-export {api as axios, apiAuth as axiosAuth}
+export {
+    api as axios,
+    apiAuth as axiosAuth,
+    setStore
+    }
