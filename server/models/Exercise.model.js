@@ -28,17 +28,6 @@ const ExerciseSchema = new mongoose.Schema(
             required: true,
             default: false
         },
-        
-        // workouts: {
-        //     type: Array,
-        //     default: [],
-        // },
-        // sets: {
-        //     type: Array,
-        //     default: [],
-        // },
-       
-        
     },
     { timestamps: true, collection : 'exercises' }
 )

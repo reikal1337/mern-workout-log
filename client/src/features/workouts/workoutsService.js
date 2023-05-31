@@ -8,13 +8,12 @@ const getWorkouts= async(token) => {
 }
 
 const postWorkout = async(formData,token) => {
-    const response = await axiosAuth(token).post(API_URL + `/add`, formData)
+    const response = await axiosAuth(token).post(API_URL + "/add", formData)
     return response.data
 }
 
 const deleteWorkout = async(id,token) => {
-    const response = await axiosAuth(token).delete(API_URL + `/delete` + `/${id}`)
-    console.log(response.data)
+    const response = await axiosAuth(token).delete(API_URL + "/delete" + `/${id}`)
     return response.data
 }
 

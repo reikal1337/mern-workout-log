@@ -15,7 +15,7 @@ const getWorkouts = async(req, res) => {
         
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: error.message})
+        res.status(500).json()
     }
 }
 
@@ -35,7 +35,7 @@ const postWorkout = async(req, res) => {
 
         return res.status(201).json({message: "Workout added!", workouts})
     } catch (err) {
-        res.status(406).json({ error: err.message})
+        res.status(406).json()
     }
 }
 
@@ -55,7 +55,7 @@ const deleteWorkout = async(req, res) => {
         
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: error.message})
+        res.status(406).json()
     }
 }
 
@@ -75,7 +75,7 @@ const updateWorkout = async(req, res) => {
 
         return res.status(200).json({message: "Workout Updated!", workouts})
     } catch (err) {
-        res.status(406).json({ error: err.message})
+        res.status(406).json()
     }
 }
 

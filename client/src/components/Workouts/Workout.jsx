@@ -19,8 +19,6 @@ function Workout(props) {
   const [editData, setEditData] = useState({
       _id: "",
       name:  "",
-      // uId: nanoid(),
-      // index: null,
       bodyParts: "",
       sets: 1,
       reps: 1
@@ -97,20 +95,6 @@ function Workout(props) {
 
   const handleAddExercise = (event) => {
     event.preventDefault()
-    // console.log("Before:")
-    // console.log(editData)
-    // const exerciseIndex = displayedExercises.length === 0 ? 1 : displayedExercises.length + 1
-    
-    // console.log(exerciseIndex) 
-    // setEditData(prevState => ({
-    //   ...prevState,
-    //   uId: nanoid(),
-    //   index: exerciseIndex
-      
-    // }))
-
-    // console.log("After:")
-    // console.log(editData)
     if(editData.name !== ""){
       setDisplayedExercises([
         ...displayedExercises,
@@ -145,29 +129,6 @@ function Workout(props) {
     )
   }
 
-  // function returnFullExercises(data) { //Probbaly need to remove this and move it to Workout log.
-  //   return data.map( object => {
-  //    return (
-  //     <div className={"exercise-content"}>
-  //       <h4>{object.exerciseName}</h4>
-  //       <h6 >{object.bodyParts}</h6>
-  //       {object.sets.map( object => {
-
-  //         return(
-  //         <div >
-  //           <span>Set: {object.set}</span>
-  //           <span>Reps: {object.reps}</span>
-  //           <span>Weight: {object.weight}kg</span>
-  //         </div>
-  //         )
-  //       })}
-
-  //     </div>
-  //    )
-  //   })
-  // }
-  // console.log("Disp:")
-  // console.log(displayedExercises)
   return (
     <WorkoutStyled>
       <div className={props.id !== collapsedIndex ? "workout-title" : "workout-title activetitle"} onClick={ () => handleClick(props.id)}>
@@ -175,10 +136,6 @@ function Workout(props) {
         <BiDownArrow className={props.id !== collapsedIndex ? "icon-arrow" : "icon-arrow activeicon"}/>
       </div>
       <div className={props.id !== collapsedIndex ? "workout-content" : "workout-content active"}>
-
-        {/* {
-        returnFullExercises(props.exercises)
-        } */}
         {
           
           displayedExercises.map((object,i) => {

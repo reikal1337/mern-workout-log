@@ -4,15 +4,9 @@ import { SimpleButtonBlue, SimpleButtonRed } from "../styles/Buttons.syles"
 import { CreateForm } from "../styles/CreateExerciseForm.styles"
 import { AiOutlineClose } from "react-icons/ai"
 import ReactDom from "react-dom"
-import { useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux";
-import { getExercieses, reset } from "../../features/savedExercises/savedExercisesSlice"
 
 function CreateWorkouteForm(props) {
-
     const [formData,setFormData] = useState("")
-
-    
 
     const handleChange = (event) => {
       const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')

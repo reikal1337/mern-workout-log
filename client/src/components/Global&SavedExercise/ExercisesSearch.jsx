@@ -27,13 +27,7 @@ function ExercisesSearch(props) {
     const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
     setSearch({...search, [event.target.name]: result})
   }
-
-  // const handleChangeLocal = (event) => {
-  //   const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
-  //   setSearch({...search, [event.target.name]: result})
-    
-  // }
-    
+   
   return (
     <SerachStyled onSubmit={handleSubmit}>
         <input name="field" type="text" maxLength="50"  value={search.field} onChange={handleChange} placeholder="Search..." />

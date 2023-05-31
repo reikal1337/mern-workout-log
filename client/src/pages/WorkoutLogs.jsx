@@ -23,14 +23,14 @@ function WorkoutLogs() {
   )
   const [selectedWorkout, setSelectedWorkout] = useState("")
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getWorkouts())
     dispatch(getWorkoutLogs())
     return () => {
       dispatch(reset())
       dispatch(workoutsReset())
     }
-  },[])
+  },[dispatch])
 
   useEffect(() => {
     if(workouts.length !== 0){
@@ -38,9 +38,6 @@ function WorkoutLogs() {
     }
     
   },[workouts])
-  console.log(message)
-
-
 
   const handleFilterChange = (event) => {
     const result = event.target.value.replace(/[^a-z\s0-9-]/gi, '')
@@ -51,28 +48,21 @@ function WorkoutLogs() {
     setSearch(data)
   }
 
-  
-
   const handleInputChange = (event) => {
     setSelectedWorkout(event.target.value)
     
   }
 
-
   const handleCreateButton = (event) => {
     event.preventDefault()
-    console.log(selectedWorkout)
     dispatch(postWorkoutLog(selectedWorkout))
     dispatch(reset())
   }
 
-  
-
-  
-
   if(isLoading){
     return <Loading size={"100"} speed={"4"} />
  }
+
   return (
     <WorkoutLogsStyled>
       <h2>Workout log</h2>

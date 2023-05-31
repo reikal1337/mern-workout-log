@@ -21,7 +21,7 @@ const login = async (req,res) => {
             token})
     } catch(err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 
@@ -35,7 +35,6 @@ const register = async(req, res) => {
             workoutLogs
 
         } = req.body
-        console.log(req.body)
         if(!username || !password){
             
             return res.status(406).json({message: "Please fill all fields"})
@@ -56,8 +55,7 @@ const register = async(req, res) => {
             workouts,
             workoutLogs
         })
-        const savedUser = await newUser.save()
-        // delete savedUser.password
+        await newUser.save()
         res.status(201).json({message: "User succesfully registered"})
     } catch (err) {
         res.status(406).json({ error: err.message})
@@ -81,7 +79,7 @@ const changePassword = async (req,res) => {
         res.status(200).json({message: "Password has been changed!"})
     } catch(err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 
@@ -98,7 +96,7 @@ const getUserData = async (req,res) => {
 
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 

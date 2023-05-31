@@ -10,7 +10,6 @@ const getExercieses = async(query,token) => {
 
 const serachExercieses = async(serachQuery,token) => {
     const response = await axiosAuth(token).get(API_URL + `/search?name=${serachQuery.name}&bodypart=${serachQuery.bodypart}`)
-    console.log(response.data)
     return response.data
 }
 

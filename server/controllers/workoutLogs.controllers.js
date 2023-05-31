@@ -13,7 +13,7 @@ const getWorkoutLogs = async(req, res) => {
         return res.status(200).json({workoutLogs})
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: error.message})
+        res.status(500).json()
     }
 }
 
@@ -56,7 +56,7 @@ const postWorkoutLog = async(req, res) => {
         return res.status(201).json({message: "Workout log added!", workoutLogs})
     } catch (err) {
         console.log(err)
-        res.status(406).json({ error: err.message})
+        res.status(406).json()
     }
 }
 
@@ -76,7 +76,7 @@ const deleteWorkoutLog = async(req, res) => {
         
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: error.message})
+        res.status(500).json()
     }
 }
 
@@ -105,7 +105,7 @@ const submitWorkoutLog = async(req, res) => {
         return res.status(200).json({message: "Workout log Submited!", workoutLogs})
 } catch (err) {
         console.log(err)
-        res.status(406).json({ error: err.message})
+        res.status(406).json()
     }
 }
 

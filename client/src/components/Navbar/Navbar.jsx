@@ -9,10 +9,7 @@ import { GiHamburgerMenu } from "react-icons/gi"
 import { AiOutlineClose } from "react-icons/ai"
 import NavLinks from "./NavLinks"
 import { NavLinksDeskStyled, NavLinksMobStyled } from "../styles/NavLinks.styles"
-import NavMenu from "./NavMenu"
 import { useState } from "react"
-import { Outlet } from "react-router-dom"
-
 
 function Navbar() {
   const navigate = useNavigate()

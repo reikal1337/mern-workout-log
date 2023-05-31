@@ -3,8 +3,6 @@ import { BiDownArrow } from "react-icons/bi"
 import { WorkoutLogStyled } from '../styles/WorkoutLog.styles'
 import WorkoutLogExercise from './WorkoutLogExercise'
 import { SimpleButtonBlue, SimpleButtonRed } from '../styles/Buttons.syles'
-import Exercise from '../Global&SavedExercise/Exercise'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteWorkoutLog, submitWorkoutLog, reset } from '../../features/workoutLogs/workoutLogsSlice'
 
@@ -56,7 +54,6 @@ function WorkoutLog(props) {
       }
 
       const deleteLog = () => {
-        console.log("Delete")
         dispatch(deleteWorkoutLog(props._id))
         dispatch(reset())
       }

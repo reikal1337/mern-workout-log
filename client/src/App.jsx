@@ -43,7 +43,6 @@ function App() {
         <Route path="/workouts" element={<Workouts />} />
         <Route path="/workoutlogs" element={<WorkoutLogs />} />
         <Route path="/profile/*" element={<Profile />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
       </Route>
     )
   )

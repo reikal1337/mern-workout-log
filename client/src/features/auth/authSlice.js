@@ -35,7 +35,6 @@ export const changePassword = createAsyncThunk('/changepassword', async (userDat
 })
 
 export const getUserData = createAsyncThunk('/profile', async (_,thunkAPI) => {
-    console.log("slice")
     try {
         const token = thunkAPI.getState().auth.user.token
         return await authService.getUserData(token)

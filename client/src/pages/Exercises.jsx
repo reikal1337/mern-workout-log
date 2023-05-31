@@ -6,13 +6,12 @@ import { Exercise, ExercisesSearch, Loading, Notification, PageBar } from "../co
 import { useSearchParams } from "react-router-dom";
 import { useCheckIfLogIn } from "../helpers/util"
 
-
 function Exercises() {
   useCheckIfLogIn()
   
   const dispatch = useDispatch()
 
-  const { exercises, page, pageMax, isLoading, isError, isSuccess, message } = useSelector(
+  const { exercises, pageMax, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.globalExerciese
   )
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,7 +29,7 @@ function Exercises() {
     return () => {
       dispatch(reset())
     }
-  }, [showLimti])
+  }, [showLimti,dispatch])
 
   useLayoutEffect(() => {
     dispatch(getExercieses({
@@ -42,7 +41,7 @@ function Exercises() {
       dispatch(reset())
       window.scrollTo(0, 0)
     }
-  }, [currentPage])
+  }, [currentPage,dispatch])
 
   const getSearchData = (data) => {
     setSearchParams({name: data.field, bodypart: data.bodyPart})
@@ -62,19 +61,16 @@ function Exercises() {
   }
 
   const changeCurrentPage = (page) => {
-    console.log("Change")
       setCurrentPage(page)
   }
 
   const nextPage = () => {
-    console.log("next")
     if(currentPage < pageMax ){
       setCurrentPage(prevState => prevState + 1)
     }
   }
 
   const prevousPage = () => {
-    console.log("prev")
     if(currentPage > 1){
       setCurrentPage(prevState => prevState - 1)
     }

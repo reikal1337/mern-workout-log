@@ -13,7 +13,7 @@ const getExercises = async(req, res) => {
         
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: error.message})
+        res.status(500).json()
     }
 }
 
@@ -48,7 +48,7 @@ const postExercise = async(req, res) => {
 
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 
@@ -83,7 +83,7 @@ const publishExercise = async(req, res) => {
         
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 
@@ -103,7 +103,7 @@ const deleteExercise = async(req, res) => {
         
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 
@@ -120,7 +120,7 @@ const removeExercise = async(req, res) => {
         }
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 
@@ -166,7 +166,6 @@ const getAllSavedExercieses = async(userId) => {
 module.exports = {
     getExercises, 
     postExercise, 
-    // serachExercieses, 
     publishExercise, 
     deleteExercise,
     removeExercise

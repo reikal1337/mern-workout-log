@@ -1,16 +1,10 @@
 import { StyledWorkoutLogExerciese } from '../styles/WorkoutLogExercise.styles'
-import { SimpleButtonBlue } from '../styles/Buttons.syles'
 import WorkoutLogSets from './WorkoutLogSets'
 import { useState } from 'react'
-import { useLayoutEffect } from 'react'
 import { useEffect } from 'react'
 function WorkoutLogExercise(props) {
   const [setsData,setSetsData] = useState([...props.sets])
 
-  const handleSubmit = (event) => {
-      event.preventDefault()
-      console.log(setsData)
-    }
   useEffect(() => {
     const { name, bodyParts,_id} = props
     props.handleExerciseChange({
@@ -25,8 +19,6 @@ function WorkoutLogExercise(props) {
   const handleSetsChange = (_id,reps,weight) => {
       setSetsData((prevState) => {
         const setIndex = prevState.findIndex(data => data._id === _id)
-        // console.log(_id)
-        // console.log(prevState)
         if(setIndex !== -1){
           const updatedSetsData = [...prevState]
           updatedSetsData[setIndex] = {_id,reps,weight}

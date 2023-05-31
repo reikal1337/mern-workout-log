@@ -8,11 +8,6 @@ const WorkoutSchema = new mongoose.Schema(
             minLength: 2,
             maxLength: 50,
         },
-        // createdBy: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: "users",
-        //     required: true
-        // },
         exercises: {
             type: Array,
             default: [],

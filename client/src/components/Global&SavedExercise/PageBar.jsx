@@ -1,6 +1,7 @@
 import { PageButton, PageButtonActive } from "../styles/Buttons.syles"
 import { PageBarStyled } from "../styles/PageBar.style"
 import { RiArrowLeftSLine, RiArrowRightSLine} from "react-icons/ri"
+import { nanoid } from "@reduxjs/toolkit"
 
 
 function PageBar(props) {
@@ -10,11 +11,11 @@ function PageBar(props) {
         for (let index = 1; index <= props.pageMax; index++) {
           if(index !== props.currentPage){
             buttons.push(
-              <PageButton onClick={() => props.changeChange(index)} >{index}</PageButton>
+              <PageButton key={nanoid()} onClick={() => props.changeChange(index)} >{index}</PageButton>
             )
           }else{
             buttons.push(
-              <PageButtonActive >{index}</PageButtonActive>
+              <PageButtonActive key={nanoid()} >{index}</PageButtonActive>
             )
           }
           

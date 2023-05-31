@@ -12,7 +12,7 @@ const initialState = {
 }
 
 
-export const getWorkoutLogs = createAsyncThunk(//Not used yet
+export const getWorkoutLogs = createAsyncThunk(
     "workoutLogs/all",
     async(_,thunkAPI) =>{
         try {
@@ -40,7 +40,7 @@ export const postWorkoutLog = createAsyncThunk(
     }
 )
 
-export const deleteWorkoutLog = createAsyncThunk(//Not used yet
+export const deleteWorkoutLog = createAsyncThunk(
     "workoutLogs/delete",
     async(id,thunkAPI) => {
         try {

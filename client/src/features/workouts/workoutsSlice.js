@@ -69,36 +69,6 @@ export const updateWorkout = createAsyncThunk(
     }
 )
 
-// export const publishExerciese = createAsyncThunk(
-//     "savedexercises/publish",
-//     async(id,thunkAPI) => {
-//         try {
-//             const token = thunkAPI.getState().auth.user.token
-//             return await savedExercisesService.publishExerciese(id,token)
-//         } catch (error) {
-//             const message = (error.response && error.response.data && error.response.data.message) 
-//         || error.message || error.toString()
-//         return thunkAPI.rejectWithValue(message)
-//         }
-//     }
-// )
-
-
-
-// export const removeExerciese = createAsyncThunk(
-//     "savedexercises/remove",
-//     async(id,thunkAPI) => {
-//         try {
-//             const token = thunkAPI.getState().auth.user.token
-//             return await savedExercisesService.removeExerciese(id,token)
-//         } catch (error) {
-//             const message = (error.response && error.response.data && error.response.data.message) 
-//         || error.message || error.toString()
-//         return thunkAPI.rejectWithValue(message)
-//         }
-//     }
-// )
-
 export const workoutsSlice = createSlice({
     name: "workouts",
     initialState,

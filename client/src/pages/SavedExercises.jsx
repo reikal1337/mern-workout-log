@@ -36,30 +36,25 @@ function SavedExercises() {
   }
 
   const handleDelete = (id) => {
-    console.log(id)
     dispatch(deleteExerciese(id))
     dispatch(reset())
   }
 
   const handleRemove = (id) => {
-    console.log(id)
     dispatch(removeExerciese(id))
     dispatch(reset())
   }
 
   const getSearchData = (data) => {
-    console.log(data)
     setSearch(prevState =>({
       ...prevState,
       field: data.field,
       bodyPart: data.bodyPart !== "all" ? data.bodyPart : ""
     }))
-    console.log(search)
     
   }
 
   const getCreateData = (data) => {
-    console.log(data)
     dispatch(postExerciese(data))
     dispatch(reset())
     setPopUp(false)

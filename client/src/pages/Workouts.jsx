@@ -1,6 +1,5 @@
 import { WorkoutsStyled } from "./styles/Workouts.style"
 import { Workout, WorkoutSearch, CreateWorkouteForm, Loading, Notification } from "../components"
-import mockData from "../components/mockWorkoutData";
 import { SimpleButtonBlue } from "../components/styles/Buttons.syles";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,10 +26,9 @@ function Workouts() {
       dispatch(reset())
       dispatch(savedExerciesesReset())
     }
-  },[])
+  },[dispatch])
 
   const getSearchData = (data) => {
-    console.log(data)
     setSearch(data)
   }
 
@@ -83,13 +81,6 @@ function Workouts() {
             
           })
         }
-        {/* {mockData.map( object => {
-          return(
-            <Workout key={object.id} {...object} />
-          )
-        })} */}
-        
-        
     </WorkoutsStyled>
   )
 }

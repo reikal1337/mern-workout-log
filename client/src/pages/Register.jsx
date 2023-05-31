@@ -31,7 +31,6 @@ function Register() {
 
     useEffect(() => {
         if(isError) {
-            // console.log(message)
             setError( () => ({
                 username: message,
                 password: ""
@@ -39,7 +38,6 @@ function Register() {
         }
 
         if(isSuccess || user) {
-            console.log("Should work")
             navigate("/login")
         }
         dispatch(reset())
