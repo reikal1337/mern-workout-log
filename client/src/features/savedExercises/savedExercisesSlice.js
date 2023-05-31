@@ -1,4 +1,4 @@
-import {createSlice, createAsyncThunk, isAnyOf} from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk, isAnyOf} from "@reduxjs/toolkit"
 
 import savedExercisesService from "./savedExercisesService"
 

@@ -6,7 +6,6 @@ function Loading(props) {
     <Spiner size={props.size} speed={props.speed}>
         <BiLoaderCircle className="loading-icon"/>
     </Spiner>
-    
   )
 }
 
