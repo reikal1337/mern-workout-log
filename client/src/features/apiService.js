@@ -8,13 +8,13 @@ const setStore = (propStore) => {
 } 
 
 const api = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://workoutlog-api.onrender.com",
    
 })
 
 const apiAuth = (token) => {
     const api = axios.create({
-        baseURL: "http://localhost:5000",
+        baseURL: "https://workoutlog-api.onrender.com",
         headers: {
             Authorization: `Bearer ${token}`
         }

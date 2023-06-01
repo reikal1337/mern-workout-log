@@ -16,5 +16,5 @@ export const store = configureStore({
         workoutLogs: workoutLogsReducer,
 
     },
-    
+    devTools: false,
 })
