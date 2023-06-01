@@ -19,7 +19,13 @@ dotenv.config()
 app.use(express.json())
 app.use(helmet())
 app.use(morgan("common"))
-app.use(cors())
+
+const allowedOrigins = ["https://workoutlog-zth5.onrender.com"]
+
+
+app.use(cors({
+    origin: allowedOrigins
+}))
 
 app.use("/", authRouter)
 
