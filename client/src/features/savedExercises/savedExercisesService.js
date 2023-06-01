@@ -9,6 +9,7 @@ const getExercieses = async(token) => {
 
 const postExerciese = async(formData,token) => {
     const response = await axiosAuth(token).post(API_URL + `/add`,formData)
+    console.log(response)
     return response.data
 }
 

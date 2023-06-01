@@ -16,7 +16,7 @@ const authenticateToken = async(req , res, next) => {
         next()
 
     } catch (err) {
-        console.log(err)
+        console.log("401 unauthorized!")
         res.status(401).json({message: "Accses Denied!"}) 
     }
 }

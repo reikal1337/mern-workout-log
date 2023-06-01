@@ -4,8 +4,12 @@ import { ExercisesStyled } from "./Exercises.style"
 export const WorkoutLogsStyled = styled(ExercisesStyled)`
 
 
-    
-
+    .select-lable{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
     #log-input-container{
         margin: 10px;
         display: flex;

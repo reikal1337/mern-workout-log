@@ -3,8 +3,6 @@ import workoutImage from "../assets/images/workout2.jpg"
 import { useCheckIfLogIn } from "../helpers/util"
 
 function Home() {
-  useCheckIfLogIn()
-
   return (
     <>
       <SectionStyled>

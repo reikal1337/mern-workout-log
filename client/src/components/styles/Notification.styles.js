@@ -35,8 +35,7 @@ export const NotificationBlue = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* ${animation} */
-    animation:   8s forwards;
+    animation: ${animation} 7s forwards;
     .notification-icon{
         font-size: 25px;
         margin-right: 5px;

@@ -2,7 +2,6 @@ const { GlobalExercise } = require("../models/GlobalExercise.model")
 const { User } = require("../models/User.model")
 
 const getGlobalExercises = async(req, res) => {
-    console.log("LOl")
     try {
         const qLimit = parseInt(req.query.limit, 10)
         const qPage = parseInt(req.query.page, 10)
@@ -21,7 +20,6 @@ const getGlobalExercises = async(req, res) => {
 
         if(!exercises) return res.status(404).json({message: "No global exercises exist!"})
         
-
         res.status(200).json({
             exercises,
             page,
@@ -30,7 +28,7 @@ const getGlobalExercises = async(req, res) => {
         
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 
@@ -62,7 +60,7 @@ const postGlobalExercise = async(req, res) => {
 
     } catch (err) {
         console.log(err)
-        res.status(406).json({ error: err.message})
+        res.status(406).json()
     }
 }
 
@@ -85,7 +83,7 @@ const serachGlobalExercieses = async(req,res) =>{
             res.status(200).json(exercises)
         } catch (err) {
             console.log(err)
-            res.status(404).json({ error: "Not found!"})
+            res.status(404).json({ message: "Not found!"})
         }
     }
 } 
@@ -99,7 +97,10 @@ const saveGlobalExercise = async(req, res) => {
         if(savedGlobalExercise){
             const checkIfSaved = await User.findOne({_id: userId, exercises: { $in: [exerciseId]}})
             
-            if(checkIfSaved){ return res.status(406).json({message: "Exercies already saved!"}) }
+            if(checkIfSaved){ 
+                console.log("Lol can't")
+                return res.status(406).json({message: "Exercies already saved!"})
+            }
 
             await User.updateOne({_id: userId}, {$push: {exercises: exerciseId}}) 
             return res.status(200).json({message: "Exercies saved!"})
@@ -107,7 +108,7 @@ const saveGlobalExercise = async(req, res) => {
         return res.status(404).json({message: "Exercies doesn't exist!"})  
     } catch (err) {
         console.log(err)
-        res.status(500).json({ error: err.message})
+        res.status(500).json()
     }
 }
 

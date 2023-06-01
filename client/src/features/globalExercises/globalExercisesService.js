@@ -16,7 +16,7 @@ const serachExercieses = async(serachQuery,token) => {
 
 const saveExercies = async(exerciseId,token) => {
     const response = await axiosAuth(token).post(API_URL + `/save/${exerciseId}`)
-    return response.data
+    return response.data 
 }
 
 

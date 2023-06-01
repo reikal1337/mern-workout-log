@@ -72,6 +72,7 @@ function WorkoutLogs() {
       }
 
       <form onSubmit={handleCreateButton}>
+      <label className='select-lable' htmlFor='_id'>Workouts:</label>
         <div id="log-input-container">
           <input type="text" maxLength="50" value={filter} onChange={handleFilterChange} placeholder="Filter..." />
           <select name="_id" value={selectedWorkout._id} onChange={handleInputChange} >

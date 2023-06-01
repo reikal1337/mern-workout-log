@@ -35,9 +35,9 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route errorElement={<NotFound />} element={<RouterLayout />} >
+        <Route path="/" index element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login"  element={<Login />} />
-        <Route path="/" index element={<Home />} />
         <Route path="/exercises" element={<Exercises />} />
         <Route path="/savedexercises" element={<SavedExercises />} />
         <Route path="/workouts" element={<Workouts />} />

@@ -144,6 +144,7 @@ function Workout(props) {
         }
        { editMode &&
        <form onSubmit={handleAddExercise}>
+        <label htmlFor="_id" className="select-lable">Exercises:</label>
         <div className="input-container">
           <input type="text" maxLength="50" value={search} onChange={handleSerachChange} placeholder="Filter..." />
           <select name="_id" value={`${editData._id},${editData.name},${editData.bodyParts}`} onChange={handleInputChange} >
@@ -151,7 +152,8 @@ function Workout(props) {
             savedExercises.filter(object =>(
               object.name.toLowerCase().includes(search.toLowerCase())
             )).map(object => {
-              return <option value={`${object._id},${object.name},${formatBodyParts(object.bodyParts)}`}>{object.name}</option>
+              return <option key={`${object._id},${nanoid()}`} 
+              value={`${object._id},${object.name},${formatBodyParts(object.bodyParts)}`}>{object.name}</option>
             })
             }
           </select>

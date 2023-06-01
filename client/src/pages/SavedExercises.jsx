@@ -27,7 +27,7 @@ function SavedExercises() {
     return () => {
       dispatch(reset())
     }
-  },[dispatch,isError])
+  },[dispatch])
 
 
   const handlePublish = (id) => {

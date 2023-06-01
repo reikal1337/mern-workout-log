@@ -20,12 +20,16 @@ const apiAuth = (token) => {
         }
     })
 
-    api.interceptors.response.use( (response) => response,(error) => {
+    api.interceptors.response.use((response) => {
+        return response
+    }
+    ,(error) => {
         if(error.response && error.response.status === 401) {
             store.dispatch(logout())
             store.dispatch(reset())
             
         }
+        throw error
     }
     )
 

@@ -81,8 +81,6 @@ export const WorkoutStyled = styled.div`
     .active{
         transition: all 0.5s ease-out;
         max-height: none;
-        // need to find better solution... Maybe find height with refs...?
-        /* overflow: hidden; */
     }
     form{
         margin: 12px;
@@ -105,10 +103,16 @@ export const WorkoutStyled = styled.div`
             border-bottom-right-radius: 0px;
         }
     }
+    .select-lable{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+    }
     .input-container{
         display: flex;
         justify-content: center;
-        margin-top: 20px;
+        margin-top: 5px;
     }
     .add-exercise-container{
         display: flex;

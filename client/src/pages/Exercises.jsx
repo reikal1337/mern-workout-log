@@ -76,8 +76,6 @@ function Exercises() {
     }
   }
 
-  
-
   return (
     <ExercisesStyled>
       <h2>Exercises</h2>
