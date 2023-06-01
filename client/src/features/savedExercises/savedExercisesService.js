@@ -14,17 +14,17 @@ const postExerciese = async(formData,token) => {
 }
 
 const publishExerciese = async(id,token) => {
-    const response = await axiosAuth(token).post(API_URL + `/publish` + `/${id}`)
+    const response = await axiosAuth(token).post(API_URL + `/publish/${id}`)
     return response.data
 }
 
 const deleteExerciese = async(id,token) => {
-    const response = await axiosAuth(token).delete(API_URL + `/delete` + `/${id}`)
+    const response = await axiosAuth(token).delete(API_URL + `/delete/${id}`)
     return response.data
 }
 
 const removeExerciese = async(id,token) => {
-    const response = await axiosAuth(token).delete(API_URL + `/remove` + `/${id}`)
+    const response = await axiosAuth(token).delete(API_URL + `/remove/${id}`)
     return response.data
 }
 

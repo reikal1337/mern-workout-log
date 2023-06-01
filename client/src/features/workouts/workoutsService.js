@@ -13,12 +13,12 @@ const postWorkout = async(formData,token) => {
 }
 
 const deleteWorkout = async(id,token) => {
-    const response = await axiosAuth(token).delete(API_URL + "/delete" + `/${id}`)
+    const response = await axiosAuth(token).delete(API_URL + `/delete/${id}`)
     return response.data
 }
 
 const updateWorkout = async(id,data,token) => {
-    const response = await axiosAuth(token).patch(API_URL + `/update` + `/${id}`,data)
+    const response = await axiosAuth(token).patch(API_URL + `/update/${id}`,data)
     return response.data
 }
 

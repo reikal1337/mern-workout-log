@@ -11,25 +11,13 @@ function Exercises() {
   
   const dispatch = useDispatch()
 
-  const { exercises, pageMax, isLoading, isError, isSuccess, message } = useSelector(
+  const { exercises, pageMax, page, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.globalExerciese
   )
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [ _, setSearchParams] = useSearchParams();
 
   const [showLimti, setShowLimit] = useState("10")
-  const [currentPage, setCurrentPage] = useState(1)
-
-
-  useLayoutEffect(() => {
-    dispatch(getExercieses({
-      limit: showLimti,
-      page: 1,
-    }))
-    setCurrentPage(1)
-    return () => {
-      dispatch(reset())
-    }
-  }, [showLimti,dispatch])
+  const [currentPage, setCurrentPage] = useState(page)
 
   useLayoutEffect(() => {
     dispatch(getExercieses({
@@ -39,9 +27,14 @@ function Exercises() {
 
     return () => {
       dispatch(reset())
+      
       window.scrollTo(0, 0)
     }
-  }, [currentPage,dispatch])
+  }, [currentPage,showLimti,dispatch])
+
+  useLayoutEffect(() => {
+    changeCurrentPage(page)
+  },[page])
 
   const getSearchData = (data) => {
     setSearchParams({name: data.field, bodypart: data.bodyPart})
@@ -94,7 +87,8 @@ function Exercises() {
           <option value="100" >100</option>
         </select>
       </form>
-      <PageBar changeChange={changeCurrentPage} nextPage={nextPage} prevousPage={prevousPage} currentPage={currentPage} pageMax={pageMax} />
+      {exercises.length !== 0 &&
+        <PageBar changeChange={changeCurrentPage} nextPage={nextPage} prevousPage={prevousPage} currentPage={currentPage} pageMax={pageMax} />}
       {
         exercises.length === 0 && <h4>No exercises</h4>
       }
@@ -108,8 +102,9 @@ function Exercises() {
       :
       <Loading size={"100"} speed={"4"} />
       } 
-      
+      {exercises.length !== 0 &&
       <PageBar changeChange={changeCurrentPage} nextPage={nextPage} prevousPage={prevousPage} currentPage={currentPage} pageMax={pageMax} />
+      }
 
     </ExercisesStyled>
     

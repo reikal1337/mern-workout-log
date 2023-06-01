@@ -22,6 +22,7 @@ function PageBar(props) {
         }
         return buttons
       }
+      console.log(props.currentPage)
   return (
     <PageBarStyled>
         {props.currentPage !== 1 &&

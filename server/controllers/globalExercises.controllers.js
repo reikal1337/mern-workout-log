@@ -6,15 +6,15 @@ const getGlobalExercises = async(req, res) => {
         const qLimit = parseInt(req.query.limit, 10)
         const qPage = parseInt(req.query.page, 10)
 
-        const page = qPage || 1
+        var page = qPage || 1
         const limit = qLimit > 10 && qLimit <= 100  ? qLimit : 10
-        const skip = (page - 1 ) * limit
-        
-        
+
         const count = await GlobalExercise.estimatedDocumentCount({})
-        
         const pageMax = Math.ceil(count / limit)
 
+        page = page <= pageMax ? page : 1
+        const skip = (page - 1 ) * limit
+        
         const exercises = await GlobalExercise.find({},{createdAt: 0, updatedAt: 0, __v: 0})
         .collation({ locale: "en" }).sort({name: 1}).limit(limit).skip(skip)
 

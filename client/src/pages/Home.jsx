@@ -1,6 +1,5 @@
 import { SectionStyled } from "./styles"
 import workoutImage from "../assets/images/workout2.jpg"
-import { useCheckIfLogIn } from "../helpers/util"
 
 function Home() {
   return (

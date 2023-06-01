@@ -33,13 +33,13 @@ function Workout(props) {
   },[])
 
   useEffect(() => {
-    if(savedExercises.length != 0){
-      setEditData({
-        ...editData,
+    if(savedExercises.length !== 0){
+      setEditData( prevState => ({
+        ...prevState,
         _id: savedExercises[0]._id,
         name: savedExercises[0].name,
         bodyParts: formatBodyParts(savedExercises[0].bodyParts)
-      })
+      }))
     }
     
   },[savedExercises])
@@ -87,12 +87,6 @@ function Workout(props) {
     }
   }
 
-  const resetDiplayedExercises = () => {
-    setDisplayedExercises([
-      ...props.exercises
-    ])
-  }
-
   const handleAddExercise = (event) => {
     event.preventDefault()
     if(editData.name !== ""){
@@ -127,6 +121,12 @@ function Workout(props) {
         (_, i) => i !== index
       )
     )
+  }
+
+  const resetDiplayedExercises = () => {
+    setDisplayedExercises([
+      ...props.exercises
+    ])
   }
 
   return (
