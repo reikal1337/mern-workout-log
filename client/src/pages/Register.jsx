@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { register, reset } from "../features/auth/authSlice"
+import { register, login, reset } from "../features/auth/authSlice"
 import { MainStyled } from "./styles"
 import { AuthButton } from "../components/styles/Buttons.syles"
 import { Loading } from "../components"
@@ -125,6 +125,7 @@ function Register() {
                  maxLength="100" minLength="6" /> 
 
                 <AuthButton>Register</AuthButton>
+                <AuthButton onClick={() => dispatch(login({username: "DemoAcc", password: ""}))}>Demo LogIn</AuthButton>
             </form>
         </MainStyled>
   )

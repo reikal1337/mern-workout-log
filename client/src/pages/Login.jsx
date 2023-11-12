@@ -83,6 +83,7 @@ function Login() {
                  onChange={handleChange} maxLength="100" minLength="6" placeholder="Enter password..."/>
                 <Link to="/register">Create new account</Link>
                 <AuthButton>Log In</AuthButton>
+                <AuthButton onClick={() => dispatch(login({username: "DemoAcc", password: ""}))}>Demo LogIn</AuthButton>
             </form>
         </MainStyled>
   )
