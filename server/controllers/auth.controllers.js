@@ -8,7 +8,12 @@ const login = async (req,res) => {
         const user = await User.findOne({username: username})
         if(!user) return res.status(403).json({message: "User does not exist!"})
 
-        const correctPassword = await bcrypt.compare(password, user.password)
+        let correctPassword = await bcrypt.compare(password, user.password)
+        if(user.username === "DemoAcc"){
+            correctPassword = true;
+            
+        }
+
         if(!correctPassword) return res.status(403).json({message: "Wrong password!"})
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET, { expiresIn: "15m"})
@@ -19,6 +24,7 @@ const login = async (req,res) => {
             workoutsNr: user.workouts.length,
             workoutLogsNr: user.workoutLogs.length,
             token})
+
     } catch(err) {
         console.log(err)
         res.status(500).json()
@@ -67,7 +73,9 @@ const changePassword = async (req,res) => {
         const userId = req.user.id
         const { oldPassword, newPassword} = req.body
         const user = await User.findOne({_id: userId})
-
+        if(user.username === "DemoAcc"){
+            req.status(403).json({message: "Can't change demo password!"})
+        }
         const correctPassword = await bcrypt.compare(oldPassword, user.password)
         if(!correctPassword) return res.status(403).json({message: "Wrong password!"})
         
